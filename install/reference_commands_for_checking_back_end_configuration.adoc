@@ -1,0 +1,97 @@
+---
+permalink: install/reference_commands_for_checking_back_end_configuration.html 
+sidebar: sidebar 
+keywords: commands, check, back-end, configuration 
+summary: Verschiedene ONTAP-Befehle bieten Informationen zur Speicher-Array-Konfiguration, einschließlich Back-End-Konfigurationsfehler. Diese Befehle sind besonders bei der Verifizierung und Fehlerbehebung von Installationen hilfreich. 
+---
+= Befehle zum Prüfen der Back-End-Konfiguration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verschiedene ONTAP-Befehle bieten Informationen zur Speicher-Array-Konfiguration, einschließlich Back-End-Konfigurationsfehler. Diese Befehle sind besonders bei der Verifizierung und Fehlerbehebung von Installationen hilfreich.
+
+Der `storage array config show` Befehl ist der erste Befehl, der bei der Verifizierung der Installation verwendet werden muss. Er ist auch der erste Befehl, den Sie verwenden können, wenn Sie bemerken, dass Ihr System nicht wie erwartet funktioniert oder wenn Sie eine Fehlermeldung erhalten.
+
+In der folgenden Tabelle sind Befehle aufgeführt, die sich besonders für die Verifizierung der Installation und die Fehlerbehebung eignen:
+
+|===
+| Befehl | Beschreibung 
+
+
+ a| 
+`storage array config show`
+ a| 
+Bietet auf Ebene des Speicher-Arrays Informationen zur Konfiguration der Back-End-Geräte in einer Bereitstellung mit ONTAP-Systemen, die Array-LUNs verwenden. Dieser Befehl zeigt, wie sich Storage-Arrays mit dem Cluster verbinden. Wenn ONTAP ein Problem feststellt, das die ordnungsgemäße Zusammenarbeit der ONTAP-Systeme mit Array-LUNs und Speicher-Arrays verhindert, weist Sie an, auszuführen, `storage array config show` `storage errors show` um Details über den Fehler zu erhalten.
+
+Dieser Befehl ist auch nützlich, um zu überprüfen, ob die Konfiguration wie vorgesehen eingerichtet ist. Überprüfen Sie beispielsweise in der Ausgabe, ob die Anzahl der Array-LUN-Gruppen, die Sie erstellt haben, erstellt wurde.
+
+
+
+ a| 
+`storage array show -name array_name`
+ a| 
+Zeigt Informationen über alle Speicher-Arrays an, die für das Cluster sichtbar sind, oder über das von Ihnen angegebene Speicher-Array. Wenn die Anzahl der dargestellten Array-LUNs die Kapazität des Systems überschreitet, zeigt das Textfeld Fehler die Anzahl der LUNs an, die ONTAP nicht ermitteln konnte. Achten Sie auf dieses Problem insbesondere bei Systemen mit wenig Speicher.
+
+
+
+ a| 
+`storage path quiesce`
+ a| 
+Setzt die I/O-Vorgänge vorübergehend auf eine bestimmte Array-LUN auf einem bestimmten Pfad aus. Der Pfad wird beim Neustart oder durch Ausführen von wieder aktiv `storage path resume`. Einige Speicher-Arrays erfordern die Einstellung der I/O für einen bestimmten Zeitraum, um eine Array-LUN zu entfernen oder zu verschieben.
+
+[NOTE]
+====
+Der `storage path quiesce` Befehl kann nicht mit IBM DS-Speicherarrays verwendet werden.
+
+====
+
+
+ a| 
+`storage path resume`
+ a| 
+Ermöglicht es, dass I/O wieder fließt; dies ist der umgekehrte Fall von Quiesce. Der `storage path resume` Befehl wird in erster Linie für die Hardwarewartung (z. B. Kabel- oder GBIC-Abzüge) oder nach einem versehentlichen Ruhezustand eines Pfades zu einer Array-LUN verwendet. Es ist nicht immer notwendig, diesen Befehl auszuführen, nachdem Sie einen Pfad stillgelegt haben. ONTAP kann beispielsweise eine neu zugeordnete Array-LUN erkennen.
+
+
+
+ a| 
+`storage array show`
+ a| 
+Zeigt Informationen über die Speicher-Arrays an, die für das Cluster sichtbar sind, z. B. Name, Anbieter, Modell, und Failover-Typ.
+
+
+
+ a| 
+`storage disk show`
+ a| 
+Durch die Eingabe `storage disk show` ohne Parameter wird für alle Festplatten und Array-LUNs Folgendes angezeigt: Der Name, die nutzbare Größe, der Containertyp, die Position, das Aggregat, und Eigentümer. Durch die Eingabe `storage disk show` mit einem Festplattennamen oder einem Array-LUN-Namen als Parameter werden Details zu einer einzelnen Festplatten- oder Array-LUN angezeigt, z. B. der Status (zugewiesen oder nicht zugewiesen), der Eigentümer und die Pfade für die Array-LUN. Die Ausgabe ist in drei Abschnitte unterteilt: Informationen über die Array-LUN, Informationen über die Pfade zur Array-LUN und Fehler im Zusammenhang mit der Array-LUN.
+
+
+
+ a| 
+`storage disk show -errors _**_`
+ a| 
+Durch die Eingabe `storage disk show` mit dem ``-errors` Parameter werden Details zu Konfigurationsfehlern auf der Festplatten- und Array-LUN-Ebene angezeigt. Obwohl die Befehlsausgabe der Ausgabe dem Befehl ähnelt `storage disk error show` , `storage disk show -errors` bietet zusätzliche Optionen zum Filtern der Ausgabe nach Parametern, wie z. B. der Position Node, Cluster und Schacht.
+
+
+
+ a| 
+`storage disk error show`
+ a| 
+Enthält Details zu Back-End-Konfigurationsfehlern auf Festplatten- und Array-LUN-Ebene. Wenn Sie show mit einem Array-LUN-Namen als Parameter eingeben `storage disk error` , werden Details zu Konfigurationsfehlern im Zusammenhang mit der angegebenen Array-LUN angezeigt. Sie müssen diese Fehler beheben, bevor Sie ONTAP für die Verwendung mit Speicherarrays konfigurieren.
+
+
+
+ a| 
+`storage errors show`
+ a| 
+Enthält Details auf Array-LUN-Ebene zu Back-End-Konfigurationsfehlern, die den gemeinsamen Betrieb des ONTAP-Systems und des Speicher-Arrays verhindern. Sie müssen die von identifizierten Fehler beheben `storage errors show` , bevor Sie ONTAP für die Verwendung mit Speicher-Arrays konfigurieren.
+
+[NOTE]
+====
+Der `storage errors show` Befehl enthält keine Informationen über Fehler bei der Festplattenkonfiguration. Um Informationen über Festplatten- und Array-LUN-Konfigurationsfehler anzuzeigen, können Sie den Befehl oder den Befehl verwenden `storage disk show -errors` `storage disk error show` .
+
+====
+|===

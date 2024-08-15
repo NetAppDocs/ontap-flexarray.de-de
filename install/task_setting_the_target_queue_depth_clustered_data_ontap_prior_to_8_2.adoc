@@ -1,0 +1,20 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_prior_to_8_2.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth, ontap, 8.2 
+summary: Die standardmäßige Warteschlangentiefe des Ziels ist für die meisten Implementierungen akzeptabel, Sie können jedoch den Standardwert bei Bedarf ändern. 
+---
+= Festlegen der Zielwarteschlangentiefe (ONTAP vor 8.2)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die standardmäßige Warteschlangentiefe des Ziels ist für die meisten Implementierungen akzeptabel, Sie können jedoch den Standardwert bei Bedarf ändern.
+
+Diese Einstellung gilt pro ONTAP System und für alle Ziel-Ports auf allen Speicher-Arrays. Für ONTAP-Systeme mit einer älteren Version als 8.2 können Sie diese Option verwenden.
+
+.Schritt
+. Verwenden Sie die folgende Option, um die Zielwarteschlangentiefe festzulegen: `options disk.target_port.cmd_queue_depth value`
+

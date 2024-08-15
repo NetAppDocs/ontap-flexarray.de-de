@@ -1,0 +1,28 @@
+---
+permalink: install/concept_rules_for_sharing_a_target_port_with_multiple_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: rules, share, target, port, multiple, fc initiator 
+summary: Es wird unterstützt, bis zu zwei ONTAP FC-Initiator-Ports mit einem einzelnen Ziel-Port auf dem Speicher-Array zu verbinden. Jeder Ziel-Port ist in zwei FC-Initiator-Ports aufgeteilt, einer von jedem Cluster-Node. Die gemeinsame Nutzung eines mit ONTAP-Systemen verbundenen Zielports mit einem anderen Host wird nicht unterstützt. 
+---
+= Regeln für die gemeinsame Nutzung eines Ziel-Ports mit mehreren FC-Initiator-Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es wird unterstützt, bis zu zwei ONTAP FC-Initiator-Ports mit einem einzelnen Ziel-Port auf dem Speicher-Array zu verbinden. Jeder Ziel-Port ist in zwei FC-Initiator-Ports aufgeteilt, einer von jedem Cluster-Node. Die gemeinsame Nutzung eines mit ONTAP-Systemen verbundenen Zielports mit einem anderen Host wird nicht unterstützt.
+
+Die gemeinsame Nutzung eines Ziel-Ports mit mehreren Initiatoren trägt dazu bei, die Verwendung von Speicher-Array-Ports für die Verbindung mit ONTAP-Systemen zu optimieren.
+
+Für diese Konfiguration gelten folgende Regeln:
+
+* Wenn sich die ONTAP Systeme in einem HA-Paar befinden, kann jeder Node am meisten über den FC-Initiator-Port desselben Ziel-Ports gemeinsam genutzt werden.
+* Alle Storage Arrays müssen von demselben Anbieter und derselben Modellfamilie stammen.
+* Für MetroCluster-Konfigurationen wird das Verbinden eines einzelnen Ziel-Ports mit mehreren FC Initiator-Ports unterstützt.
+* Als Best Practice für das Zoning wird empfohlen, jedes FC-Initiator-Ziel-Port-Paar in einer separaten Zone (1:1) zu haben.
+
+
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation und Konfiguration von Fabric-Attached MetroCluster"]

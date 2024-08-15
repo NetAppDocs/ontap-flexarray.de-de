@@ -1,0 +1,49 @@
+---
+permalink: install/concept_aggregate_rules_when_the_storage_arrays_are_from_the_same_family.html 
+sidebar: sidebar 
+keywords: aggregate, rules, storage, arrays, same, family, add, luns, single, multiple, distribute 
+summary: Spezielle Regeln gelten für die Festlegung von Array-LUNs in Aggregaten, wenn die Storage-Arrays vom selben Anbieter und derselben Modellfamilie des Storage-Arrays stammen. 
+---
+= Aggregieren Sie Regeln, wenn die Speicher-Arrays aus der gleichen Familie stammen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Spezielle Regeln gelten für die Festlegung von Array-LUNs in Aggregaten, wenn die Storage-Arrays vom selben Anbieter und derselben Modellfamilie des Storage-Arrays stammen.
+
+Wenn Ihre Storage Arrays vom selben Anbieter stammen, gelten folgende Regeln für das Hinzufügen von Array-LUNs zu Aggregaten:
+
+* Sie können Array-LUNs von den Storage-Arrays im selben Aggregat kombinieren, wenn sich die Storage-Arrays in derselben Produktfamilie befinden.
+* Sie können die Array-LUNs in verschiedene Aggregate unterteilen.
+
+
+Die folgenden Beispiele zeigen einige Optionen zum Verlegen von Array-LUNs in Aggregaten, wenn sich die Speicher-Arrays hinter einem ONTAP-System in der _gleichen Anbieterfamilie_ befinden.
+
+[NOTE]
+====
+Die Abbildungen zeigen lediglich zwei Speicher-Arrays; Ihre Bereitstellung kann mehr Speicher-Arrays umfassen.
+
+====
+
+
+== Beispiel 1: Hinzufügen von LUNs aus allen Storage Arrays zu einem einzigen Aggregat
+
+Wie in der folgenden Abbildung dargestellt, können Sie ein Aggregat erstellen und anschließend alle LUNs aller Storage Arrays in derselben Familie zum selben Aggregat hinzufügen:
+
+image::../media/luns_assigned_to_same_aggr_same_family.gif[Diese Grafik wird durch den umgebenden Text beschrieben.]
+
+
+
+== Beispiel 2: Verteilen und Vermischen von LUNs der Storage-Arrays über mehrere Aggregate
+
+Wie in der folgenden Abbildung dargestellt, können Sie mehrere Aggregate erstellen und anschließend die Array-LUNs aus den verschiedenen Storage Arrays in derselben Produktfamilie über die Aggregate verteilen und mischen:
+
+image:../media/luns_from_same_family_mixed_in_multiple_aggrs.gif[""]
+
+[NOTE]
+====
+Dieses Beispiel wird nicht unterstützt, wenn Sie Speicher-Arrays des gleichen Modells haben und eines über Fibre-Channel-Laufwerke verfügt und das andere Speicher-Array über SATA-Laufwerke verfügt. In diesem Fall werden diese Speicher-Arrays nicht in der gleichen Familie betrachtet.
+
+====

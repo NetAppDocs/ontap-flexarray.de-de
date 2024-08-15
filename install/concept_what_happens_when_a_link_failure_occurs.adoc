@@ -1,0 +1,34 @@
+---
+permalink: install/concept_what_happens_when_a_link_failure_occurs.html 
+sidebar: sidebar 
+keywords: happens, link, failure, occurs 
+summary: ONTAP überwacht die Nutzung eines Links in regelmäßigen Abständen. Die ONTAP-Reaktion auf einen Link-Fehler hängt davon ab, wo der Fehler auftritt. 
+---
+= Was passiert, wenn eine Verbindung ausfällt
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP überwacht die Nutzung einer Verbindung in regelmäßigen Abständen. Die ONTAP-Reaktion auf einen Link-Fehler hängt davon ab, wo der Fehler auftritt.
+
+Die folgende Tabelle zeigt, was beim Ausfall einer Fabric-Attached-Konfiguration auftritt:
+
+|===
+| Wenn ein Fehler in der Verbindung zwischen... | Dann... 
+
+
+ a| 
+ONTAP-System und Switch
+ a| 
+ONTAP erhält sofort eine Benachrichtigung und sendet sofort Datenverkehr zum anderen Pfad.
+
+
+
+ a| 
+Switch und das Speicher-Array
+ a| 
+ONTAP erkennt nicht sofort, dass eine Verbindung ausfällt, da noch eine Verbindung zwischen dem ONTAP System und dem Switch hergestellt wird. ONTAP erkennt bei einer E/A-Zeitdauer einen Ausfall. ONTAP versucht dreimal erneut, den Verkehr auf dem ursprünglichen Pfad zu senden, und schaltet dann über den Verkehr auf den anderen Pfad um.
+
+|===

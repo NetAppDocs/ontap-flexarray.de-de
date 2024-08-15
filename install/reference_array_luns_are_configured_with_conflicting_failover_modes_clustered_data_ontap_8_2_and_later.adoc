@@ -1,0 +1,130 @@
+---
+permalink: install/reference_array_luns_are_configured_with_conflicting_failover_modes_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: array, luns, configured, conflict, failover, modes 
+summary: ONTAP setzt voraus, dass Array-LUNs, die für ein bestimmtes ONTAP-System sichtbar sind, mit demselben Failover-Modus konfiguriert werden. Auf einigen Speicher-Arrays ist es möglich, inkonsistente Failover-Modi auf verschiedenen Pfaden zu einer Array-LUN zu konfigurieren. 
+---
+= Array-LUNs werden mit widersprüchlichen Failover-Modi konfiguriert
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP setzt voraus, dass Array-LUNs, die für ein bestimmtes ONTAP-System sichtbar sind, mit demselben Failover-Modus konfiguriert werden. Auf einigen Speicher-Arrays ist es möglich, inkonsistente Failover-Modi auf verschiedenen Pfaden zu einer Array-LUN zu konfigurieren.
+
+
+
+== Speicherfehler zeigen Meldung
+
+[listing]
+----
+NAME(UID): This array LUN is configured with conflicting failover modes. Each path to this LUN must use the same mode.
+----
+
+
+== Erklärung
+
+Bei einigen Speicher-Arrays, z. B. EMC CLARiiON-Speicher-Arrays, kann der Failover-Modus über den FC-Initiator-Port festgelegt werden. Auf diesen Speicher-Arrays können inkonsistente Failover-Modi für Array-LUNs festgelegt werden, die für die FC-Initiatoren auf demselben ONTAP System sichtbar sind. ONTAP unterstützt keine inkonsistenten Failover-Modi für Pfade zu einer Array LUN von einem bestimmten ONTAP System.
+
+Wenn Ihr Speicher-Array die Einstellung des Failover-Modus für eine Array-LUN durch FC-Initiator zulässt, sollte ein Teil des Installationsprozesses auch die Überprüfung umfassen, um sicherzustellen, dass keine Probleme mit den Failover-Modus-Einstellungen für die Array-LUNs bestehen, die für das ONTAP-System sichtbar sind. Der `storage errors show` Befehl warnt Sie vor inkonsistenten Failover-Modus-Einstellungen für Array-LUNs und generiert eine EMS-Meldung.
+
+Ihr System kann zwar mit inkonsistenten Einstellungen des Array-LUN-Failover-Modus betrieben werden, Sie müssen dieses Problem jedoch so schnell wie möglich beheben. Wenn ein Pfad ausfällt, funktioniert das ONTAP System möglicherweise nicht ordnungsgemäß, es findet kein Failover oder es kann zu einer Systempanik kommen.
+
+[NOTE]
+====
+ONTAP unterstützt unterschiedliche Failover-Modus-Einstellungen zwischen Nodes, auf denen ONTAP ausgeführt wird. Beispielsweise kann Node A den aktiv/Passiv-Modus für die Pfade zu einer Array-LUN verwenden, und Node B kann ALUA für die Pfade zur selben Array-LUN verwenden.
+
+====
+
+
+== Fehlerbehebung und Problemlösung
+
+Der Failover-Modus des ersten Pfads, den ONTAP während der LUN-Initialisierung erkennt, ist der Failover-Modus, den ONTAP für alle Pfade zur LUN von einem bestimmten ONTAP System erwartet. Wenn der Failover-Modus nachfolgende erkannter Pfade nicht mit dem Failover-Modus des ersten Pfads übereinstimmt, gibt ONTAP eine Fehlermeldung aus.
+
+Im folgenden `storage errors show` Beispiel erklärt ONTAP, dass der Failover-Modus für die LUN EMC-1.128, der über mysystem1 FC-Initiator 0a sichtbar ist, _proprietary_ ist und dass der Failover-Modus sich von dem Failover-Modus unterscheidet, den ONTAP im ersten Pfad für diese Array-LUN ermittelt hat.
+
+[listing]
+----
+
+mysystem1::> storage errors show
+EMC-1.128 (60060160e1b0220008071baf6046e211): hba 0a port 500601603ce014de mode Proprietary: This array LUN is configured with conflicting failover modes. Each path to this LUN must use the same mode.
+
+Disk: EMC-1.128
+UID: 60060160:E1B02200:1C65EB20:BFF7E111:00000000:00000000:00000000:...
+----
+Sie müssen das Problem mit der Nichtübereinstimmung des Failovers auf dem Speicher-Array beheben. Das gesamte Verfahren zur Behebung der Diskrepanz hängt jedoch davon ab, ob der von ONTAP auf dem ersten Pfad erkannte Failover-Modus der Failover-Modus ist, den Sie für alle Pfade auf diesem ONTAP-System zur Array-LUN verwenden möchten.
+
+. Geben Sie ein `storage errors show` , falls Sie dies nicht bereits im Rahmen der Installationsüberprüfung getan haben.
++
+[NOTE]
+====
+Der `storage array config` Befehl sagt Ihnen, dass Sie ausführen `storage error show` müssen, wenn ein Problem vorliegt, das Sie beheben müssen.
+
+====
+. Überprüfen Sie die `storage errors show` Ausgabe, um die Failover-Moduseinstellung für die Array-LUN zu bestimmen, die nicht mit dem von ONTAP erwarteten Failover-Modus übereinstimmt.
++
+|===
+| Wenn der Failover-Modus, den das System auf dem ersten Pfad erkannt hat,... | Beispiel | Sie möchten... 
+
+
+ a| 
+Was Sie wollen
+ a| 
+Sie möchten einen Failover-Modus von ALUA verwenden, und ALUA ist der Failover-Modus, den ONTAP für den ersten Pfad erkannt hat.
+ a| 
+Ändern Sie auf dem Speicher-Array den Failover-Modus für den Initiator, den ONTAP in der Fehlermeldung identifiziert hat. Fahren Sie mit Schritt 3 fort.
+
+
+
+ a| 
+Nicht das, was man will
+ a| 
+Sie möchten einen Failover-Modus mit aktiv/Passiv ausführen, aber ALUA ist der Failover-Modus, den ONTAP für den ersten Pfad erkannt hat.
+ a| 
+Entfernen Sie die Array-LUN aus der Ansicht des ONTAP-Systems. Fahren Sie mit Schritt 4 fort.
+
+|===
+. Wenn Sie den Failover-Modus für den Initiator ändern müssen, gehen Sie wie folgt vor, um die Diskrepanz zu beheben.
++
+Sie würden diesen Schritt verwenden, wenn der Failover-Modus, den das System auf dem ersten Pfad _is_ erkannt hat, was Sie möchten.
+
++
+.. Nehmen Sie in ONTAP den zweiten Pfad offline.
+.. Ändern Sie auf dem Speicher-Array den Failover-Modus für den Initiator, den ONTAP in der Fehlermeldung identifiziert hat.
+.. Bringen Sie in ONTAP den zweiten Weg wieder online.
+
+
+. Wenn Sie die Array-LUN aus der Ansicht des ONTAP-Systems entfernen müssen, um die Diskrepanz zu beheben, wählen Sie eine der folgenden Methoden, je nachdem, ob die Array-LUNs Ersatzteile oder in einem Aggregat sind.
++
+Sie würden eine dieser Methoden verwenden, wenn der Failover-Modus, den das System auf dem ersten Pfad erkannt hat, nicht_ ist, was Sie möchten.
+
++
+|===
+| Methode 1: Betroffene Array LUNs sind Ersatzteile (nicht Teil eines Aggregats) | Methode 2: Betroffene LUNs befinden sich in einem Aggregat 
+
+
+ a| 
+Bei dieser Methode muss das ONTAP-System nicht neu gestartet werden.
+
+.. Führen Sie in ONTAP den folgenden Befehl für jede betroffene Ersatz-LUN aus: `disk remove_ownership LUNfullname`
+.. Maskieren Sie auf dem Speicher-Array jede betroffene Array-LUN auf allen Pfaden zum ONTAP-System.
+.. Warten Sie ca. eine Minute, und vergewissern Sie sich, dass die Array-LUNs für das ONTAP-System nicht mehr sichtbar sind.
+.. Legen Sie für jeden FC-Initiator auf dem ONTAP-System denselben Failover-Modus fest.
+.. Geben Sie alle betroffenen Array-LUNs wieder dem ONTAP-System an.
++
+ONTAP sollte die LUNs ermitteln, wenn das nächste Mal die LUN-Erkennung ausgeführt wird
+
+.. Führen Sie aus `storage errors show` , um sicherzustellen, dass kein Failover-Modus mehr auftritt.
+
+ a| 
+Bei dieser Methode muss das ONTAP-System neu gestartet werden.
+
+.. Starten Sie das ONTAP-System neu, und halten Sie es an der Loader-Eingabeaufforderung gedrückt.
+.. Überprüfen Sie auf dem Speicher-Array die Einstellungen des Failover-Modus auf den FC-Initiatoren für dieses System, und aktualisieren Sie sie nach Bedarf auf den gewünschten Failover-Modus.
+.. Starten Sie das ONTAP-System neu.
+.. Führen Sie aus `storage errors show` , um sicherzustellen, dass kein Failover-Modus mehr auftritt.
+
+
+|===
+

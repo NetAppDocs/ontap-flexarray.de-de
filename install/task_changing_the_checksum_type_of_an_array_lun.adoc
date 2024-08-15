@@ -1,0 +1,48 @@
+---
+permalink: install/task_changing_the_checksum_type_of_an_array_lun.html 
+sidebar: sidebar 
+keywords: change, checksum, type, array, lun 
+summary: Sie müssen den Prüfsummentyp auf Zonenebene einer Array-LUN ändern, wenn Sie sie einem Aggregat hinzufügen möchten, das einen anderen Prüfsummentyp auf Zonenebene hat. 
+---
+= Ändern des Prüfsummentyps einer Array-LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen den Prüfsummentyp auf Zonenebene einer Array-LUN ändern, wenn Sie sie einem Aggregat hinzufügen möchten, das einen anderen Prüfsummentyp auf Zonenebene hat.
+
+*Was Sie brauchen*
+
+Sie müssen die Kompromisse zwischen der Performance in bestimmten Workload-Typen und der Storage-Kapazitätsauslastung jedes Prüfsummentyps überprüft haben.
+
+Sie können sich auch an Ihren Vertriebsingenieur wenden, um Informationen über die Verwendung von Prüfsummen zu erhalten.
+
+* Sie müssen einem Array-LUN einen Prüfsummentyp *Zoning* zuweisen, den Sie zu einem AZCS-Aggregat (Advanced Zoning Checksumme) hinzufügen möchten. Wenn eine Array-LUN mit Prüfsummen-Zoning zu einem AZCS-Aggregat hinzugefügt wird, wird es zu einer erweiterten Prüfsummen-Array-LUN. Ähnlich ist es, wenn ein Prüfsummen-Array-LUN zu einem Aggregat in Zonen hinzugefügt wird, ein Prüfsummentyp auf Zonenebene.
+* Sie können die Prüfsumme von Array-LUNs beim Zuweisen der Eigentumsrechte nicht ändern. Sie können die Prüfsumme nur auf bereits zugewiesenen Array-LUNs ändern.
+
+
+.Schritte
+. Geben Sie den folgenden Befehl ein, um den Prüfsummentyp zu ändern: `storage disk assign -disk disk name -owner owner -c new_checksum_type`
++
+_Disk Name_ ist die Array-LUN, deren Prüfsummen-Typ Sie ändern möchten.
+
++
+_Owner_ ist der Node, dem die Array-LUN zugewiesen ist.
+
++
+_New_checksum_type_ kann blockiert oder abgegrenzt werden.
+
++
+`storage disk assign -disk EMC-1.1 -owner system147b -c block`
+
++
+Der Prüfsummentyp auf Zonenebene der Array-LUN wird auf dem neuen, von Ihnen angegebenen Prüfsummentyp auf Zonenebene geändert.
+
+. Geben Sie den folgenden Befehl ein, um auf die nodeshell zuzugreifen: `system node run -node node_name`
++
+_Node_Name_ ist der Name dieses Systems.
+
+. Geben Sie den folgenden Befehl ein, um die Nodeshell zu beenden: `exit`
+

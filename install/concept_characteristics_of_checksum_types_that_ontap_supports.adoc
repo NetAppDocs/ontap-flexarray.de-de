@@ -1,0 +1,40 @@
+---
+permalink: install/concept_characteristics_of_checksum_types_that_ontap_supports.html 
+sidebar: sidebar 
+keywords: characteristics, checksum, types, ontap, supports, block, advanced, zoned 
+summary: 'ONTAP unterstützt BCS (Block Checksumme type) und AZCS (Advanced Zoning Checksumme type) für Array-LUNs, Festplatten und Aggregate.' 
+---
+= Eigenschaften der von ONTAP unterstützten Prüfsummentypen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt BCS (Block Checksumme type) und AZCS (Advanced Zoning Checksumme type) für Array-LUNs, Festplatten und Aggregate.
+
+Der Typ der Prüfsumme, der einer Array-LUN in ONTAP zugewiesen wird, kann sich auf die Performance oder den nutzbaren Speicherplatz einer Array-LUN auswirken. Daher können die Anzahl und Größe der benötigten Array-LUNs abhängig von dem Prüfsummentyp, den Sie Array-LUNs zuweisen, beeinflusst werden.
+
+
+
+== Blockprüfsumme (BCS)
+
+BCS ist der empfohlene StandardPrüfsummentyp für Array-LUNs. BCS bietet eine bessere Performance für Array LUNs als AZCS.
+
+BCS hat einen größeren Einfluss auf den nutzbaren Speicherplatz in einer Array-LUN als AZCS. BCS nutzt 12.5 Prozent des nutzbaren Speicherplatzes in einer Array-LUN.
+
+
+
+== Erweiterte Prüfsummen (AZCS)
+
+AZCS ist eine Alternative zu BCS. Der Einfluss von AZCS auf den nutzbaren Speicherplatz in einer Array-LUN ist geringer als bei BCS; AZCS nutzt 1.56 Prozent der Gerätekapazität. Allerdings müssen Sie abwägen, ob mehr nutzbarer Speicherplatz erforderlich ist, im Vergleich zur Performance. AZCS kann manchmal Performance-Probleme für Array-LUNs verursachen.
+
+AZCS wird für Array LUNs für hochperformante zufällige Workloads nicht empfohlen. Sie können AZCS jedoch mit Array-LUNs für DR, Archivierung oder ähnliche Workloads verwenden.
+
+Es gibt keine Beeinträchtigung der Performance von AZCS auf nativen Festplatten.
+
+Die Richtlinien für Prüfsummen unterscheiden sich je nach Größe und Typ der Festplatte. Weitere Informationen finden Sie im _TR3838 Storage Subsystem Configuration Guide_.
+
+*Verwandte Informationen*
+
+https://www.netapp.com/pdf.html?item=/media/19675-tr-3838.pdf["Technischer Bericht 3838 von NetApp zur Konfiguration von Storage-Subsystemen"^]

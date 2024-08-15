@@ -1,0 +1,14 @@
+---
+permalink: install/concept_invalid_path_setup_examples.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, examples 
+summary: Das Pfadsetup kann ungültig sein, da Pfade zu einer Array-LUN nicht redundant sind oder die Anzahl der Pfade zu einer Array-LUN die ONTAP-Anforderungen nicht erfüllt. 
+---
+= Ungültige Beispiele für Pfadeinstellungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Das Pfadsetup kann ungültig sein, da Pfade zu einer Array-LUN nicht redundant sind oder die Anzahl der Pfade zu einer Array-LUN die ONTAP-Anforderungen nicht erfüllt.

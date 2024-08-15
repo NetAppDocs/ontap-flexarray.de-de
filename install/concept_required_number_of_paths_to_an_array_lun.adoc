@@ -1,0 +1,18 @@
+---
+permalink: install/concept_required_number_of_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: required, number, paths, array, lun 
+summary: ONTAP unterstützt entweder vier oder zwei Pfade zu Array-LUNs. 
+---
+= Erforderliche Anzahl von Pfaden zu einer Array-LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt entweder vier oder zwei Pfade zu Array-LUNs.
+
+ONTAP erwartet und erfordert, dass ein Speicherarray auf mindestens zwei redundanten Speicher-Array-Ports Zugriff auf eine bestimmte Array-LUN bietet, d. h. über mindestens zwei redundante Pfade.
+
+Vergewissern Sie sich, dass die Ports auf dem Storage-Array, die Sie für den Zugriff auf eine bestimmte LUN auswählen, aus unterschiedlichen Komponenten stammen, um einen Single Point of Failure zu vermeiden, z. B. von alternativen Controllern, Clustern oder Gehäusen. Der Grund ist, dass Sie nicht möchten, dass alle Zugriffe auf eine Array-LUN verloren gehen, wenn eine Komponente ausfällt.

@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_when_luns_are_not_visible_with_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: workaround, luns, not, visible, hitachi, storage, arrays, aggregates, created, ontap, system, 
+summary: Die in den erforderlichen Parametern für Hitachi-Speicher-Arrays mit Systemen, auf denen ONTAP ausgeführt wird, angegebenen Speicher-Array-Parameter sollten festgelegt und LUNs den Host-Gruppen zugeordnet werden, bevor der Switch in Zonen eingeteilt wird, um das ONTAP-System, das Array-LUNs verwendet, mit einem Hitachi-Speicher-Array zu verbinden. 
+---
+= Problemumgehung, wenn LUNs bei Hitachi-Speicher-Arrays nicht sichtbar sind
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die in den erforderlichen Parametern für Hitachi-Speicher-Arrays mit Systemen, auf denen ONTAP ausgeführt wird, angegebenen Speicher-Array-Parameter sollten festgelegt und LUNs den Host-Gruppen zugeordnet werden, bevor der Switch in Zonen eingeteilt wird, um das ONTAP-System, das Array-LUNs verwendet, mit einem Hitachi-Speicher-Array zu verbinden.
+
+xref:reference_required_parameters_for_hitachi_storage_arrays_with_ontap_systems.adoc[Erforderliche Parameter für Hitachi-Speicher-Arrays mit Systemen, auf denen ONTAP ausgeführt wird]
+
+Wenn das Zoning vor dem Festlegen der Parameter und dem Zuordnen der LUNs zu den Host-Gruppen konfiguriert wurde, können Sie das Problem beheben, dass LUNs nicht sichtbar sind, indem Sie einen Pfad neu initialisieren. Die Pfadneuinitialisierung erzwingt eine erneute Erkennung der Array-LUNs, die einem Hitachi-Speicher-Array zugeordnet sind.
+
+Das Verfahren, das Sie verwenden, hängt davon ab, ob Aggregate mit Hitachi Array LUNs bereits auf dem ONTAP System konfiguriert wurden. (Bei den folgenden Verfahren wird davon ausgegangen, dass Knoten-1 und Knoten-2 die Namen der ONTAP-Nodes sind.)
+
+
+
+== Wenn Aggregate mit Hitachi Array LUNs bereits auf einem ONTAP System erstellt wurden, das Array LUNs verwendet
+
+. Führen Sie den folgenden Befehl aus, um sicherzustellen, dass die HA-Konfiguration auf Ihren ONTAP Systemen aktiviert ist: *`cluster ha show`*
++
+Die folgende Ausgabe wird angezeigt:
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Führen Sie den folgenden Befehl aus, um sicherzustellen, dass Storage Failover auf Ihrem ONTAP-System konfiguriert ist: *`storage failover show`*
++
+Die folgende Ausgabe wird angezeigt:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Führen Sie den folgenden Befehl aus, um eine Übernahme auf Knoten-1 durchzuführen: *`storage failover takeover -ofnode Node-1`*
+. Führen Sie den folgenden Befehl erneut aus, um zu überprüfen, ob Node-2 für einen Giveback-Vorgang bereit ist: *`storage failover show`*
++
+Die folgende Ausgabe wird angezeigt:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Führen Sie den folgenden Befehl aus, um einen Giveback-Vorgang auf Knoten 1 durchzuführen: *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. Wiederholen Sie von anderen Nodes im Cluster die Schritte 3 bis 5.
+
+
+
+
+== Wenn Aggregate mit Hitachi Array LUNs nicht auf einem ONTAP System erstellt wurden, das Array LUNs verwendet
+
+. Führen Sie den folgenden Befehl aus, um alle ONTAP FC-Initiator-Ports aufzulisten, die mit dem Hitachi-Speicher-Array verbunden sind: *`system node run -node <node name> -command "sysconfig -v"`*
++
+Beispiel: *`system node run -node Node-1 -command "sysconfig -v"`*
+
+. Führen Sie den folgenden Befehl aus, um alle aufgeführten Ports offline zu schalten: *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`*
++
+Beispiel: *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`*
+
+. Führen Sie den folgenden Befehl aus, um alle aufgeführten Ports online zu schalten: *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`*
++
+Beispiel: *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`*
+
+

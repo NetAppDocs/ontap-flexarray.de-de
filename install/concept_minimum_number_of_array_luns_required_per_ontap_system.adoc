@@ -1,0 +1,18 @@
+---
+permalink: install/concept_minimum_number_of_array_luns_required_per_ontap_system.html 
+sidebar: sidebar 
+keywords: minimum, number, array, luns, required, ontap, system 
+summary: Die Anzahl der Array LUNs, die Sie pro ONTAP-System benötigen, hängt vom Standort des Root-Volumes ab. 
+---
+= Mindestanzahl erforderlicher Array LUNs pro ONTAP System
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Anzahl der Array LUNs, die Sie pro ONTAP-System benötigen, hängt vom Standort des Root-Volumes ab.
+
+Das Root-Volume kann sich entweder auf einer Festplatte oder auf Array-LUNs befinden. Der Speicherort des Root-Volumes bestimmt dann die Mindestanzahl an Array-LUNs, die Sie benötigen. Wenn sich das Root-Volume auf einem Storage-Array befindet, muss jedes eigenständige ONTAP-System und jeder Node in einem HA-Paar über mindestens eine Array-LUN verfügen. Wenn sich das Root-Volume auf einer nativen Festplatte befindet, sind die einzigen Array-LUNs für den Datenspeicher erforderlich.
+
+Für eine MetroCluster-Konfiguration, die Array-LUNs verwendet, sind zwei Array-LUNs erforderlich (eine LUN von jedem Standort), wenn sich das Root-Volume auf einem Speicher-Array befindet. Die beiden LUNs sind erforderlich, damit das Root-Volume gespiegelt werden kann.

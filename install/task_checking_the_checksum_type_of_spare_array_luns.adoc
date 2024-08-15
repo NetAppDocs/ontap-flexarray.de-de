@@ -1,0 +1,33 @@
+---
+permalink: install/task_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: check, checksum, type, spare, array, luns 
+summary: Wenn Sie planen, eine Ersatz-Array-LUN zu einem Aggregat hinzuzufügen, indem Sie seinen Namen angeben, müssen Sie sicherstellen, dass der Prüfsummen-Typ der Array-LUN, die Sie hinzufügen möchten, mit dem aggregierten Prüfsummentyp übereinstimmt. 
+---
+= Prüfen des Prüfsummentyps der Spare Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie planen, eine Ersatz-Array-LUN zu einem Aggregat hinzuzufügen, indem Sie seinen Namen angeben, müssen Sie sicherstellen, dass der Prüfsummen-Typ der Array-LUN, die Sie hinzufügen möchten, mit dem aggregierten Prüfsummentyp übereinstimmt.
+
+Sie können Array-LUNs verschiedener Prüfsummentypen in einem Array-LUN-Aggregat nicht mischen. Der Prüfsummentyp auf Zonenebene des Aggregats und der Prüfsummentyp der Array-LUNs, die ihm hinzugefügt werden, müssen gleich sein.
+
+Wenn Sie eine Anzahl an Array-LUNs angeben, die zu einem Aggregat hinzugefügt werden sollen, wählt ONTAP standardmäßig Array-LUNs des gleichen Prüfsummen-Typs wie das Aggregat aus.
+
+[NOTE]
+====
+Der Prüfsummentyp auf Zonenebene aller neu erstellten Aggregate mit Prüfsummen-Array-LUNS ist _Advanced--Prüfsumme_ (AZCS). Der Prüfsummentyp auf Zonenebene wird weiterhin für vorhandene Aggregate in Zonen unterstützt. Prüfsummen-Ersatzarray-LUNs, die einem bestehenden Prüfsummen-Aggregat hinzugefügt wurden, werden weiterhin Prüfsummen-Array-LUNs in Zonen eingeteilt. Prüfsummen-Ersatzarray-LUNs, die einem AZCS-Aggregat mit Prüfsummen-Typ hinzugefügt wurden, verwenden das AZCS-Prüfsummenschema zur Verwaltung von Prüfsummen.
+
+====
+.Schritt
+. Überprüfen Sie den Prüfsummentyp der Ersatz-Array-LUNs, indem Sie den folgenden Befehl eingeben:
++
+`storage disk show -fields checksum-compatibility -container-type spare`
+
++
+Sie können eine Block-Prüfsumme Array-LUN zu einem Block-Prüfsummen-Aggregat und einer Array-LUN zu einem _Advanced--Prüfsumme_ (AZCS) Aggregat hinzufügen.
+
+

@@ -1,0 +1,20 @@
+---
+permalink: install/concept_supported_methods_for_connecting_a_v_series_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: supported, methods, connect, ontap, system, storage, array 
+summary: Sie können das ONTAP System in einer Fabric-Attached-Konfiguration mit Storage Arrays verbinden. Fabric-Attached-Konfigurationen werden sowohl für Standalone-Systeme als auch für HA-Paare unterstützt. Direct-Attached-Konfigurationen sind auf einige Storage Arrays und einige ONTAP Versionen beschränkt. 
+---
+= Unterstützte Methoden zum Verbinden eines ONTAP-Systems mit einem Speicherarray
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können das ONTAP System in einer Fabric-Attached-Konfiguration mit Storage Arrays verbinden. Fabric-Attached-Konfigurationen werden sowohl für Standalone-Systeme als auch für HA-Paare unterstützt. Direct-Attached-Konfigurationen sind auf einige Storage Arrays und einige ONTAP Versionen beschränkt.
+
+Die Interoperabilitäts-Matrix enthält Informationen zu den Verbindungsmethoden, die für bestimmte Speicher-Arrays und Plattformen mit ONTAP unterstützt werden.
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_array_luns_become_available_for_ontap_storage_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, ontap, storage, use 
+summary: Ein ONTAP-System kann eine Array-LUN, die ihr präsentiert wird, erst verwenden, wenn ONTAP für die Verwendung der Array-LUN konfiguriert wurde. 
+---
+= So werden Array-LUNs zur Verwendung mit ONTAP Storage verfügbar
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ein ONTAP-System kann eine Array-LUN, die ihr präsentiert wird, erst verwenden, wenn ONTAP für die Verwendung der Array-LUN konfiguriert wurde.
+
+Obwohl der Speicher-Array-Administrator eine Array-LUN für ONTAP zugänglich macht, kann ONTAP die Array-LUN erst für Speicher verwenden, wenn die beiden folgenden Aufgaben abgeschlossen sind:
+
+. Ein ONTAP-System (lizenziert für die Verwendung von Array-LUNs) muss als _Owner_ der Array-LUN zugewiesen werden.
+. Die Array-LUN muss einem Aggregat hinzugefügt werden.
+
+
+Wenn Sie eine Array-LUN einem ONTAP-System zuweisen, schreibt ONTAP Daten in die Array-LUN, um das zugewiesene System als Eigentümer der Array-LUN zu identifizieren. Diese logische Beziehung wird als _Disk Ownership_ bezeichnet.
+
+Wenn Sie eine Array-LUN einem ONTAP-System zuweisen, wird sie zu einer Ersatz-LUN, die dem System gehört, und ist für kein anderes ONTAP-System mehr verfügbar.
+
+Eine Ersatz-Array-LUN kann erst dann für den Storage verwendet werden, wenn Sie sie einem Aggregat hinzufügen. Anschließend stellt ONTAP sicher, dass nur der Eigentümer der Array-LUN Daten in die LUN schreiben und von ihr lesen kann.
+
+Bei einem HA-Paar müssen beide Nodes in der Lage sein, den gleichen Storage zu sehen, aber nur ein Node im Paar ist der Besitzer der Array-LUN. Der Partner-Node übernimmt bei einem Ausfall des Nodes, der den Eigentümer besitzt, Lese-/Schreibzugriff auf eine Array-LUN. Der ursprüngliche Eigentümer-Node nimmt die Eigentümerschaft wieder auf, nachdem das Problem, das die Nichtverfügbarkeit des Node verursacht hat, behoben ist.

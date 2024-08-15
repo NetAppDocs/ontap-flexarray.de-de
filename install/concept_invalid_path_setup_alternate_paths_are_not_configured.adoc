@@ -1,0 +1,46 @@
+---
+permalink: install/concept_invalid_path_setup_alternate_paths_are_not_configured.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, alternate, paths, configured 
+summary: 'Es ist wichtig, alternative Pfade zu allen Array LUNs von beiden FC-Initiatoren auf dem ONTAP System einzurichten, um so einen Single Point of Failure (SPOF) zu vermeiden.' 
+---
+= Ungültiges Pfad-Setup: Alternative Pfade sind nicht konfiguriert
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es ist wichtig, alternative Pfade zu allen Array LUNs von beiden FC-Initiatoren auf dem ONTAP System einzurichten, um so einen Single Point of Failure (SPOF) zu vermeiden.
+
+Die folgende Konfiguration ist ungültig, da sie keine alternativen Pfade von den einzelnen FC-Initiator-Ports auf den ONTAP-Systemen zu jeder LUN auf dem Storage-Array bereitstellt. Beide FC-Initiator-Ports aus demselben ONTAP-System sind über denselben Switch mit dem Storage-Array verbunden.
+
+image::../media/invalid_config_no_alternate_paths.gif[Diese Grafik wird im umgebenden Text beschrieben.]
+
+Nehmen wir an, dass das folgende Zoning in diesem ungültigen Beispiel vorhanden ist:
+
+* Für vs1:
++
+** 0a ist auf Controller 1 Port A abgegrenzt
+** 0c ist abgegrenzt, um Controller 1 Port B zu sehen
+
+
+* Für vs2:
++
+** 0a ist auf Controller 2 Port A abgegrenzt
+** 0c ist abgegrenzt, um Controller 2 Port B. zu sehen
+
+
+
+
+In dieser Beispielkonfiguration wird jeder Switch zu einem SPOF.
+
+Um dies zu einer gültigen Konfiguration zu machen, müssen die folgenden Änderungen vorgenommen werden:
+
+* Der FC-Initiator-Port 0c von vs1 muss mit Switch 2 verbunden sein.
+* Der FC-Initiator-Port 0a von vs2 muss mit Switch 1 verbunden sein.
+* Das entsprechende Zoning muss konfiguriert werden.
++
+Wenn Sie mehrere Ports auf einem Speicher-Array verwenden, das die Konfiguration eines bestimmten LUN-Satzes auf einem ausgewählten Port unterstützt, muss ein bestimmter FC-Initiator-Port in der Lage sein, alle Array-LUNs auf der Fabric anzuzeigen.
+
+

@@ -1,0 +1,24 @@
+---
+permalink: implement-e-series/concept_stand_alone_basic_configuration.html 
+sidebar: sidebar 
+keywords: stand-alone, basic, configuration 
+summary: Die eigenständige Basiskonfiguration eines ONTAP-Systems, das Array-LUNs verwendet, ist eine einfache Fabric-Attached-Konfiguration mit einem einzelnen FC-Initiator-Port-Paar, das auf eine einzelne LUN-Gruppe zugreift. 
+---
+= Eigenständige Grundkonfiguration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die eigenständige Basiskonfiguration eines ONTAP-Systems, das Array-LUNs verwendet, ist eine einfache Fabric-Attached-Konfiguration mit einem einzelnen FC-Initiator-Port-Paar, das auf eine einzelne LUN-Gruppe zugreift.
+
+Diese Konfiguration wird für die Verwendung mit allen in der Interoperabilitäts-Matrix aufgeführten Storage Arrays unterstützt, da sie für die Version von ONTAP auf dem System unterstützt wird.
+
+Die folgende Abbildung zeigt diese Konfiguration:
+
+image::../media/one_standalone_2_port_array_lun_group_array_port_labels.gif[In einer einzelnen Array-LUN-Gruppenkonfiguration mit 2 Ports mit einem eigenständigen System]
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

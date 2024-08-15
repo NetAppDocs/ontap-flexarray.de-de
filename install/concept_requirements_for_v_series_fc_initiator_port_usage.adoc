@@ -1,0 +1,62 @@
+---
+permalink: install/concept_requirements_for_v_series_fc_initiator_port_usage.html 
+sidebar: sidebar 
+keywords: requirements, use, fc initiator, ports 
+summary: Wenn Sie FC-Initiator-Ports in einer ONTAP-Konfiguration mit Array-LUNs verwenden möchten, müssen Sie die spezifischen Anforderungen für Port-Paar-Redundanz, Port-Einstellungen für HBAs, Verbindungen mit Zielports, Array-LUN-Limits und Verbindungen zu verschiedenen Speichergeräten erfüllen. 
+---
+= Anforderungen für die Verwendung von FC-Initiator-Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie FC-Initiator-Ports in einer ONTAP-Konfiguration mit Array-LUNs verwenden möchten, müssen Sie die spezifischen Anforderungen für Port-Paar-Redundanz, Port-Einstellungen für HBAs, Verbindungen mit Zielports, Array-LUN-Limits und Verbindungen zu verschiedenen Speichergeräten erfüllen.
+
+|===
+| Für diese Funktion... | Die Anforderungen sind... 
+
+
+ a| 
+Port-Paar-Redundanz
+ a| 
+Sie müssen redundante FC-Initiator-Port-Paare verwenden, während Sie ein ONTAP-System mit Array-LUNs verbinden.
+
+
+
+ a| 
+Porteinstellung für HBAs
+ a| 
+Sie müssen alle HBAs festlegen, die für den Zugriff auf Festplatten oder Array-LUNs verwendet werden, als _Initiator_-Ports.
+
+
+
+ a| 
+Verbindung mit Zielports des Speicher-Arrays wird hergestellt
+ a| 
+Sie können denselben FC-Initiator-Port mit mehreren Ziel-Ports im Speicher-Array verbinden.
+
+Sie können bis zu zwei FC-Initiator-Ports mit einem einzelnen Ziel-Port verbinden.
+
+
+
+ a| 
+Grenzwerte für Array-LUNs
+ a| 
+Es gibt Beschränkungen dafür, wie viele Array LUNs über einem FC-Initiator-Port sichtbar sein können. Die Limits variieren je nach ONTAP Versionen.
+
+
+
+ a| 
+Verbindung zu verschiedenen Speichergeräten und Geräten herstellen
+ a| 
+Sie müssen einen separaten FC-Initiator-Port verwenden, um das ONTAP-System mit den folgenden Anschlüssen zu verbinden:
+
+* Platten-Shelfs
+* Array-LUNs
+* Tape-Geräte
+
+
+Wenn das ONTAP-System nicht über genügend interne Ports für Ihre Anforderung verfügt, müssen Sie einen zusätzlichen HBA bestellen.
+
+|===

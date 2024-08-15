@@ -1,0 +1,14 @@
+---
+permalink: install/concept_factors_that_impact_the_number_and_size_of_array_luns_you_need.html 
+sidebar: sidebar 
+keywords: factors, impact, number, size, array, luns, need 
+summary: Sie müssen eine Reihe von Faktoren berücksichtigen, einschließlich des nutzbaren Speicherplatzes in einer LUN, wenn Sie bestimmen, wie viele Array-LUNs Sie benötigen und deren Größe. 
+---
+= Faktoren, die sich auf die Anzahl und Größe der benötigten Array-LUNs auswirken
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen eine Reihe von Faktoren berücksichtigen, einschließlich des nutzbaren Speicherplatzes in einer LUN, wenn Sie bestimmen, wie viele Array-LUNs Sie benötigen und deren Größe.

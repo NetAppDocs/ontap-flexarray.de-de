@@ -1,0 +1,58 @@
+---
+permalink: install/concept_pre_cluster_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: pre cluster, array, lun, name, format, ontap, systems 
+summary: Bevor ein Node zu einem Cluster hinzugefügt wird oder sich das System im Wartungsmodus befindet, folgt der LUN-Name des Arrays einem Format, das vor Data ONTAP 8.3, dem Pre-Cluster-Format, verwendet wird. 
+---
+= Format für LUN-Namen vor dem Cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bevor ein Node zu einem Cluster hinzugefügt wird oder sich das System im Wartungsmodus befindet, folgt der LUN-Name des Arrays einem Format, das vor Data ONTAP 8.3, dem Format _Pre-Cluster_, verwendet wird.
+
+In diesem Format ist der Array-LUN-Name ein pfadbasierter Name, der die Geräte im Pfad zwischen dem ONTAP-System und dem Speicher-Array, die verwendeten Ports und die SCSI-LUN-ID auf dem Pfad umfasst, den das Speicher-Array extern zur Zuordnung zu Hosts bereitstellt.
+
+Auf einem ONTAP System, das Array-LUNs unterstützt, kann jede Array-LUN mehrere Namen haben, da zu jeder LUN mehrere Pfade vorhanden sind.
+
+
+
+== Format für Array-LUN-Namen für ONTAP-Systeme
+
+|===
+| Konfiguration | Format für Array-LUN-Namen | Komponentenbeschreibungen 
+
+
+ a| 
+Direct-Attached
+ a| 
+`node-name.adapter.idlun-id`
+ a| 
+`node-name` Ist der Name des Cluster-Node. Bei ONTAP wird der Node-Name dem LUN-Namen vorangestellt, sodass der pfadbasierte Name innerhalb des Clusters eindeutig ist. Der Adapter ist die Adapternummer auf dem ONTAP System.
+
+`id` Ist der Channel-Adapter-Port auf dem Speicher-Array.
+
+`lun-id` Ist die Array-LUN-Nummer, die das Speicherarray Hosts zur Verfügung stellt.
+
+Beispiel: `node1.0a.0L1`
+
+
+
+ a| 
+Fabric-Attached
+ a| 
+`node-name:switch-name:port.idlun-id`
+ a| 
+`node-name` Ist der Name des Node. Bei ONTAP wird der Node-Name dem LUN-Namen vorangestellt, sodass der pfadbasierte Name innerhalb des Clusters eindeutig ist. `switch-name` Ist der Name des Switches.
+
+`port` Ist der Switch-Port, der mit dem Ziel-Port (dem Endpunkt) verbunden ist.
+
+`id` Ist die Geräte-ID.
+
+`lun-id` Ist die Array-LUN-Nummer, die das Speicherarray Hosts zur Verfügung stellt.
+
+Beispiel: `node1:brocade3:6.126L1`
+
+|===

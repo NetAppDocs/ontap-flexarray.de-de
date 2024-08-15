@@ -1,0 +1,47 @@
+---
+permalink: install/concept_minimum_and_maximum_array_lun_sizes_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: minimum, maximum, array, lun, sizes, supported, ontap, configurations 
+summary: Die von den Storage Arrays bereitgestellten Array-LUNs müssen innerhalb der Mindest- und Maximalgrößenanforderungen für eine ONTAP Konfiguration mit Array-LUNs liegen. ONTAP gibt eine Fehlermeldung aus, die eine Array-LUN identifiziert, die die Mindest- oder Höchstgrößenanforderungen nicht erfüllt. 
+---
+= Minimale und maximale unterstützte Array-LUN-Größen für ONTAP Konfigurationen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die von den Storage Arrays bereitgestellten Array-LUNs müssen innerhalb der Mindest- und Maximalgrößenanforderungen für eine ONTAP Konfiguration mit Array-LUNs liegen. ONTAP gibt eine Fehlermeldung aus, die eine Array-LUN identifiziert, die die Mindest- oder Höchstgrößenanforderungen nicht erfüllt.
+
+Die minimale und maximale Array-LUN-Größe werden entsprechend der Art und Weise berechnet, wie ONTAP Maßeinheiten definiert. Die ONTAP Definition von GB und TB lautet wie folgt:
+
+[cols="2*"]
+|===
+| Eins... | Entspricht... 
+
+
+ a| 
+GB
+ a| 
+1000 x 1024 x 1024 Byte (1000 MB)
+
+
+
+ a| 
+TB
+ a| 
+1000 x 1000 x 1024 x 1024 Byte (1000 GB)
+
+|===
+Verschiedene Anbieter von Storage-Arrays verwenden für die Berechnung der Maßeinheiten unterschiedliche Formeln. Sie müssen die Maßeinheiten Ihres Anbieters verwenden, um die Array LUN-Größen zu berechnen, die der von einer ONTAP Konfiguration unterstützten Mindest- und Höchstgröße entsprechen.
+
+Die maximale LUN-Größe, die ONTAP unterstützt, unterscheidet sich je nach ONTAP Versionen. Informationen über die minimale und maximale Array-LUN-Größe finden Sie im Abschnitt _Hardware Universe_.
+
+[NOTE]
+====
+Die minimale Array-LUN-Größe für eine Daten-(Speicher-)LUN unterscheidet sich von der minimalen Array-LUN-Größe für das Root-Volume.
+
+====
+*Verwandte Informationen*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

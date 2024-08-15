@@ -1,0 +1,47 @@
+---
+permalink: install/concept_stages_of_implementation_for_a_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: stages, implementation, system, use, array, luns, back end, front end 
+summary: 'Die Implementierung einer Konfiguration, bei der Ihr System LUNs aus einem Speicher-Array nutzt, erfolgt in zwei Phasen: Eine Back-End-Implementierung und eine Front-End-Implementierung. Sie ist bei der Planung Ihrer Konfiguration hilfreich, um die grundlegenden Aufgaben in den einzelnen Phasen zu verstehen.' 
+---
+= Implementierungsstufen für ein System unter Verwendung von Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Implementierung einer Konfiguration, bei der Ihr System LUNs aus einem Speicher-Array nutzt, erfolgt in zwei Phasen: Eine Back-End-Implementierung und eine Front-End-Implementierung. Sie ist bei der Planung Ihrer Konfiguration hilfreich, um die grundlegenden Aufgaben in den einzelnen Phasen zu verstehen.
+
+
+
+== Phase 1: Back-End-Implementierung
+
+Die Einrichtung der Back-End-Implementierung umfasst alle Aufgaben zur Einrichtung des ONTAP Systems mit einem Storage Array bis zu dem Punkt, an dem die ONTAP Software installiert werden kann.
+
+Zu den Aufgaben zur Einrichtung der Back-End-Implementierung gehören:
+
+. Erstellen und Formatieren von Array-LUNs
+. Zuweisen von Ports
+. Verkabelung
+. Zoning-Switches (falls zutreffend)
+. In ONTAP bestimmte Array-LUNs einem ONTAP-System zuweisen
+. Geben Sie in ONTAP Informationen zur Einrichtung eines ONTAP-Systems im Netzwerk an
+. Installation der ONTAP Software
+
+
+Wenn ein ONTAP System mit Festplatten-Shelfs bestellt wird, wird die ONTAP Software werkseitig installiert. In einer solchen Konfiguration müssen Sie nicht das Root-Volume erstellen und Lizenzen sowie ONTAP Software installieren.
+
+Wenn ein ONTAP System ohne Festplatten-Shelfs bestellt wird, müssen Sie ONTAP konfigurieren, bevor Sie das Cluster einrichten.
+
+
+
+== Phase 2: Front-End-Implementierung
+
+Die Aufgaben zum Einrichten der Front-End-Implementierung sind identisch mit denen eines Systems, das Festplatten verwendet, einschließlich der folgenden:
+
+* Konfiguration des ONTAP Systems für alle Protokolle (NAS, FC oder beides)
+* Konfigurieren von ONTAP Funktionen wie SnapVault, SnapMirror, SnapValidator und Snapshot Kopien
+* Volumes und Aggregate erstellen
+* Einrichtung der Datensicherung einschließlich NDMP Dumps und Tapes
+

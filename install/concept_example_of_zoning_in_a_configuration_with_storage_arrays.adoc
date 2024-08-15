@@ -1,0 +1,88 @@
+---
+permalink: install/concept_example_of_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: example, zone, configuration, storage, arrays, single, 4-port, lun, group 
+summary: Durch die Verwendung der LUN-Sicherheit bei der Konfiguration der Switches für Zoning wird sichergestellt, dass verschiedene Hosts keine LUNs sehen, die einem anderen Host zugeordnet sind. 
+---
+= Beispiel für Zoning in einer Konfiguration mit Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durch die Verwendung der LUN-Sicherheit bei der Konfiguration der Switches für Zoning wird sichergestellt, dass verschiedene Hosts keine LUNs sehen, die einem anderen Host zugeordnet sind.
+
+
+
+== Zoning in einer einzelnen LUN-Gruppenkonfiguration mit 4 Ports
+
+image::../media/one_4_port_array_lun_gp.gif[Diese Grafik wird durch den umgebenden Text beschrieben.]
+
+Die folgende Tabelle zeigt das Zoning für diese Beispielkonfiguration von ONTAP Systemen in einem HA-Paar. Das Einzel-Initiator-Zoning wird als Zoning-Strategie empfohlen.
+
+|===
+| Zone | ONTAP-System |  | Storage Array erledigen |  
+
+
+ a| 
+Schalter 1
+
+
+
+ a| 
+z1
+ a| 
+vs1
+ a| 
+Port 0a
+ a| 
+Controller 1
+ a| 
+Anschluss 1 A
+
+
+
+ a| 
+z2
+ a| 
+vs2
+ a| 
+Port 0a
+ a| 
+Controller 1
+ a| 
+Anschluss 1B
+
+
+
+ a| 
+Schalter 2
+
+
+
+ a| 
+z3
+ a| 
+vs1
+ a| 
+Anschluss 0c
+ a| 
+Controller 2
+ a| 
+Anschluss 2 A
+
+
+
+ a| 
+z4
+ a| 
+vs2
+ a| 
+Anschluss 0c
+ a| 
+Controller 2
+ a| 
+Anschluss 2B
+
+|===

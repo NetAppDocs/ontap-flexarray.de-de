@@ -1,0 +1,111 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hitachi_storage_arrays_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hitachi, storage, arrays, ontap, systems, ams, hus, vsp, hus vm, workaround 
+summary: Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann. 
+---
+= Erforderliche Parameter für Hitachi Storage Arrays mit ONTAP Systemen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann.
+
+
+
+== Erforderliche Systemparameter für AMS- und HUS-Speicherarrays
+
+Die Parameter, die eingestellt werden müssen, sind in der folgenden Tabelle aufgeführt:
+
+|===
+| Parameter | Einstellung 
+
+
+ a| 
+`Mapping mode`
+ a| 
+Aktiviert
+
+
+
+ a| 
+`Host group security`
+ a| 
+Aktiviert
+
+
+
+ a| 
+`Mode Setting > Common Setting`
+ a| 
+Standardmodus
+
+
+
+ a| 
+`Platform`
+ a| 
+Nicht angegeben
+
+
+
+ a| 
+`Middleware`
+ a| 
+Nicht angegeben
+
+|===
+
+
+== Erforderliche Systemparameter für VSP- und HUS-VM-Speicher-Arrays
+
+Die Parameter, die eingestellt werden müssen, sind in der folgenden Tabelle aufgeführt:
+
+|===
+| Parameter | Einstellung 
+
+
+ a| 
+`Host mode`
+ a| 
+Standard oder 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Aktiviert
+
+
+
+ a| 
+[NOTE]
+====
+Für jedes Initiator-Ziel-Port-Paar sollte eine von den Standard-Host-Gruppen getrennte Host-Gruppe erstellt werden.
+
+====
+|===
+Die Speicher-Array-Parameter sollten festgelegt und LUNs den Host-Gruppen zugeordnet werden, bevor der Switch in Zonen eingeteilt wird, um das ONTAP-System mit dem Hitachi-Speicher-Array zu verbinden.
+
+Wenn die ONTAP FC-Initiator-Ports mit Hitachi-Array-Ziel-Ports abgegrenzt werden, bevor die Speicher-Array-Parameter festgelegt sind und die LUNs den Host-Gruppen zugeordnet sind, sind Sie möglicherweise nicht in der Lage, LUNs zu sehen, die der ONTAP-Schnittstelle präsentiert werden.
+
+In diesem Fall generiert ONTAP eine der folgenden EMS-Meldungen:
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Behelfslösung
+
+Wenn das Zoning vor dem Festlegen der Parameter und dem Zuordnen der LUNs zu den Host-Gruppen konfiguriert wurde, können Sie das Problem der nicht sichtbaren LUNs beheben, indem Sie eine erneute Pfadinitialisierung durchführen, um eine erneute Erkennung der Array-LUNs zu erzwingen, die vom Hitachi-Speicher-Array zugeordnet sind. Informationen zur Problemumgehung finden Sie unter Problemumgehung, wenn LUNs mit Hitachi-Speicher-Arrays nicht sichtbar sind.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hitachi_storage_arrays.adoc[Problemumgehung, wenn LUNs bei Hitachi-Speicher-Arrays nicht sichtbar sind]

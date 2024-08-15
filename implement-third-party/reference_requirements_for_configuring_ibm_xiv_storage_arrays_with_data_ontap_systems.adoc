@@ -1,0 +1,45 @@
+---
+permalink: implement-third-party/reference_requirements_for_configuring_ibm_xiv_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: requirements, configuring, ibm xiv, arrays, ontap, systems, parameter, settings 
+summary: Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann. 
+---
+= Anforderungen für die Konfiguration von IBM XIV Arrays mit ONTAP Systemen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann.
+
+
+
+== Systemparametereinstellungen
+
+In der folgenden Tabelle sind die Systemparametereinstellungen für IBM XIV Gen3-Arrays aufgeführt:
+
+|===
+| Parameter | Einstellung 
+
+
+ a| 
+`Type`
+ a| 
+Standard
+
+
+
+ a| 
+`Host`
+ a| 
+Vom Benutzer bereitgestellter Hostname
+
+
+
+ a| 
+`Cluster`
+ a| 
+Vom Benutzer bereitgestellter Cluster-Name
+
+|===

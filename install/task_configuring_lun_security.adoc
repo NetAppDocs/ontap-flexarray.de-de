@@ -1,0 +1,32 @@
+---
+permalink: install/task_configuring_lun_security.html 
+sidebar: sidebar 
+keywords: configure, lun, security 
+summary: Der Speicher-Array-Administrator muss das Speicher-Array konfigurieren und Host-Gruppen erstellen, damit andere Hosts nicht auf die Array-LUNs zugreifen können, die für die Verwendung durch ONTAP vorgesehen sind. 
+---
+= Die LUN-Sicherheit wird konfiguriert
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Der Speicher-Array-Administrator muss das Speicher-Array konfigurieren und Host-Gruppen erstellen, damit andere Hosts nicht auf die Array-LUNs zugreifen können, die für die Verwendung durch ONTAP vorgesehen sind.
+
+Das Konzept der LUN-Sicherheit ähnelt dem Zoning, außer dass die LUN-Sicherheit auf dem Speicher-Array eingerichtet ist. Die LUN-Sicherheit verhindert, dass unterschiedliche Server den Speicher des jeweils anderen Servers im SAN nutzen. Die LUN-Sicherheit kann auch als _LUN-Maskierung_ bezeichnet werden.
+
+.Schritte
+. Richten Sie die LUN-Sicherheit auf dem Speicher-Array ein.
++
+Informationen zum Einrichten der LUN-Sicherheit finden Sie in der Dokumentation zum Speicher-Array.
+
++
+Weitere Informationen zur LUN-Sicherheit für die Speicher-Arrays Ihres Anbieters finden Sie unter https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["FlexArray Virtualisierungs-Implementierung für Storage von Drittanbietern"] . Einige Storage Arrays müssen zur Verwendung durch ONTAP Systeme dediziert sein.
+
+. Erstellen von Host-Gruppen oder vergleichbarer Host-Gruppen für das ONTAP System
++
+Der Begriff _Host Group_ wird auf einigen Speicher-Arrays verwendet, um einen Konfigurationsparameter zu beschreiben, mit dem Sie den Hostzugriff auf bestimmte Ports auf dem Speicher-Array festlegen können. Für verschiedene Speicher-Arrays werden unterschiedliche Begriffe verwendet, um diesen Konfigurationsparameter zu beschreiben. Jeder Anbieter von Speicher-Arrays verfügt über einen eigenen Prozess zur Erstellung einer Host-Gruppe oder eines entsprechenden Anbieters.
+
+
+
+*Verwandte Informationen*

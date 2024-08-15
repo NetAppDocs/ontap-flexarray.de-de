@@ -1,0 +1,33 @@
+---
+permalink: install/concept_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: array, lun, name, format 
+summary: Der einer Array-LUN zugewiesene Name hat ein neues Format, um sicherzustellen, dass der Name in einem Cluster eindeutig ist. 
+---
+= Format für Array-LUN-Namen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Der einer Array-LUN zugewiesene Name hat ein neues Format, um sicherzustellen, dass der Name in einem Cluster eindeutig ist.
+
+Der Array-LUN-Name besteht aus zwei Komponenten und sieht wie folgt aus:
+
+``<array_prefix>.<offset>``, Zum Beispiel `EMC-1.1`.
+
+* Das `array_prefix` ist ein eindeutiges Präfix, das ONTAP standardmäßig jedem Speicher-Array zuweist.
++
+Dieses Feld besteht aus ``<array_name-array_instance> (EMC-1`` in diesem Fall).
+
++
+`array_name` Kann durch die ersten drei Buchstaben des Namens des Anbieters gekennzeichnet werden.
+
++
+Wenn mehr als ein Array vom gleichen Anbieter vorhanden ist, wird der Wert des `array_instance` Erlöses in aufsteigender Reihenfolge angezeigt.
+
+* Der Offset ist die aufsteigende Nummer der virtuellen Festplatte, die ONTAP jeder LUN zuweist. Er ist unabhängig von der LUN-ID des Hosts.
+
+
+Sie können das Feld mit dem Befehl ändern ``<array_prefix>`` `storage array modify -name -prefix` .

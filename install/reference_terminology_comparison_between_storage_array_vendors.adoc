@@ -1,0 +1,219 @@
+---
+permalink: install/reference_terminology_comparison_between_storage_array_vendors.html 
+sidebar: sidebar 
+keywords: terminology, comparison, between, storage, array, vendors 
+summary: Verschiedene Anbieter von Storage Arrays verwenden gelegentlich verschiedene Begriffe, um ähnliche Konzepte zu beschreiben. Umgekehrt können die Bedeutung des gleichen Begriffs zwischen den Array-Anbietern variieren. 
+---
+= Terminologievergleich zwischen Anbietern von Storage-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verschiedene Anbieter von Storage Arrays verwenden gelegentlich verschiedene Begriffe, um ähnliche Konzepte zu beschreiben. Umgekehrt können die Bedeutung des gleichen Begriffs zwischen den Array-Anbietern variieren.
+
+Die folgende Tabelle zeigt eine Zuordnung einiger gängiger Anbieterbegriffe:
+
+|===
+| Laufzeit | Anbieter | Definition 
+
+
+ a| 
+Host-Gruppe
+ a| 
+Hitachi
+ a| 
+Eine Konfigurationseinheit, mit der Sie den Hostzugriff auf Ports auf dem Speicher-Array festlegen können. Sie identifizieren die WWNs des FC-Initiator-Ports für das ONTAP-System, auf das Sie auf die LUNs zugreifen möchten. Der Prozess hängt vom jeweiligen Anbieter ab und unterscheidet sich manchmal bei den verschiedenen Storage Array-Modellen desselben Anbieters.
+
+
+
+ a| 
+HP XP
+ a| 
+
+
+
+| Storage Group Zur Verfügung  a| 
+EMC CX, EMC VNX
+ a| 
+
+
+
+| Host-Definition  a| 
+3PAR
+ a| 
+
+
+
+| Host  a| 
+3PAR, HP EVA, HP XP, HITACHI
+ a| 
+
+
+
+ a| 
+
+
+
+| Paritätsgruppe  a| 
+Hitachi, HP XP
+ a| 
+Die Anordnung der Festplatten im Back-End, die zusammen den definierten RAID-Level bilden.
+
+
+
+ a| 
+RAID-Gruppe
+ a| 
+ONTAP, EMC CX, EMC VNX
+ a| 
+
+
+
+| Festplattengruppe  a| 
+HP EVA
+ a| 
+Eine Reihe physischer Laufwerke, die Speicherpools bilden, aus denen Sie virtuelle Laufwerke erstellen können.
+
+
+
+ a| 
+Paritätssatz, RAID-Satz
+ a| 
+3PAR
+ a| 
+Eine Gruppe paritätsgeschützter _chunklets_. (Ein Chunklet ist ein Block mit 256 MB zusammenhängendem Speicherplatz auf einer physischen Festplatte.)
+
+
+
+ a| 
+ a| 
+|  
+
+
+| Cluster  a| 
+ONTAP
+ a| 
+In ONTAP eine Gruppierung von Nodes, die es mehreren Nodes ermöglicht, ihre Ressourcen in einem großen virtuellen Server zu bündeln und die Arbeit auf das Cluster zu verteilen.
+
+
+
+ a| 
+| Hitachi, HP XP  a| 
+Eine Hardwarekomponente auf den Speicherarrays, die die Ports enthält, mit denen Hosts verbunden sind.
+
+
+
+ a| 
+ a| 
+|  
+
+
+| Controller  a| 
+ONTAP
+ a| 
+Die Komponente eines Storage-Systems, auf dem das ONTAP Betriebssystem ausgeführt wird und mit Back-End Storage Arrays interagiert. Controller werden auch manchmal Köpfe oder CPU-Module genannt.
+
+
+
+ a| 
+| HITACHI, HP EVA, HP XP  a| 
+Hardware auf dem Speicher-Array, auf dem sich die Zielports befinden.
+
+
+
+ a| 
+Knoten
+ a| 
+3-PAR
+ a| 
+Eine Hardwarekomponente auf den Speicherarrays, die die Ports enthält, mit denen Hosts verbunden sind.
+
+
+
+ a| 
+FBE Board
+ a| 
+EMC Symmetrix
+ a| 
+
+
+
+| Speicherprozessor (SP)  a| 
+EMC CX, EMC VNX
+ a| 
+
+
+
+ a| 
+LUN
+ a| 
+Zahlreiche Storage-Arrays
+ a| 
+Eine Gruppierung von einer oder mehreren Festplatten oder Festplattenpartitionen in eine Spanne an Festplattenspeicher. In der ONTAP-Dokumentation wird dies als _Array LUN_ bezeichnet.
+
+
+
+ a| 
+LDEV
+ a| 
+Hitachi, HP XP
+ a| 
+
+
+
+| LUN  a| 
+ONTAP
+ a| 
+Das ONTAP System kann den damit verbundenen Storage virtualisieren und den Storage als LUNs für externe Applikationen und Clients (zum Beispiel über iSCSI und FC) bereitstellen. Clients wissen nicht, wo eine Front-End-LUN gespeichert ist.
+
+
+
+ a| 
+LUN, virtuelles Laufwerk
+ a| 
+HP EVA
+ a| 
+Ein virtuelles Laufwerk (in der Benutzeroberfläche _vDisk_ genannt) ist ein simuliertes Laufwerk, das in einer Laufwerksgruppe erstellt wird. Sie können einer virtuellen Festplatte eine Kombination von Merkmalen zuweisen, z. B. einen Namen, eine Redundanzstufe und eine Größe. Bei der Präsentation eines virtuellen Laufwerks wird der Speicher einem Host zur Verfügung gestellt.
+
+
+
+ a| 
+Array-LUN
+ a| 
+ONTAP-Dokumentation, ONTAP Storage Management Tools
+ a| 
+In der ONTAP-Dokumentation wird der Begriff „_Array LUN_“ verwendet, um LUNs auf den Speicher-Arrays von Front-End-LUNs ( ONTAP-LUNs) zu unterscheiden.
+
+
+
+ a| 
+VLUN
+ a| 
+3PAR
+ a| 
+(Volume-LUN) Eine Paarung zwischen einem virtuellen Volume und einer Logical Unit Number (LUN). Damit ein Host ein virtuelles Volume sehen kann, muss das Volume als LUN exportiert werden, indem vLUNs auf dem Speicher-Array erstellt werden.
+
+
+
+ a| 
+ a| 
+|  
+
+
+| Datenmenge  a| 
+ONTAP
+ a| 
+Eine logische Einheit, in der Benutzerdaten gespeichert werden, auf die über ein oder mehrere der von ONTAP unterstützten Zugriffsprotokolle zugegriffen werden kann, u. a. NFS (Network File System), Common Internet File System (CIFS), HTTP (Hypertext Transfer Protocol), Fibre Channel (FC) und iSCSI (Internet SCSI).
+
+
+
+ a| 
+Virtual Volume
+ a| 
+3PAR
+ a| 
+Eine virtuelle Speichereinheit, die durch Zuordnen von Daten von einem oder mehreren logischen Laufwerken erstellt wird.
+
+|===

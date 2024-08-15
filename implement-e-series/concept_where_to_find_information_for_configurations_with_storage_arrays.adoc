@@ -1,0 +1,16 @@
+---
+permalink: implement-e-series/concept_where_to_find_information_for_configurations_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: Where, find, information, configurations, storage, arrays 
+summary: Wenn Sie Ihre Konfiguration für die Verwendung von ONTAP-Systemen mit Storage-Arrays planen, sollten Sie neben der Produktdokumentation verschiedene Quellen nach Informationen zur Array-LUN-Konfiguration suchen. 
+---
+= Wo finden Sie Informationen für Konfigurationen mit Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie Ihre Konfiguration für die Verwendung von ONTAP-Systemen mit Storage-Arrays planen, sollten Sie neben der Produktdokumentation verschiedene Quellen nach Informationen zur Array-LUN-Konfiguration suchen.
+
+Die auf der NetApp Support-Website verfügbaren Tools bieten an einem zentralen Standort spezifische Informationen darüber, welche Funktionen, Konfigurationen und Speicher-Array-Modelle in bestimmten Versionen unterstützt werden.

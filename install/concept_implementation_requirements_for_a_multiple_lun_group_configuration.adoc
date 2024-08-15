@@ -1,0 +1,43 @@
+---
+permalink: install/concept_implementation_requirements_for_a_multiple_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: implementation, requirements, multiple, lun, group, configuration 
+summary: Sie können die System-Performance verbessern, indem Sie eine Konfiguration mit mehreren LUN-Gruppen in Ihrer Speicherumgebung implementieren. Zur Implementierung dieser Konfiguration müssen auf den ONTAP-Systemen und den Storage-Arrays bestimmte Setup-Aufgaben ausgeführt werden. 
+---
+= Implementierungsanforderungen für eine Konfiguration mit mehreren LUN-Gruppen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können die System-Performance verbessern, indem Sie eine Konfiguration mit mehreren LUN-Gruppen in Ihrer Speicherumgebung implementieren. Zur Implementierung dieser Konfiguration müssen auf den ONTAP-Systemen und den Storage-Arrays bestimmte Setup-Aufgaben ausgeführt werden.
+
+Eine Konfiguration mehrerer LUN-Gruppen wird für die meisten Speicher-Arrays unterstützt. Überprüfen Sie anhand der _Interoperabilitätsmatrix_, ob diese Konfiguration von Ihrem bestimmten Speicher-Array unterstützt wird.
+
+Sie müssen mit dem Speicher-Array-Administrator zusammenarbeiten, um Folgendes auf dem _Storage Array_ für eine Konfiguration mit mehreren LUN-Gruppen einzurichten:
+
+* Verwenden Sie so viele Ports wie möglich, um Zugriff auf die Array-LUNs zu ermöglichen, die dem ONTAP-System zugewiesen sind.
+* Verwenden Sie Host-Gruppen (oder die Entsprechung Ihres Anbieters), um zu definieren, welche Array-LUN-Gruppen den einzelnen FC-Initiator-Ports auf einem ONTAP System angezeigt werden.
+
+
+Sie können Folgendes auf dem ONTAP-System einrichten, um eine Konfiguration mit mehreren LUN-Gruppen zu implementieren:
+
+* Verwenden Sie für jede Array-LUN-Gruppe ein FC-Initiator-Port-Paar.
++
+Jedes FC-Initiator-Port-Paar greift über redundante Pfade auf eine andere LUN-Gruppe im Speicher-Array zu.
+
+* Erstellen Sie ein großes Aggregat in der ONTAP-Konfiguration, und fügen Sie dem Aggregat Array-LUNs aus mehreren RAID-Gruppen (Paritätsgruppen) hinzu.
++
+Auf diese Weise wird der I/O auf mehrere Festplatten verteilt. Die Kombination aus I/O-Verteilung über die RAID-Gruppen und der Erstellung eines großen Aggregats führt zu einer deutlichen Performance-Steigerung.
+
+
+
+Sie müssen Folgendes auf dem _Switch_ einrichten, um eine Konfiguration mit mehreren LUN-Gruppen zu implementieren:
+
+* Konfigurieren Sie das Switch-Zoning, um festzulegen, welche Zielports die FC-Initiator-Ports auf dem ONTAP-System für den Zugriff auf die einzelnen Array-LUN-Gruppen verwenden sollen.
+
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

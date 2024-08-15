@@ -1,0 +1,85 @@
+---
+permalink: install/task_connecting_an_ontap_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: connect, ontap, system, storage, array 
+summary: Beim Verbinden des ONTAP-Systems mit einem Speicher-Array müssen das ONTAP-System, Switches und Speicher-Arrays miteinander verkabelt und zusätzliche Geräte wie Bandsicherungsgeräte angeschlossen werden. 
+---
+= Verbinden eines ONTAP-Systems mit einem Speicher-Array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Beim Verbinden des ONTAP-Systems mit einem Speicher-Array müssen das ONTAP-System, Switches und Speicher-Arrays miteinander verkabelt und zusätzliche Geräte wie Bandsicherungsgeräte angeschlossen werden.
+
+*Was Sie brauchen*
+
+* Sie müssen die integrierten Ports und Erweiterungsadapterports für Ihr ONTAP-System für die Verbindung zum Speicher-Array identifiziert haben.
+* Sie müssen die Ports auf dem Speicher-Array, die Sie verwenden möchten, um eine Verbindung zum ONTAP-System herzustellen, gefunden haben.
+
+
+In diesem Verfahren wird beschrieben, wie ein ONTAP-System über zwei Pfade mit einem Speicherarray verbunden wird, wobei jeder Initiator einem Zielport zugewiesen ist.
+
+.Schritte
+. Verbinden Sie das ONTAP-System wie in der folgenden Tabelle dargestellt mit den Switches:
++
+|===
+| Für... | Führen Sie die folgenden Schritte aus... 
+
+
+ a| 
+Ein eigenständiges System
+ a| 
+.. Schließen Sie ein Kabel von einem FC-Initiator-Port am ONTAP-System an einen Port an Switch 1 an.
+.. Verbinden Sie einen redundanten FC-Initiator-Port mit einem weiteren Kabel mit einem Port auf Switch 2.
+
+
+
+
+ a| 
+Ein HA-Paar
+ a| 
+.. Verbinden Sie auf dem ersten Node im HA-Paar ein Kabel von einem FC-Initiator-Port mit einem Port an Switch 1.
+.. Verbinden Sie ein weiteres Kabel von einem redundanten FC-Initiator-Port auf demselben Node mit einem Port auf Switch 2.
+.. Verbinden Sie auf dem zweiten Node im HA-Paar ein Kabel von einem FC-Initiator-Port mit einem Port an Switch 1.
+.. Verbinden Sie ein weiteres Kabel von einem redundanten FC-Initiator-Port auf demselben Node mit einem Port auf Switch 2.
+
+
+|===
+. Verbinden Sie die Switches mithilfe der Anweisungen in der folgenden Tabelle und bei einem HA-Paar die folgende Abbildung mit dem Speicher-Array:
++
+|===
+| Für ein eigenständiges System... | Für ein HA-Paar... 
+
+
+ a| 
+.. Verbinden Sie Switch 1 mit dem Speicher-Array-Controller 1, Port 1A.
+.. Verbinden Sie Switch 2 mit dem Speicher-Array-Controller 2, Port 2A.
+
+ a| 
+.. Verbinden Sie Switch 1 mit dem Speicher-Array-Controller 1, Port 1A.
+.. Verbinden Sie Switch 2 mit dem Speicher-Array-Controller 2, Port 2A.
+.. Verbinden Sie Switch 1 mit dem Speicher-Array-Controller 1, Port 1B.
+.. Verbinden Sie Switch 2 mit dem Speicher-Array-Controller 2, Port 2B.
+
+
+|===
++
+In der folgenden Abbildung sind die Verbindungen für ein HA-Paar dargestellt.
+
++
+image::../media/one_4_port_array_lun_gp.gif[Verbindungen von vs1 0a und vs2 0a gehen zu Speicher-Array-Controller 1,ports 1A and 1B. Connections from vs1 0c and vs2 0c go to storage array controller 2,ports 2A and 2B.]
+
+. *Optional:* Verbinden Sie das ONTAP-System mit einem Bandsicherungs-Gerät über einen separaten FC-Initiator-Port oder SCSI-Bandadapter.
+. Stellen Sie sicher, dass das Speicher-Array konfiguriert und ordnungsgemäß angeschlossen ist und eingeschaltet ist.
++
+Das konfigurierte und angeschlossene Speicher-Array muss eingeschaltet sein, bevor Sie das ONTAP-System einschalten. Informationen zum Einschalten des Speicher-Arrays finden Sie in der Dokumentation zum Speicher-Array.
+
+. Wenn Ihre Bereitstellung Switches umfasst, stellen Sie sicher, dass alle Switch-IDs eingestellt sind, und schalten Sie sie dann in 10-Minuten-Intervallen ein.
+. *Optional:* Wenn zutreffend, schalten Sie alle Bandsicherungen ein.
+. Schalten Sie das ONTAP-System ein, und führen Sie die Ersteinrichtung und -Konfiguration des Netzwerks durch.
+. Wenn das Speicher-Array die WWNs des ONTAP-Systems nicht automatisch erkennt, nachdem Sie das ONTAP-System mit dem Speicher-Array verbunden haben, müssen Sie die WWNs manuell beziehen.
+
+
+Um mit den Storage Arrays arbeiten zu können, müssen Sie die entsprechenden ONTAP Managementfunktionen einrichten.

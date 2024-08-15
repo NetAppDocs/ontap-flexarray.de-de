@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_requirements_for_using_disks_external_to_the_storage_array.html 
+sidebar: sidebar 
+keywords: requirements, using, disks, external, storage, array 
+summary: 'ONTAP unterstützt die Verwendung derselben Festplatten hinter den Speicherarrays, die der Anbieter unterstützt (d. h. externe Festplatten des Speicherarrays). Wenn Sie Speicher-Arrays bereitstellen, die externe Festplatten verwenden, akzeptiert ONTAP die Konfiguration zwischen dem Speicher-Array und den externen Festplatten.' 
+---
+= Anforderungen für die Verwendung von Festplatten außerhalb des Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt die Verwendung derselben Festplatten hinter den Speicherarrays, die der Anbieter unterstützt (d. h. externe Festplatten des Speicherarrays). Wenn Sie Speicher-Arrays bereitstellen, die externe Festplatten verwenden, akzeptiert ONTAP die Konfiguration zwischen dem Speicher-Array und den externen Festplatten.
+
+Im Folgenden finden Sie Einschränkungen und Best-Practice-Empfehlungen für die Bereitstellung von Speicher-Arrays, die externe Festplatten verwenden:
+
+* Root-Volumes und Ersatz-Core-LUNs werden auf externen Festplatten unterstützt.
+* Array-LUNs aus externen und internen Festplatten sollten sich nicht im gleichen ONTAP-Aggregat befinden.
+* Array-LUNs aus SATA-Laufwerken und Array-LUNs aus FC-Laufwerken sollten nicht im selben Aggregat sein.
+* Regeln für die Anzahl der Pfade zu Array-LUNs auf externen Festplatten sind die gleichen wie für Array-LUNs auf Festplatten auf dem Speicher-Array.
++
+Im Fall von externen Festplatten gehen die Pfade vom ONTAP-System über das Speicher-Array zu den externen Festplatten.
+
+* Für Array-LUNs auf externen Festplatten wird nur die Blockprüfsumme unterstützt.
+
+
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Installationsanforderungen für FlexArray Virtualisierung und Referenz"]

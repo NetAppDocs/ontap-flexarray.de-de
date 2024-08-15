@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_requirements_for_volume_groups_on_ds8xxx_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, volume, groups, ds8xxx, storage, arrays 
+summary: Bei der Konfiguration von DS8xxx-Arrays müssen Sie die Einschränkungen bei der Anzahl der Volume-Gruppen kennen, die Sie mit einer LUN-Gruppe verwenden können. 
+---
+= Anforderungen für Volume-Gruppen auf DS8xxx-Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Konfiguration von DS8xxx-Arrays müssen Sie die Einschränkungen bei der Anzahl der Volume-Gruppen kennen, die Sie mit einer LUN-Gruppe verwenden können.
+
+Sie müssen für jede LUN-Gruppe auf einem DS8xxx Speicher-Array eine einzelne Volume-Gruppe verwenden, um sicherzustellen, dass die DS8xxx Array-LUNs allen FC-Initiatoren (die sich auf dem ONTAP-System befinden), die darauf zugreifen, konsistent präsentiert werden.
+
+[NOTE]
+====
+Wenn Array-LUNs nicht konsistent präsentiert werden, besteht die Möglichkeit einer Datenbeschädigung.
+
+====

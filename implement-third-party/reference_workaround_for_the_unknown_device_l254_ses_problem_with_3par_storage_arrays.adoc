@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.html 
+sidebar: sidebar 
+keywords: 'Workaround, unknown device (l254/ses), problem, 3PAR, storage, arrays, aggregates, luns, created, ontap system, not' 
+summary: Die Hostdefinition mit der Hostpersona, die im Abschnitt erforderliche Parameter für 3PAR-Arrays mit ONTAP-Systemen angegeben ist, sollte auf einem 3PAR-Speicher-Array erstellt werden, bevor der Switch in Zonen aufgeteilt wird, um das ONTAP-System mit einem 3PAR-Speicher-Array zu verbinden. Wenn Zoning vor der Host-Definition konfiguriert ist, erkennt ONTAP eine 3PAR Array-LUN als LUN 254 und Produkttyp-SES, die von ONTAP nicht verwendet werden können. 
+---
+= Problemumgehung für das unbekannte Geräteproblem (L254/SES) mit 3PAR-Speicherarrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Hostdefinition mit der Hostpersona, die im Abschnitt erforderliche Parameter für 3PAR-Arrays mit ONTAP-Systemen angegeben ist, sollte auf einem 3PAR-Speicher-Array erstellt werden, bevor der Switch in Zonen aufgeteilt wird, um das ONTAP-System mit einem 3PAR-Speicher-Array zu verbinden. Wenn Zoning vor der Host-Definition konfiguriert ist, erkennt ONTAP eine 3PAR Array-LUN als LUN 254 und Produkttyp-SES, die von ONTAP nicht verwendet werden können.
+
+xref:reference_required_parameters_for_3par_arrays_with_data_ontap_systems.adoc[Erforderliche Parameter für 3PAR-Arrays mit ONTAP-Systemen]
+
+Wenn ONTAP 3PAR Array-LUNs als LUN 254 und Produkttyp-SES erkennt, können die neu zugeordneten 3PAR-LUNs nicht ONTAP Systemen zugewiesen werden. Einige 3PAR-LUNs, die möglicherweise bereits zu einem Aggregat hinzugefügt wurden, können nicht verwendet werden, da ONTAP eine LUN 254 erkennt. ONTAP generiert EMS-Meldungen für die LUN, die als LUN 254 ermittelt wurde, und den Produkttyp SES und meldet einige LUNs als unbekannte Geräte.
+
+Wenn das Zoning vor der Hostdefinition konfiguriert wurde, können Sie das Problem mit dem unbekannten LUN 254/SES-Gerät beheben, indem Sie eine erneute Ermittlung der Array-LUNs erzwingen, die vom 3PAR-Speicher-Array zugeordnet sind. Das Verfahren, das Sie verwenden, hängt davon ab, ob Aggregate mit 3PAR Array LUNs bereits auf dem ONTAP System konfiguriert wurden. (Bei den folgenden Verfahren wird davon ausgegangen, dass Knoten-1 und Knoten-2 die Namen der ONTAP-Nodes sind.)
+
+
+
+== Wenn bereits Aggregate mit 3PAR Array-LUNs auf einem ONTAP-System erstellt wurden
+
+. Führen Sie den folgenden Befehl aus, um sicherzustellen, dass eine HA-Konfiguration auf Ihren ONTAP Systemen aktiviert ist: *`cluster ha show`*
++
+Die folgende Ausgabe wird angezeigt:
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Führen Sie den folgenden Befehl aus, um sicherzustellen, dass Storage Failover auf Ihren ONTAP Systemen konfiguriert ist: *`storage failover show`*
++
+Die folgende Ausgabe wird angezeigt:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Führen Sie einen Takeover-Vorgang auf Node-1 durch, indem Sie den folgenden Befehl ausführen: *`storage failover takeover -ofnode Node-1`*
+. Führen Sie den folgenden Befehl erneut aus, um zu überprüfen, ob Node-2 für einen Giveback-Vorgang bereit ist: *`storage failover show`*
++
+Die folgende Ausgabe wird angezeigt:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Führen Sie einen Giveback-Vorgang auf Node-1 durch, indem Sie den folgenden Befehl ausführen: *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. Wiederholen Sie von anderen Nodes im Cluster die Schritte 3 bis 5.
+
+
+
+
+== Wenn Aggregate mit 3PAR Array LUNs nicht auf einem ONTAP System erstellt wurden
+
+. Führen Sie den folgenden Befehl aus, um alle ONTAP FC-Initiator-Ports aufzulisten, die mit dem 3PAR-Speicherarray verbunden sind: *`system node run -node <node name> -command "sysconfig -v"`*
++
+Das folgende Beispiel zeigt den Befehl mit einem bestimmten Knotennamen, der enthalten ist: *`system node run -node Node-1 -command "sysconfig -v"`*
+
+. Führen Sie den folgenden Befehl aus, um alle aufgeführten Ports offline zu schalten: *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`*
++
+Im folgenden Beispiel wird der Befehl mit einem bestimmten Node-Namen und einem enthaltenen Adapter gezeigt: *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`*
+
+. Führen Sie den folgenden Befehl aus, um alle aufgeführten Ports online zu schalten: *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`*
++
+Im folgenden Beispiel wird der Befehl mit einem bestimmten Node-Namen und einem enthaltenen Adapter gezeigt: *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`*
+
+

@@ -1,0 +1,36 @@
+---
+permalink: install/task_changing_array_lun_size_or_composition.html 
+sidebar: sidebar 
+keywords: change, array, lun, size, composition 
+summary: Die Neukonfigurieren der Größe oder Zusammensetzung einer Array-LUN muss auf dem Speicher-Array erfolgen. Wenn eine Array-LUN bereits einem ONTAP-System zugewiesen wurde, müssen Sie mithilfe von ONTAP den Status der Array-LUN in „nicht verwendet“ ändern, bevor der Storage-Array-Administrator sie neu konfigurieren kann. 
+---
+= Ändern der Array-LUN-Größe oder -Zusammensetzung
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Neukonfigurieren der Größe oder Zusammensetzung einer Array-LUN muss auf dem Speicher-Array erfolgen. Wenn eine Array-LUN bereits einem ONTAP-System zugewiesen wurde, müssen Sie mithilfe von ONTAP den Status der Array-LUN in „nicht verwendet“ ändern, bevor der Storage-Array-Administrator sie neu konfigurieren kann.
+
+*Was Sie brauchen*
+
+Die Array-LUN muss eine Ersatz-Array-LUN sein, bevor Sie ihren Status in „nicht verwendet“ ändern können.
+
+.Schritte
+. Geben Sie auf dem ONTAP System den folgenden Befehl ein, um die Eigentümerinformationen zu entfernen: `storage disk removeowner  -disk arrayLUNname`
+. Führen Sie auf dem Speicher-Array die folgenden Schritte aus:
++
+.. Heben Sie die Zuordnung der Array-LUN zu den ONTAP-Systemen auf (nicht vorhanden), damit sie die Array-LUN nicht mehr sehen können.
+.. Ändern Sie die Größe oder Zusammensetzung der Array-LUN.
+.. Wenn ONTAP die Array-LUN erneut verwenden soll, stellen Sie die Array-LUN erneut den ONTAP-Systemen zur Verfügung.
++
+An dieser Stelle ist die Array-LUN für die FC-Initiator-Ports sichtbar, für die die Array-LUN bereitgestellt wurde. Sie kann jedoch von keinem ONTAP-System verwendet werden.
+
+
+
+. Geben Sie den folgenden Befehl auf dem ONTAP-System ein, das Sie der Besitzer der Array-LUN sein möchten: `storage disk assign -disk arrayLUNname -owner nodename`
++
+Nachdem die Besitzerinformationen entfernt wurden, kann die Array-LUN erst dann von einem ONTAP-System verwendet werden, wenn die Array-LUN erneut einem System zugewiesen wurde. Sie können die Array-LUN als Ersatz behalten oder es zu einem Aggregat hinzufügen. Sie müssen die Array-LUN zu einem Aggregat hinzufügen, bevor die Array-LUN zum Speicher verwendet werden kann.
+
+

@@ -1,0 +1,67 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hp_xp_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hp, xp, storage, arrays, ontap, workaround 
+summary: Für den erfolgreichen Einsatz mit ONTAP-Systemen sind bestimmte Parametereinstellungen auf dem Speicher-Array erforderlich. 
+---
+= Erforderliche Parameter für HP XP-Speicher-Arrays mit ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Für den erfolgreichen Einsatz mit ONTAP-Systemen sind bestimmte Parametereinstellungen auf dem Speicher-Array erforderlich.
+
+
+
+== Erforderliche Systemparameter für HP XP-Speicherarrays
+
+Die erforderlichen Parametereinstellungen sind in der folgenden Tabelle aufgeführt:
+
+|===
+| Parameter | Einstellung 
+
+
+ a| 
+`Host mode`
+ a| 
+Standard oder 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Aktiviert
+
+
+
+ a| 
+[NOTE]
+====
+Für jedes Initiator-Ziel-Port-Paar sollte eine von den Standard-Host-Gruppen getrennte Host-Gruppe erstellt werden.
+
+====
+|===
+Die Speicher-Array-Parameter sollten festgelegt und LUNs den Host-Gruppen zugeordnet werden, bevor der Switch in Zonen eingeteilt wird, um das ONTAP-System mit einem HP XP-Speicher-Array zu verbinden.
+
+Wenn die ONTAP-FC-Initiator-Ports mit den HP XP-Array-Zielports abgegrenzt sind, bevor die Speicher-Array-Parameter festgelegt sind und die LUNs den Host-Gruppen zugeordnet sind, können Sie möglicherweise keine LUNs sehen, die der ONTAP-Schnittstelle präsentiert werden.
+
+In diesem Fall generiert ONTAP eine der folgenden EMS-Meldungen:
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Behelfslösung
+
+Wenn das Zoning vor dem Festlegen der Parameter und dem Zuordnen der LUNs zu den Host-Gruppen konfiguriert wurde, können Sie das Problem der nicht sichtbaren LUNs beheben, indem Sie eine erneute Pfadinitialisierung durchführen, um eine erneute Erkennung der Array-LUNs zu erzwingen, die vom HP XP-Speicher-Array zugeordnet sind.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hp_xp_storage_arrays.adoc[Problemumgehung, wenn LUNs bei HP XP-Speicherarrays nicht sichtbar sind]

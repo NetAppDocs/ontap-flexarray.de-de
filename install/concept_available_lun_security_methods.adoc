@@ -1,0 +1,44 @@
+---
+permalink: install/concept_available_lun_security_methods.html 
+sidebar: sidebar 
+keywords: available, lun, security, methods, port-level, storage, array, dedicate, ontap 
+summary: Mithilfe verschiedener LUN-Sicherheitsmethoden können Sie festlegen, welche Hosts auf bestimmte Array-LUNs zugreifen können. Sie können Sicherheitsprodukte auf Port-Ebene oder LUN-Ebene verwenden oder einen Storage zur Verwendung durch ONTAP-Systeme zuweisen. 
+---
+= Verfügbare LUN-Sicherheitsmethoden
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mithilfe verschiedener LUN-Sicherheitsmethoden können Sie festlegen, welche Hosts auf bestimmte Array-LUNs zugreifen können. Sie können Sicherheitsprodukte auf Port-Ebene oder LUN-Ebene verwenden oder einen Storage zur Verwendung durch ONTAP-Systeme zuweisen.
+
+
+
+== Sicherheit auf Port-Ebene
+
+Sie können die Sicherheit auf Portebene verwenden, um nur die Array-LUNs für einen bestimmten Host anzuzeigen. Dieser Port wird dann diesem Host zugewiesen.
+
+Nicht alle Storage Arrays unterstützen Sicherheit auf Port-Ebene. Einige Speicher-Arrays stellen standardmäßig alle LUNs auf allen Ports bereit, und sie bieten keine Möglichkeit, die Sichtbarkeit von LUNs auf bestimmte Hosts einzuschränken. Für diese Arrays müssen Sie entweder ein LUN-Sicherheitsprodukt verwenden oder das Speicher-Array dem ONTAP-System zuweisen. Prüfen Sie die Dokumentation Ihres Speicher-Arrays, um festzustellen, ob Ihr Speicher-Array die Sicherheit auf Port-Ebene unterstützt.
+
+
+
+== LUN-Sicherheitsprodukte
+
+Sie können ein LUN-Sicherheitsprodukt verwenden, um Hosts zu steuern, die auf denselben Port begrenzt sind, sodass sie nur auf bestimmte Array-LUNs über diesen Port zugreifen können. Dadurch wird verhindert, dass andere Hosts auf dieselben Array-LUNs zugreifen, indem sie von den anderen Hosts maskiert werden.
+
+
+
+== Stellen Sie das Storage-Array für die ONTAP-Verwendung bereit
+
+Sie können das Storage-Array zur Verwendung durch ONTAP Systeme zuweisen. In diesem Fall sind keine anderen Hosts als die ONTAP-Systeme mit dem Speicher-Array verbunden.
+
+Sie sollten sowohl Zoning als auch LUN-Sicherheit verwenden, um zusätzlichen Schutz und Redundanz für die ONTAP-Systeme zu erreichen.
+
+Zusätzlich zu den LUN-Sicherheitsmethoden sollten Sie auch nach weiteren Details zur LUN-Sicherheit für die Speicher-Arrays Ihres Anbieters suchen. Einige Storage Arrays müssen zur Verwendung durch ONTAP Systeme dediziert sein.
+
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["FlexArray Virtualisierungs-Implementierung für Storage von Drittanbietern"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["FlexArray Virtualisierungs-Implementierung für NetApp E-Series Storage"]

@@ -1,0 +1,28 @@
+---
+permalink: install/concept_target_queue_depth_customization.html 
+sidebar: sidebar 
+keywords: target, queue, depth, customization 
+summary: 'Die Zielwarteschlangentiefe definiert die Anzahl der ONTAP-Befehle, die auf einem Zielport des Speicherarrays in eine Warteschlange (ausstehende) gestellt werden können. ONTAP liefert einen Standardwert. Für die meisten Implementierungen ist die standardmäßige Warteschlangentiefe des Ziels angemessen. Sie können diese jedoch ändern, um Performance-Probleme zu beheben.' 
+---
+= Anpassung der Warteschlangentiefe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Zielwarteschlangentiefe definiert die Anzahl der ONTAP-Befehle, die auf einem Zielport des Speicherarrays in eine Warteschlange (ausstehende) gestellt werden können. ONTAP liefert einen Standardwert. Für die meisten Implementierungen ist die standardmäßige Warteschlangentiefe des Ziels angemessen. Sie können diese jedoch ändern, um Performance-Probleme zu beheben.
+
+Die standardmäßige Warteschlangentiefe des Ziels unterscheidet sich von den verschiedenen Versionen von ONTAP:
+
+* Bei ONTAP ist der Standardwert 512.
+* Bei allen Versionen vor Data ONTAP 8.2 ist der Standardwert 256.
+
+
+Wenn ein Speicher-Array mit mehreren Initiatoren konfiguriert ist, die Zielports gemeinsam nutzen, möchten Sie nicht, dass die ausstehenden Befehle im Warteschlangenpuffer aller Initiatoren zusammen die vom Speicher-Array verhandhabenen überschreiten. Andernfalls kann die Performance aller Hosts beeinträchtigt werden. Speicher-Arrays unterscheiden sich in der Anzahl der Befehle, die sie im Warteschlangenpuffer verarbeiten können.
+
+[NOTE]
+====
+Die Tiefe der Zielwarteschlange kann auch als „`target Queue length,``“`Q-depth,`“ oder „` Max Throttle“ bezeichnet werden.
+
+====

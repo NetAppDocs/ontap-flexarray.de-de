@@ -1,0 +1,36 @@
+---
+permalink: install/concept_how_array_luns_are_made_available_for_host_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, host, use 
+summary: Ein Storage Array-Administrator muss Array-LUNs erstellen und diesen bestimmten FC Initiator-Ports der ONTAP-Systeme zur Verfügung stellen. 
+---
+= Wie Array-LUNs für den Host zur Verfügung gestellt werden
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ein Storage Array-Administrator muss Array-LUNs erstellen und diesen bestimmten FC Initiator-Ports der ONTAP-Systeme zur Verfügung stellen.
+
+Der Prozess, in dem LUNs für Hosts verfügbar sind, und die entsprechende Terminologie sind von den Anbietern von Storage Arrays unterschiedlich. Der Administrator des Speicher-Arrays führt folgende grundlegende Schritte aus, um LUNs für die Host-Nutzung zur Verfügung zu stellen:
+
+. Erstellt logische Geräte (LDEVs).
++
+[NOTE]
+====
+_LDEV_ ist ein Begriff, der von einigen Anbietern verwendet wird und diesen Inhalt zur Beschreibung eines logischen RAID-Speichers verwendet, der von Festplatten konfiguriert wird.
+
+====
+. Erstellt eine Host-Gruppe (oder ein Anbieteräquivalent).
++
+Die Host-Gruppe umfasst die WWPNs der Initiator-Ports der Hosts, die den LDEV sehen dürfen.
+
++
+[NOTE]
+====
+Um das Management zu vereinfachen, können Sie mit den meisten Speicher-Arrays eine oder mehrere Host-Gruppen definieren. Sie können bestimmte WWPNs (Ports) und WWNs (Hosts) definieren, um Mitglieder derselben Gruppe zu sein. Anschließend verknüpfen Sie bestimmte Array-LUNs mit einer Host-Gruppe. Hosts in der Host-Gruppe können auf die LUNs zugreifen, die mit der Host-Gruppe verbunden sind. Hosts, die sich nicht in dieser Host-Gruppe befinden, können nicht auf diese LUNs zugreifen. Verschiedene Anbieter beschreiben dieses Konzept mit unterschiedlichen Begriffen. Der Prozess zur Erstellung einer Host-Gruppe unterscheidet sich je nach Hersteller.
+
+====
+. Ordnet die LDEVs Host-Gruppen als LUNs zu.
+

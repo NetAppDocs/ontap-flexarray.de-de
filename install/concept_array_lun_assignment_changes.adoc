@@ -1,0 +1,14 @@
+---
+permalink: install/concept_array_lun_assignment_changes.html 
+sidebar: sidebar 
+keywords: array, lun, assignment, changes 
+summary: Sie können die Zuweisung einer freien Array-LUN von einem ONTAP-System zu einem anderen ändern. Möglicherweise möchten Sie die Eigentümerschaft für den Lastausgleich über Nodes ändern. 
+---
+= Änderungen an der Array-LUN-Zuweisung
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können die Zuordnung einer Array-LUN _spare_ von einem ONTAP-System zu einem anderen ändern. Möglicherweise möchten Sie die Eigentümerschaft für den Lastausgleich über Nodes ändern.

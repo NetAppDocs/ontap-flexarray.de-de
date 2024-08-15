@@ -1,0 +1,36 @@
+---
+permalink: install/task_modifying_assignment_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: modify, assignment, spare, array, luns 
+summary: Sie können die Eigentumsrechte einer Ersatz-Array-LUN auf einen anderen Node ändern. Dies ist möglicherweise zum Lastausgleich über die Nodes sinnvoll. 
+---
+= Ändern der Zuweisung von Ersatz-Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können die Eigentumsrechte einer Array-LUN _spare_ zu einem anderen Knoten ändern. Dies ist möglicherweise zum Lastausgleich über die Nodes sinnvoll.
+
+.Schritte
+. Geben Sie an der Konsole des Node, der die Array-LUN besitzt, die Sie neu zuweisen möchten, den folgenden Befehl ein, um eine Liste der freien Array-LUNs auf dem Node anzuzeigen: `storage disk show -owner local`
++
+Die Array-LUNs im Besitz des Node, sowohl Spare-Festplatten als auch LUNs in Aggregaten, werden aufgelistet.
+
+. Vergewissern Sie sich, dass die LUN, die Sie einem anderen Node zuweisen möchten, eine freie LUN ist.
+. Geben Sie den folgenden Befehl ein, um die Eigentümerschaft der Array-LUN einem anderen Node zuzuweisen: `storage disk assign arrayLUNname -owner new_owner_name -force`
++
+[NOTE]
+====
+Die Array-LUN-Eigentumsrechte werden nicht geändert, wenn die Option -Force nicht verwendet wird oder wenn die Array-LUN bereits zu einem Aggregat hinzugefügt wurde.
+
+====
+. Geben Sie den folgenden Befehl ein, um zu überprüfen, ob die Eigentumsrechte der Ersatz-Array-LUN auf den anderen Node geändert wurden: `storage disk show -owner local`
++
+Die Ersatz-Array-LUN, die Sie zum neuen Besitzer geändert haben, sollte nicht mehr in der Liste der Ersatzteile erscheinen. Wenn die Array-LUN weiterhin angezeigt wird, wiederholen Sie den Befehl, um die Eigentumsrechte zu ändern.
+
+. Geben Sie auf dem Zielknoten den folgenden Befehl ein, um zu überprüfen, ob die Ersatz-Array-LUN, deren Besitzrechte Sie geändert haben, als Ersatzlaufwerk im Besitz des Zielknotens aufgeführt wird: `storage disk show -owner local`
+
+
+Sie müssen die Array-LUN zu einem Aggregat hinzufügen, bevor sie für den Storage verwendet werden kann.

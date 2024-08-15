@@ -1,0 +1,16 @@
+---
+permalink: implement-third-party/concept_alua_support_for_hp_eva_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, support, hp eva, storage, arrays 
+summary: 'Für den Asymmetric Logical Unit Access (ALUA) mit HP EVA Arrays wird jetzt Unterstützung hinzugefügt.' 
+---
+= ALUA-Unterstützung für HP EVA Storage Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Für den Asymmetric Logical Unit Access (ALUA) mit HP EVA Arrays wird jetzt Unterstützung hinzugefügt.
+
+Standardmäßig ist die Unterstützung für ALUA sowohl in ONTAP als auch in allen HP EVA Storage Arrays aktiviert.

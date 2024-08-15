@@ -1,0 +1,94 @@
+---
+permalink: install/reference_all_paths_to_an_array_lun_are_on_the_same_storage_array_controller.html 
+sidebar: sidebar 
+keywords: all, paths, array, lun, same, storage, array, controller, errors, message 
+summary: 'ONTAP unterstützt nicht das Konfigurieren aller Pfade zum gleichen Storage-Array-Controller, da dadurch eine Konfiguration mit einem Single Point of Failure (SPOF) eingerichtet wird. Der Befehl Storage Errors show identifiziert jede Array LUN, deren Pfade eingerichtet sind, um zum gleichen Speicher-Array-Controller zu wechseln.' 
+---
+= Alle Pfade zu einer Array-LUN befinden sich auf demselben Storage Array Controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt nicht das Konfigurieren aller Pfade zum gleichen Storage-Array-Controller, da dadurch eine Konfiguration mit einem Single Point of Failure (SPOF) eingerichtet wird. Der `storage errors show` Befehl identifiziert jede Array-LUN, deren Pfade eingerichtet sind, um zum gleichen Speicher-Array-Controller zu wechseln.
+
+ONTAP ermöglicht es Ihnen erst, einem ONTAP-System Array-LUNs zuzuweisen, nachdem Sie diesen Fehler behoben haben.
+
+
+
+== Speicherfehler zeigen Meldung
+
+[listing]
+----
+NAME (UID): All paths to this array LUN are connected to the same fault domain. This is a single point of failure
+----
+
+
+== Erklärung
+
+Dieser Fehler tritt auf, weil die Pfade zu einer Array-LUN so eingerichtet sind, dass sie zum selben Storage-Array-Controller oder zu derselben FRU gehen.
+
+[NOTE]
+====
+Die Verwendung von vier Pfaden zu einer Array-LUN, ein Speicher-Array mit FRUs mit mehreren Directors (z. B. EMC Symmetrix oder HDS USP) oder ein Speicher-Array mit zwei Controllern (z. B. EMC CX oder HP EVA) sind gute Methoden zur Erzielung von Redundanz. Wenn Sie jedoch die Pfade einrichten, um über einen einzigen Storage Array Controller oder eine FRU zu gehen, richten Sie Ihre Konfiguration mit einem SPOF ein, sogar mit solchen Funktionen. Bei einem aktiv/aktiv-Speicher-Array gilt die gesamte FRU als eine Fehlerdomäne. Ein EMC Symmetrix-Speicher-Array verfügt beispielsweise über mehrere Channel Directors auf derselben FEBE-Platine. Eine FEBE-Platine wird als eine Fehlerdomäne betrachtet, da alle Pfade durch dieselbe FEBE-Platine gehen, wenn Sie die Platine ersetzen müssen, alle Pfade verlieren.
+
+====
+Die folgende Abbildung zeigt die korrekte und falsche Auswahl des Speicher-Array-Ports zum Einrichten redundanter Pfade zu einer Array-LUN, sodass Sie keine einzige Fehlerdomäne haben. Die Pfadeinrichtung im Beispiel auf der linken Seite ist korrekt, da die Pfade zur Array-LUN redundant sind - jede Verbindung ist mit einem Port auf einem anderen Controller auf dem Speicher-Array. Im Beispiel rechts gehen beide Pfade zum Array-LUN zum gleichen Controller, der einen SPOF einrichtet.
+
+image::../media/redundant_array_port_selection.gif[Diese Grafik wird im umgebenden Text beschrieben.]
+
+Mit dem `storage errors show` Befehl wird die Array-LUN angezeigt, die sich in der gleichen Fehlerdomäne befindet. Dieses Problem wird auch in der Ausgabe angezeigt `storage disk show` , wenn Sie die Spalte TPGN (Nummer der Zielportgruppe) betrachten. Für jeden Initiator in einem Initiator-Port-Paar sollte ein anderes TPGN angezeigt werden. Wenn das TPGN für beide Initiatoren im Paar gleich ist, befinden sich beide Initiatoren in der gleichen Fehlerdomäne.
+
+Im folgenden `storage disk show` Beispiel wird TPGN 1 für LUN 30 angezeigt, auf das über die Initiatoren 0a und 0c zugegriffen wird. Wenn die Pfade redundant sind, wird für jeden Initiator ein anderes TPGN angezeigt.
+
+[listing]
+----
+
+mysystem1::> storage disk show mysystem1:vgbr300s70:9.126L30
+                  Disk: HP-1.15
+        Container Type: unassigned
+            Owner/Home: -  / -
+               DR Home: -
+                 Array: HP_HSV450_1
+                Vendor: HP
+                 Model: HSV450
+         Serial Number: 600508B4000B63140000800001660000
+                   UID: 600508B4:000B6314:00008000:01660000:00000000:...
+                   BPS: 512
+         Physical Size: -
+              Position: present
+Checksum Compatibility: block
+             Aggregate: -
+                  Plex: -
+Paths:
+                     LUN Initiator Side   Target Side
+Controller Initiator ID  Switch Port      Switch Port     Acc Use  Target Port      TPGN...
+---------- --------- --- ---------------- --------------- --- ---  ---------------- -----
+mysystem1    0c      30  vgci9148s75:1-12 vgci9148s75:1-9 AO  RDY  50014380025d1509   1
+mysystem1    0a      30  vgbr300s70:12    vgbr300s70:9    AO  INU  50014380025d1508   1
+
+Errors:
+HP-1.15 (600508b4000b63140000800001660000): All paths to this array LUN are connected to the same fault domain. This is a single point of failure.
+----
+[NOTE]
+====
+Die vollständige UID in diesem Beispiel ist 600508B4:000B6314:00008000:01660000:00000000:00000000:00000000:00000000:00000000:00000000. Er wird im Beispiel wegen des Raumes abgeschnitten.
+
+====
+
+
+== Fehlerbehebung und Problemlösung
+
+Die Pfade zur Array-LUN müssen neu konfiguriert werden, damit sie zu redundanten Storage-Array-Controllern oder FRUs gehen.
+
+. Verbinden Sie den redundanten Zielport des anderen Controllers mit einem Kabel.
++
+Sie sollten die Redundanz beibehalten, während Sie dieses Problem beheben, indem Sie ein Kabel zum alternativen Controller hinzufügen _bevor_ Sie ein Kabel vom Controller mit dem SPOF entfernen. Redundanz bleibt in diesem Fall erhalten, da Sie die Anzahl der Pfade vorübergehend auf drei Pfade erhöhen, anstatt die Anzahl der Pfade auf einen zu reduzieren, während Sie das Problem beheben.
+
+. Entfernen Sie ein Kabel vom Controller, der mit dem SPOF eingerichtet wurde.
++
+Sie verfügen jetzt über zwei redundante Pfade zur Array-LUN.
+
+. Geben Sie in der ONTAP-Befehlszeile den folgenden Befehl erneut ein, um zu bestätigen, dass der Fehler behoben wurde: `storage errors show`
+

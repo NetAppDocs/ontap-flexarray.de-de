@@ -1,0 +1,33 @@
+---
+permalink: install/concept_support_for_metrocluster_configurations_that_can_use_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, metrocluster, configurations, array, luns 
+summary: Bevor Sie eine MetroCluster-Konfiguration für Array-LUNs einrichten, müssen Sie sicherstellen, dass für die ONTAP-Systeme und den in der Konfiguration verwendeten Storage die grundlegenden Unterstützungsanforderungen erfüllt werden. 
+---
+= Anforderungen für MetroCluster-Konfigurationen mit Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bevor Sie eine MetroCluster-Konfiguration für Array-LUNs einrichten, müssen Sie sicherstellen, dass für die ONTAP-Systeme und den in der Konfiguration verwendeten Storage die grundlegenden Unterstützungsanforderungen erfüllt werden.
+
+Die grundlegenden Anforderungen für die Unterstützung von MetroCluster Konfigurationen mit Array-LUNs sind:
+
+* In MetroCluster-Konfigurationen können Sie sowohl V-Series Systeme als auch FAS Systeme verwenden, die Array LUNs unterstützen.
++
+Sie müssen jedoch sicherstellen, dass alle in einer MetroCluster-Konfiguration verwendeten ONTAP-Systeme dasselbe Modell haben.
+
+* ONTAP Systeme können nur native Festplatten, nur LUNs auf Storage-Arrays oder beides verwenden.
+* Wenn Sie eine MetroCluster-Konfiguration mit nativen Festplatten und Array-LUNs einrichten, müssen Sie FC-to-SAS-Bridges und native Festplatten verwenden, die von diesen Bridges unterstützt werden.
+* Die ONTAP Systeme und Storage Arrays müssen in der _Interoperabilitätsmatrix_ als in MetroCluster Konfigurationen unterstützt identifiziert werden.
+
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation und Konfiguration von Fabric-Attached MetroCluster"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/index.html["Installation und Konfiguration von Stretch MetroCluster"]

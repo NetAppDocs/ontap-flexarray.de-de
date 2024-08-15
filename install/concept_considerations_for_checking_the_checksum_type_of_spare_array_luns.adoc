@@ -1,0 +1,28 @@
+---
+permalink: install/concept_considerations_for_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: checksum, type, considerations, add, spare, array, luns, aggregates 
+summary: Beim Hinzufügen von Array-LUNs zu Aggregaten müssen Sie bestimmte Überlegungen in Bezug auf Prüfsummen-Typen berücksichtigen. Wenn Sie beispielsweise planen, einem Aggregat eine Ersatz-Array-LUN durch Angabe seines Namens hinzuzufügen, müssen Sie sicherstellen, dass die Array-LUN und das Aggregat den gleichen Prüfsummentyp haben. 
+---
+= Überlegungen zum Prüfsummentyp beim Hinzufügen von Ersatz-Array-LUNs zu Aggregaten
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Beim Hinzufügen von Array-LUNs zu Aggregaten müssen Sie bestimmte Überlegungen in Bezug auf Prüfsummen-Typen berücksichtigen. Wenn Sie beispielsweise planen, einem Aggregat eine Ersatz-Array-LUN durch Angabe seines Namens hinzuzufügen, müssen Sie sicherstellen, dass die Array-LUN und das Aggregat den gleichen Prüfsummentyp haben.
+
+Im Folgenden finden Sie einige Überlegungen zum Prüfsummentyp beim Hinzufügen von Ersatz-Array-LUNs zu Aggregaten:
+
+* Sie können Array-LUNs verschiedener Prüfsummentypen in einem Array-LUN-Aggregat nicht mischen.
+* Wenn Sie eine Anzahl an Array-LUNs angeben, die zu einem Aggregat hinzugefügt werden sollen, wählt ONTAP standardmäßig die Array-LUNs desselben Prüfsummen-Typs wie das Aggregat aus.
+* Array-LUNs des Prüfsummentyp auf Zonenebene, wenn sie zu einem bestehenden Prüfsummen-Aggregat hinzugefügt werden, werden weiterhin Prüfsummen-Array-LUNs in Zonen eingeteilt.
+* Auf ein AZCS-Aggregat (Advanced Zone Checksum) hinzugefügte Prüfsummen-Ersatzarray-LUNs verwenden das AZCS-Prüfsummenschema.
+
+
+[NOTE]
+====
+Sie können den Prüfsummentyp der Spare-Array-LUNs mit dem Befehl überprüfen `storage disk show` . Weitere Informationen zum Befehl finden Sie in den man-Pages.
+
+====

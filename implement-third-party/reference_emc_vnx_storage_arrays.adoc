@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_vnx_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, arrays 
+summary: Sie müssen bestimmte Anforderungen erfüllen, wenn Sie EMC VNX-Speicherarrays für die Verwendung mit ONTAP-Systemen konfigurieren, die die Array-LUNs verwenden. Diese Anforderungen umfassen die Festlegung von Konfigurationsparametern auf Ihren Speicher-Arrays und die Bereitstellung nur unterstützter Konfigurationen. 
+---
+= EMC VNX-Speicherarrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen bestimmte Anforderungen erfüllen, wenn Sie EMC VNX-Speicherarrays für die Verwendung mit ONTAP-Systemen konfigurieren, die die Array-LUNs verwenden. Diese Anforderungen umfassen die Festlegung von Konfigurationsparametern auf Ihren Speicher-Arrays und die Bereitstellung nur unterstützter Konfigurationen.

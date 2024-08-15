@@ -1,0 +1,50 @@
+---
+permalink: install/reference_an_access_control_lun_is_presented_to_ontap.html 
+sidebar: sidebar 
+keywords: access, control, lun, presented, ontap 
+summary: ONTAP unterstützt keine Access Control Array LUNs. Die Speicherfehler zeigen Ausgabewarnungen an, wenn eine Zugriffskontroll-LUN präsentiert wird. 
+---
+= Eine LUN zur Zugriffssteuerung wird ONTAP angezeigt
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt keine Access Control Array LUNs. Die `storage errors show` Ausgabe gibt eine Warnmeldung aus, wenn eine Zugriffskontroll-LUN angezeigt wird.
+
+
+
+== Speicherfehler zeigen Meldung
+
+[listing]
+----
+
+NAME (UID): This array LUN is an access control LUN. It is not supported and should be masked off or disabled.
+----
+
+
+== Erklärung
+
+ONTAP unterstützt nur Storage Array LUNs. Wenn eine Array-LUN beispielsweise eine E-Series-ZugriffssteuerungsLUN ONTAP präsentiert wird, sieht die `storage array config show` Ausgabe normal aus. Sie zeigt die ZugriffssteuerungsLUN in einer LUN-Gruppe an, wie im folgenden Beispiel gezeigt. Die Warnmeldung unten auf dem Bildschirm zeigt das Problem an. Sie müssen laufen `storage errors show` , um herauszufinden, dass das Problem ist, dass eine Zugriffskontroll LUN präsentiert wurde und welche LUN es ist.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+          LUN     LUN
+Node      Group   Count  Array Name    Array Target Port       Initiator
+------    ------  -----  ------------ ------------------       --------
+mysystem1   0       1    NETAPP_INF_1  20:1A:00:a0:b8:0f:ee:04   0a
+                                       20:2A:00:a0:b8:0f:ee:04   0c
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+
+
+== Fehlerbehebung und Problemlösung
+
+. Maskieren Sie auf dem Speicher-Array die Zugriffskontroll-LUN.
+. Führen Sie in ONTAP erneut aus `storage errors show` , um zu bestätigen, dass die Zugriffskontroll LUN nicht mehr ONTAP präsentiert wird.
+

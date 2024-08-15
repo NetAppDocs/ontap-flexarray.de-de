@@ -1,0 +1,23 @@
+---
+permalink: install/concept_additional_tasks_after_installing_and_testing_a_ontap_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: additional, tasks, after, install, test, ontap, configuration, array, luns, netapp 
+summary: Nach der Installation und dem Testen einer ONTAP Konfiguration mit Array LUNs können Sie den ONTAP Systemen zusätzliche Array LUNs zuweisen und auf den Systemen verschiedene ONTAP Funktionen einrichten. 
+---
+= Zusätzliche Aufgaben nach dem Installieren und Testen einer ONTAP-Konfiguration mit Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nach der Installation und dem Testen einer ONTAP Konfiguration mit Array LUNs können Sie den ONTAP Systemen zusätzliche Array LUNs zuweisen und auf den Systemen verschiedene ONTAP Funktionen einrichten.
+
+Im Folgenden finden Sie einige Aufgaben, die Sie nach Abschluss der Installation und dem Testen des ONTAP-Systems mit Array-LUNs durchführen können:
+
+* Weisen Sie ONTAP-Systemen nach Bedarf zusätzliche Array-LUNs zu.
+* Erstellen Sie je nach Bedarf ONTAP Aggregate und Volumes.
+* Richten Sie je nach Bedarf zusätzliche ONTAP-Funktionen auf Ihrem System ein, z. B. Funktionen für Backup und Recovery.
+
+
+Informationen zum Konfigurieren der verschiedenen ONTAP-Funktionen finden Sie im entsprechenden ONTAP-Handbuch.

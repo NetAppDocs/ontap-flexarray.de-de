@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_general_configuration_guidelines_for_all_storage_arrays.html 
+sidebar: sidebar 
+keywords: configuration, guidelines, storage, arrays 
+summary: Es gibt bestimmte Konfigurationsrichtlinien, die Sie für alle von ONTAP unterstützten Speicher-Arrays befolgen müssen. 
+---
+= Allgemeine Konfigurationsrichtlinien für alle Storage Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es gibt bestimmte Konfigurationsrichtlinien, die Sie für alle von ONTAP unterstützten Speicher-Arrays befolgen müssen.

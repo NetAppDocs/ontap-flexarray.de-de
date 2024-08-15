@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_the_checksum_type_is_determined_for_aggregates_with_array_luns.html 
+sidebar: sidebar 
+keywords: how, checksum, type, determined, array, lun, aggregates 
+summary: Jedem ONTAP Aggregat ist ein Prüfsummentyp auf Zonenebene zugeordnet. Der Prüfsummen-Typ des Aggregats wird durch den Prüfsummen-Typ der Array-LUNs bestimmt, die ihm hinzugefügt werden. 
+---
+= Wie der Prüfsummentyp auf Zonenebene für Array-LUN-Aggregate ermittelt wird
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Jedem ONTAP Aggregat ist ein Prüfsummentyp auf Zonenebene zugeordnet. Der Prüfsummen-Typ des Aggregats wird durch den Prüfsummen-Typ der Array-LUNs bestimmt, die ihm hinzugefügt werden.
+
+Der Prüfsummentyp auf Zonenebene eines Aggregats wird durch den Prüfsummentyp auf Zonenebene der ersten Array-LUN bestimmt, die dem Aggregat hinzugefügt wird. Der Prüfsummentyp auf Zonenebene gilt für ein gesamtes Aggregat (d.h. für alle Volumen im Aggregat). Das Kombinieren von Array-LUNs verschiedener Prüfsummen in einem Aggregat wird nicht unterstützt.
+
+* Eine Array-LUN vom Typ _Block_ muss mit Aggregaten vom Typ Blocksummenprüfung verwendet werden.
+* Eine Array-LUN des Typs _zoned_ muss mit Aggregaten mit erweiterten Prüfsummen-Prüfsummen (AZCS oder Advanced_zoned) verwendet werden.
+
+
+Bevor Sie Array-LUNs zu einem Aggregat hinzufügen, müssen Sie aus den folgenden Gründen den Prüfsummentyp auf Zonenebene der hinzuzufügenden LUNs kennen:
+
+* Sie können Array-LUNs verschiedener Prüfsummentyp auf Zonenebene nicht zum selben Aggregat hinzufügen.
+* Sie können kein Aggregat von einem Prüfsummentyp auf Zonenebene in den anderen konvertieren.
+
+
+Wenn Sie ein Aggregat erstellen, können Sie die Anzahl der hinzuzufügenden Array-LUNs angeben oder die Namen der hinzuzufügenden LUNs angeben. Wenn Sie eine Anzahl von Array-LUNs angeben möchten, die dem Aggregat hinzugefügt werden sollen, muss die gleiche oder mehr Array-LUNs dieses Prüfsummentyps verfügbar sein.

@@ -1,0 +1,62 @@
+---
+permalink: install/concept_example_configuration_shared_target_ports.html 
+sidebar: sidebar 
+keywords: example, configuration, shared, target, ports, multiple, initiator 
+summary: Es können maximal zwei ONTAP FC-Initiator-Ports mit einem einzelnen Ziel-Port im Speicher-Array verbunden werden. 
+---
+= Beispielkonfiguration: Gemeinsame Zielports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es können maximal zwei ONTAP FC-Initiator-Ports mit einem einzelnen Ziel-Port im Speicher-Array verbunden werden.
+
+Als Best Practice für das Zoning wird empfohlen, jedes FC-Initiator-Ziel-Port-Paar in einer separaten Zone (1:1) zu haben.
+
+
+
+== Gemeinsamer Zielport, der mit mehreren Initiator-Ports verbunden ist
+
+In der folgenden Abbildung werden Verbindungen und Zoning für die gemeinsame Nutzung eines Ziel-Ports mit mehreren FC-Initiator-Ports in verschiedenen ONTAP-Systemen dargestellt.
+
+Die durchgehenden Linien in der folgenden Abbildung zeigen die Verbindungen von den FC-Initiator-Ports auf System vs1 und die gestrichelten Linien zeigen die Verbindungen von den FC-Initiator-Ports auf System vs2.
+
+image::../media/shared_target_ports.gif[Die Verbindungen und das Zoning für die Konfiguration des gemeinsam genutzten Zielports werden im umgebenden Text beschrieben.]
+
+In der folgenden Tabelle sind die 1:1 Zoning-Definitionen für das Beispiel eines Ziel-Ports, der zwei FC-Initiator-Ports von den Controllern in einem HA-Paar gemeinsam verwendet:
+
+|===
+| Zone | Port des ONTAP Systems und FC Initiator | Storage Array erledigen 
+
+
+ a| 
+*Schalter 1*
+
+
+
+ a| 
+z1
+| vs1:0a | Controller 1: Anschluss 1A 
+
+
+ a| 
+z3
+| vs2:0a |  
+
+
+ a| 
+*Schalter 2*
+
+
+
+ a| 
+z2
+| vs1:0c | Controller 2: Port 2A 
+
+
+ a| 
+z4
+| vs2:0c |  
+|===

@@ -1,0 +1,35 @@
+---
+permalink: install/task_obtaining_wwns_manually.html 
+sidebar: sidebar 
+keywords: obtain, wwpns, manually 
+summary: 'Wenn das ONTAP-System nicht mit dem SAN-Switch verbunden ist, müssen Sie die World Wide Port Names (WWPNs) der FC-Initiator-Ports des Systems abrufen, die für die Verbindung des Systems mit dem Switch verwendet werden.' 
+---
+= Manuelles Abrufen von WWPNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn das ONTAP-System nicht mit dem SAN-Switch verbunden ist, müssen Sie die World Wide Port Names (WWPNs) der FC-Initiator-Ports des Systems abrufen, die für die Verbindung des Systems mit dem Switch verwendet werden.
+
+Damit der Switch WWPNs automatisch erkennt, ist die bevorzugte Methode zum Abrufen von WWPNs, da potenzielle Fehler durch die Eingabe der WWPNs in die Switch-Konfiguration vermieden werden können.
+
+.Schritte
+. Schließen Sie die Konsolenverbindung des Systems an einen Laptop an.
+. Schalten Sie das System ein.
++
+Unterbrechen Sie den Boot-Vorgang, indem Sie Strg-C drücken, wenn die folgende Meldung an der Konsole angezeigt wird:
+
++
+[listing]
+----
+Press CTRL-C for boot menu
+----
+. Wählen Sie im Menü Startoptionen die Option Wartungsmodus aus.
+. Geben Sie den folgenden Befehl ein, um die WWPNs der FC-Initiator-Ports des Systems aufzulisten: `storage show adapter`
++
+Um einen bestimmten Adapter-WWPN aufzulisten, fügen Sie den Adapternamen hinzu, z. B. Storage show Adapter 0a.
+
+. Zeichnen Sie die zu verwendenden WWPNs auf und beenden Sie den Wartungsmodus.
+

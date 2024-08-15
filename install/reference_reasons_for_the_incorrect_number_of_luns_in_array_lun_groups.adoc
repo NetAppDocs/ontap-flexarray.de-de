@@ -1,0 +1,57 @@
+---
+permalink: install/reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.html 
+sidebar: sidebar 
+keywords: reasons, incorrect, number, luns, array, groups, issue, resolve 
+summary: Wenn Sie Ihre Konfiguration überprüfen, sollten Sie die Ausgabe von Speicher-Array-config show überprüfen, um sicherzustellen, dass die Anzahl der LUNs in jeder LUN-Gruppe Ihren Zweck entspricht. Die wahrscheinlichste Ursache für eine falsche Anzahl von LUNs in einer LUN-Gruppe ist, dass die Array-LUN keinem ONTAP-System zugeordnet ist. 
+---
+= Gründe für die falsche Anzahl von LUNs in Array-LUN-Gruppen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie Ihre Konfiguration validieren, sollten Sie die Ausgabe prüfen `storage array config show` , um sicherzustellen, dass die Anzahl der LUNs in jeder LUN-Gruppe Ihren Zweck entspricht. Die wahrscheinlichste Ursache für eine falsche Anzahl von LUNs in einer LUN-Gruppe ist, dass die Array-LUN keinem ONTAP-System zugeordnet ist.
+
+
+
+== Beispiel der Speicher-Array-Konfiguration zeigt die Ausgabe
+
+Die Anzahl der Array-LUNs in jeder LUN-Gruppe wird in der Ausgabe angezeigt `storage array config show` , wie das folgende Beispiel zeigt:
+
+[listing]
+----
+mysystem1::> storage array config show
+
+               LUN     LUN
+Node           Group   Count Array Name     Array Target Port  Initiator
+------         ------ ----- -------------- -------------------- ----------
+mysystem1        0      50   DGC_RAID5_1     201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0c
+----
+
+
+== Erklärung
+
+Die wahrscheinlichsten Gründe, warum eine Array-LUN, von der Sie erwartet haben, in einer LUN-Gruppe fehlt, sind folgende:
+
+* Die Array-LUN ist dem ONTAP-System nicht zugeordnet.
+* Es wurde ein Zuordnungsfehler festgestellt, der dazu geführt hat, dass die Array-LUN in der falschen LUN-Gruppe ist.
++
+Die Konfiguration der Host-Gruppe ist z. B. falsch.
+
+* Das Speicher-Array wird noch initialisiert und die Array-LUNs verfügbar gemacht (Übergangszustand).
+* Die ONTAP-LUN-Scanner haben die LUNs noch nicht erkannt (Übergangsstatus).
+
+
+
+
+== Lösung des Problems
+
+. Wenn die Array-LUN nicht dem ONTAP-System zugeordnet wurde, muss der Speicher-Array-Administrator sie zuordnen.
++
+Der Prozess für die Zuordnung von Array-LUNs zu Hosts variiert je nach Speicher-Arrays.
+
+. Wenn die Array-LUN dem ONTAP-System zugeordnet wurde, überprüfen Sie das Zoning und die Konfiguration der Host-Gruppe.
+. Führen Sie nach der Behebung des Problems erneut aus `storage array config show` , um zu bestätigen, dass das Problem behoben ist.
+

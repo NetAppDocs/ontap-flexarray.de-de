@@ -1,0 +1,71 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_emc_symmetrix_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameter, settings, storage, array, ontap, systems, host, channel, director, configuration, port 
+summary: Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann. 
+---
+= Erforderliche Parametereinstellungen auf dem Speicher-Array für ONTAP-Systeme
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann.
+
+
+
+== Erforderliche Konfigurationsparameter für den Host-Channel-Director-Port
+
+Die Konfigurationsparameter für den Host-Channel-Director-Port, die auf dem Speicher-Array festgelegt werden müssen, werden in der folgenden Tabelle angezeigt:
+
+|===
+| Parameter (Namen können sich zwischen GUI und CLI unterscheiden) | Einstellung 
+
+
+ a| 
+`Common SN` (Gemeinsame Seriennummer oder C-Bit-Parameter)
+ a| 
+Aktivieren
+
+
+
+ a| 
+`PP` (Punkt-zu-Punkt-Parameter)
+ a| 
+Aktivieren
+
+
+
+ a| 
+`SC3` (SCSI-3)
+ a| 
+Aktivieren
+
+
+
+ a| 
+`SPC-2` (SCS2_Protocol_Version, SCSI Primary Command 2-Parameter oder `Allow inquiry data to be compiled to the standard)`
+ a| 
+Aktivieren
+
+
+
+ a| 
+`UWN` (Eindeutiger Weltweiter Name)
+ a| 
+Aktivieren
+
+
+
+ a| 
+`Volume Set Addressing`
+ a| 
+Deaktivieren
+
+|===
+Der `Volume Set Addressing` Parameter muss auf alle Channel-Director-Ports, denen die LUN zugeordnet ist, auf dieselbe Weise festgelegt werden. Wenn die Einstellungen unterschiedlich sind, meldet ONTAP, dass die LUN-ID in der Ausgabe und in einer EMS-Meldung nicht übereinstimmt `storage errors show` .
+
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Installationsanforderungen für FlexArray Virtualisierung und Referenz"]

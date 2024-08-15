@@ -1,0 +1,106 @@
+---
+permalink: install/concept_guidelines_for_connecting_a_v_series_system_to_native_disk_shelves.html 
+sidebar: sidebar 
+keywords: guidelines, connect, v-series, system, native, disk, shelves, fc initiator, ports 
+summary: Bei der Planung der Anbindung Ihres V-Series Systems an native Platten-Shelves sollte Ihr Port-zu-Port-Konnektivitätsplan Redundanz und andere Richtlinien berücksichtigen. 
+---
+= Richtlinien zur Verbindung eines V-Series Systems mit nativen Platten-Shelves
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Planung der Anbindung Ihres V-Series Systems an native Platten-Shelves sollte Ihr Port-zu-Port-Konnektivitätsplan Redundanz und andere Richtlinien berücksichtigen.
+
+
+
+== Anzahl der für Festplatten erforderlichen FC-Initiator-Ports
+
+Die Anzahl der FC-Initiator-Ports, die für die Verbindung eines V-Series Systems mit einem Festplatten-Shelf erforderlich sind, hängt davon ab, ob Ihr V-Series System ein Standalone-System oder ein HA-Paar ist
+
+[cols="2*"]
+|===
+| Konfiguration | Anzahl der FC-Initiator-Ports 
+
+
+ a| 
+Eigenständiges System
+ a| 
+* Wenn Sie eine Schleife verwenden: Einen FC-Initiator-Port.
+* Wenn Sie zwei Loops verbinden: Zwei FC-Initiator-Ports, einen für jede Schleife.
+
+
+
+
+ a| 
+In einem HA-Paar
+ a| 
+* Wenn Sie Multipath Storage verwenden, zwei FC-Initiator-Ports für jede Schleife.
+* Wenn Sie Multipath Storage nicht verwenden, muss für jeden Controller für jede Schleife in der Konfiguration ein FC-Initiator-Port verwendet werden.
+
+
+|===
+
+
+== Verbindungen zwischen einem V-Series System und Festplatten
+
+Die gleichen Prozesse führen Sie bei der Verkabelung eines V-Series Systems mit einem nativen Platten-Shelf aus wie bei der Verkabelung eines FAS Systems mit einem nativen Platten-Shelf. Beim Erstellen Ihres Port-zu-Port-Konnektivitätsschemas bieten dieses Handbuch und die ONTAP- und Hardware-Handbücher in der folgenden Tabelle Informationen zur Einrichtung und Verwaltung von Festplatten- und Festplatten-Shelfs.
+
+[cols="2*"]
+|===
+| Weitere Informationen zu... | Siehe... 
+
+
+ a| 
+Festplattenunterstützung, einschließlich unterstützter Festplattengeschwindigkeiten und Festplattenkapazität
+ a| 
+https://mysupport.netapp.com/site/global/dashboard["NetApp Support"]
+
+
+
+ a| 
+Installation eines V-Series Systems in einem Rack oder Systemschrank
+ a| 
+Bei neuen Systemen wird diese Aufgabe normalerweise vom Werk ausgeführt. Wenn Sie Anweisungen benötigen, lesen Sie die Anleitung für Ihren Schrank.
+
+
+
+ a| 
+Anschluss eines Platten-Shelf an ein Standalone V-Series System
+ a| 
+Die Installations- und Setup-Anleitung für Ihre Plattform.
+
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1213632["Installations- und Setup-Anleitung 32xx Systeme"]
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1147995["Installations- und Setup-Anleitung 62xx Systeme"]
+
+
+
+
+ a| 
+Anschließen eines HA-Paars an ein Festplatten-Shelf
+ a| 
+https://docs.netapp.com/us-en/ontap/high-availability/index.html["Hochverfügbarkeitskonfiguration"]
+
+
+
+ a| 
+Hinzufügen eines Festplatten-Shelfs
+ a| 
+Das entsprechende Handbuch für Ihren Festplatten-Shelf-Typ.
+
+
+
+ a| 
+Verschieben eines Festplatten-Shelfs
+ a| 
+Das entsprechende Handbuch für Ihren Festplatten-Shelf-Typ.
+
+
+
+ a| 
+Festplattenmanagement
+ a| 
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Festplatten- und Aggregatmanagement"]
+
+|===

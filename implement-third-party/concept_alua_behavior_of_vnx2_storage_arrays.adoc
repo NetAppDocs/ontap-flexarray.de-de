@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_alua_behavior_of_vnx2_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, behavior, vnx2, storage, arrays 
+summary: 'Obwohl alle EMC CLARiiON- und VNX-Arrays ALUA-Failover-Modus (asymmetrisch aktiv/aktiv) verwenden, können VNX2-Storage-Arrays in ihrem ALUA-Verhalten unterschiedlich sein.' 
+---
+= ALUA-Verhalten von VNX2 Storage-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Obwohl alle EMC CLARiiON- und VNX-Arrays ALUA-Failover-Modus (asymmetrisch aktiv/aktiv) verwenden, können VNX2-Storage-Arrays in ihrem ALUA-Verhalten unterschiedlich sein.
+
+Wie alle anderen EMC Array LUNs nutzen VNX2-Array-LUNs, die dem ONTAP System aus Dynamic Disk Pools bereitgestellt wurden, den ALUA Failover-Modus. VNX2-Array-LUNs, die aus herkömmlichen RAID-Gruppen für das ONTAP-System bereitgestellt werden, verwenden jedoch den aktiv/aktiv-Failover-Modus, wobei alle Pfade als * (aktiv optimiert) gemeldet werden *`AO`. Dieses Verhalten der Array-LUNs ändert sich während bestimmter Vorgänge, z. B. bei der Erstellung von Snapshots im Back-End-Array.
+
+Um ein konsistentes Verhalten der VNX2-Array-LUNs aufrechtzuerhalten, behandelt ONTAP diese LUNs daher als ALUA, unabhängig davon, ob diese Array-LUNs von herkömmlichen RAID-Gruppen oder von dynamischen Festplatten-Pools präsentiert werden.
+
+In einer solchen Situation werden die I/O-Anforderungen für eine bestimmte VNX2-LUN nur über die Pfade verteilt, die als * (aktiv-optimiert) gemeldet werden und nicht über alle Pfade, die als * (aktiv-optimiert) gemeldet werden *`INU` *`AO`.
+
+Wenn Sie beispielsweise vier Pfade zu einer VNX2-Array-LUN haben, die dem ONTAP-System von einer herkömmlichen RAID-Gruppe bereitgestellt wird, werden alle Pfade als * gemeldet *`AO`; allerdings befinden sich nur zwei der Pfade im *`INU`Status *, während die beiden anderen Pfade nicht verwendet werden, sondern sich im Status * (bereit) befinden *`RDY`.

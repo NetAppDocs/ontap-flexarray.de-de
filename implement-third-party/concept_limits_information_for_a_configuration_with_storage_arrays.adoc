@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_limits_information_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: limit, types, configurations, storage, arrays 
+summary: Bei der Planung einer ONTAP-Konfiguration müssen Sie bestimmte Storage Array-Limits berücksichtigen. 
+---
+= Grenzwerte für Konfigurationen mit Speicherarrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Planung einer ONTAP-Konfiguration müssen Sie bestimmte Storage Array-Limits berücksichtigen.
+
+Das _Hardware Universe_ enthält spezifische Grenzwerte für Speicher-Arrays und native Festplatten.
+
+Die folgenden Obergrenzen gelten nur für Speicher-Arrays und nicht für native Festplatten:
+
+* Minimale und maximale Array-LUN-Größe, die von ONTAP unterstützt wird
+* Mindestgröße für die Array-LUN für das Root-Volume
+* Minimale Größe der Core Array-LUN
+* Grenzwerte für RAID-Gruppen durch Array LUNs
+* Minimale Aggregatgröße für ein Aggregat von Array-LUNs
+* Maximale Anzahl an kombinierten Array-LUNs und Festplatten pro Plattform
+
+
+*Verwandte Informationen*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

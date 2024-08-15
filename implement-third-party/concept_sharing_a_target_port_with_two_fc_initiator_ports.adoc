@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/concept_sharing_a_target_port_with_two_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: share, target, port, two fc initiator, ports 
+summary: Es können maximal zwei Node-übergreifende ONTAP FC-Initiator-Ports mit einem einzelnen Ziel-Port im Storage-Array verbunden werden. Diese Konfiguration wird mit MetroCluster-Konfigurationen in ONTAP unterstützt. 
+---
+= Gemeinsamer Zugriff auf einen Ziel-Port mit zwei FC-Initiator-Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es können maximal zwei Node-übergreifende ONTAP FC-Initiator-Ports mit einem einzelnen Ziel-Port im Storage-Array verbunden werden. Diese Konfiguration wird mit MetroCluster-Konfigurationen in ONTAP unterstützt.
+
+Diese Konfiguration wird für die Verwendung mit allen in der Interoperabilitäts-Matrix aufgeführten Storage Arrays unterstützt, da sie für die Version von ONTAP auf dem System unterstützt wird.
+
+In der folgenden Abbildung ist eine Shared-Ziel-Port-Konfiguration mit einem HA-Paar dargestellt. Die gemeinsame Nutzung eines Ziel-Ports mit zwei FC Initiator-Ports wird sowohl bei Standalone-Systemen als auch bei HA-Paaren unterstützt.
+
+[NOTE]
+====
+Einzelheiten zur gemeinsamen Nutzung eines FC-Initiator-Ports mit mehreren Ziel-Ports und Zoning finden Sie unter _Installationsanforderungen und Referenz für die FlexArray-Virtualisierung_
+
+====
+
+
+== An FC-Initiator-Ports angebundener Shared Target Port
+
+Im folgenden Beispiel ist ein HA-Paar dargestellt, bei dem sich ein einzelner Ziel-Port mit zwei FC-Initiator-Ports verbindet:
+
+image::../media/shared_target_ports.gif[Diese Grafik wird im umgebenden Text beschrieben]
+
+Die Initiator-Ports 0a der Controller vs1 und vs2 sind mit dem Speicher-Array-Port 1A und die Ports 0c der Controller sind mit dem Speicher-Array-Port 2A verbunden.
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Installationsanforderungen für FlexArray Virtualisierung und Referenz"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation und Konfiguration von Fabric-Attached MetroCluster"]

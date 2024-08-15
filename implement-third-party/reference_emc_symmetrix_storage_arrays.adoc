@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, symmetrix, storage, arrays 
+summary: Bei der Konfiguration von Speicher-Arrays für die Nutzung mit ONTAP-Systemen, die Array-LUNs verwenden, müssen bestimmte Anforderungen erfüllt werden. Diese Anforderungen umfassen die Festlegung von Konfigurationsparametern auf Ihren Speicher-Arrays und die Bereitstellung nur unterstützter Konfigurationen. 
+---
+= EMC Symmetrix-Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Konfiguration von Speicher-Arrays für die Nutzung mit ONTAP-Systemen, die Array-LUNs verwenden, müssen bestimmte Anforderungen erfüllt werden. Diese Anforderungen umfassen die Festlegung von Konfigurationsparametern auf Ihren Speicher-Arrays und die Bereitstellung nur unterstützter Konfigurationen.

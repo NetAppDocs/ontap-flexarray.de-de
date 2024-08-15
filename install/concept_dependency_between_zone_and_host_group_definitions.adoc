@@ -1,0 +1,90 @@
+---
+permalink: install/concept_dependency_between_zone_and_host_group_definitions.html 
+sidebar: sidebar 
+keywords: dependency, between, zone, host, group, definitions, common, errors, cascading, effect 
+summary: Fehler in Zonendefinitionen können eine Neukonfiguration der Host-Gruppen-Definitionen erfordern und umgekehrt. 
+---
+= Abhängigkeit zwischen Zonen- und Hostgruppendefinitionen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Fehler in Zonendefinitionen können eine Neukonfiguration der Host-Gruppen-Definitionen erfordern und umgekehrt.
+
+Wenn eine Zonendefinition erstellt wird, werden zwei Ports angegeben: Der WWPN des FC-Initiator-Ports auf dem ONTAP-System und der Storage-Array-Port-WWPN oder WWNN für diese Zone. Ebenso werden bei Konfiguration der Host-Gruppe für das ONTAP-System im Speicher-Array die WWPNs der FC-Initiator-Ports angegeben, die Mitglied der Host-Gruppe sein sollen.
+
+Die typische Reihenfolge der Konfiguration ist wie folgt:
+
+. Erstellen Sie eine Zonendefinition.
+. Erstellen Sie die Host-Gruppe auf dem Speicher-Array (indem Sie den WWPN des FC-Initiator-Ports auf dem ONTAP-System aus der Auswahlliste auswählen).
+. Array-LUNs den Ports zur Verfügung stellen.
+
+
+Host-Gruppen werden jedoch manchmal vor Zonendefinitionen konfiguriert, was die manuelle Eingabe von WWPNs in der Hostgruppenkonfiguration auf dem Speicher-Array erfordert.
+
+
+
+== Häufige Fehler
+
+In der ONTAP-Ausgabe werden die FC-Initiator-Ports im ONTAP System durch die Adapternummer identifiziert – z. B. 0a, 0b, 0c, 0d, und so weiter bei Modellen mit integrierten Ports. WWPNs werden in der Switch-GUI und der Speicher-Array-GUI angezeigt. Da WWPNs lang und hexadezimal formatiert sind, sind die folgenden Fehler häufig:
+
+[cols="2*"]
+|===
+| Wie WWPNs angegeben werden | Allgemeiner Fehler 
+
+
+ a| 
+Der Administrator gibt WWPNs ein
+ a| 
+Ein Tippfehler wurde gemacht.
+
+
+
+ a| 
+WWPNs werden vom Switch automatisch erkannt
+ a| 
+Der falsche FC-Initiator-Port-WWPN ist aus der Auswahlliste ausgewählt.
+
+|===
+[NOTE]
+====
+Wenn die ONTAP Systeme, Switches und Speicher-Array verkabelt sind, erkennt der Switch automatisch die WWPNs der ONTAP Systeme und Speicher-Array-Ports. Die WWPNs sind dann in Auswahllisten in der Switch GUI verfügbar, wodurch die Auswahl des WWPN jedes Zonenmitglieds ermöglicht wird, anstatt ihn einzugeben. Um das Risiko von Tippfehlern zu beseitigen, wird empfohlen, dass der Switch WWPNs erkennt.
+
+====
+
+
+== Kaskadierende Auswirkung von Fehlern
+
+Ein erster naheliegender Schritt bei der Fehlerbehebung bei einer Fabric-Attached-Konfiguration ist die Überprüfung, ob das Zoning richtig konfiguriert wurde. Auch die Beziehung zwischen Host-Gruppe und Zonendefinitionen ist wichtig. Zur Behebung eines Problems müssen möglicherweise sowohl die Zonendefinition als auch die Hostgruppendefinition neu konfiguriert werden, je nachdem, wo der Fehler während des Konfigurationsprozesses aufgetreten ist.
+
+Wenn der Switch WWPNs automatisch erkennt und Zonendefinitionen zuerst konfiguriert werden, werden die WWPNs der FC-Initiator-Ports, die für den Zugriff auf LUNs auf dem Speicher-Array verwendet werden, automatisch auf die Auswahllisten für die Hostgruppenkonfiguration in der Speicher-Array-GUI übertragen. Daher werden alle Zoning-Fehler auch an die Speicher-Array-Host-Gruppen-Auswahllisten weitergegeben. In den Auswahllisten werden die langen, hexadezimalen WWPNs anstelle der kurzen FC-Initiator-Port-Labels angezeigt, die auf dem ONTAP-System sichtbar sind (wie z. B. 0a, 0b usw.). Daher ist es nicht leicht zu erkennen, dass der WWPN, den Sie erwartet haben, nicht vorhanden ist.
+
+Die folgende Tabelle zeigt die Auswirkungen bestimmter Fehler:
+
+[cols="3*"]
+|===
+| Zonendefinition auf dem Switch | Konfiguration der Host-Gruppe auf dem Speicher-Array | Symptom bei ONTAP-Ausgang 
+
+
+ a| 
+Der FC-Initiator-Port in der Zonendefinition ist falsch. Dies hat dazu geführt, dass der falsche FC-Initiator-Port-WWPN auf die Host-Gruppen-Konfiguration übertragen wurde.
+ a| 
+Der WWPN des FC-Initiator-Ports, der in der Auswahlliste angezeigt wird, ist ausgewählt, nicht der WWPN, den Sie beabsichtigt.
+ a| 
+Array-LUNs sind über dem FC-Initiator-Port, auf dem die erwarteten LUNs sichtbar wären, nicht sichtbar.
+
+
+
+ a| 
+Die Zonendefinition enthält den korrekten FC-Initiator-Port.
+ a| 
+Der WWPN in der Host-Gruppendefinition ist aus einem der folgenden Gründe falsch:
+
+* Der falsche WWPN wurde ausgewählt.
+* Host-Gruppen wurden vor dem Konfigurieren der Zonendefinition manuell konfiguriert. Beim Eingeben des WWPN des FC-Initiator-Ports wurde ein Tippfehler gemacht.
+
+ a| 
+
+|===

@@ -1,0 +1,32 @@
+---
+permalink: install/concept_planning_considerations_for_ontap_raid_groups.html 
+sidebar: sidebar 
+keywords: plan, considerations, ontap, raid, groups 
+summary: Bevor Sie ONTAP RAID-Gruppen für Array-LUNs einrichten, müssen Sie die Größe der Aggregate, die Anzahl und Größe der RAID-Gruppen und die Größe der Array-LUNs planen. RAID-Gruppen, die Ihre Datenanforderungen am besten erfüllen, sorgen für einen angemessenen Schutz der Daten und deren Verfügbarkeit auf dem Array. 
+---
+= Planungsüberlegungen für ONTAP RAID-Gruppen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bevor Sie ONTAP RAID-Gruppen für Array-LUNs einrichten, müssen Sie die Größe der Aggregate, die Anzahl und Größe der RAID-Gruppen und die Größe der Array-LUNs planen. RAID-Gruppen, die Ihre Datenanforderungen am besten erfüllen, sorgen für einen angemessenen Schutz der Daten und deren Verfügbarkeit auf dem Array.
+
+Die Planung von ONTAP RAID-Gruppen umfasst die folgenden Aufgaben:
+
+. Planung der Größe des Aggregats, das Ihren Datenanforderungen am besten entspricht.
+. Planen der Anzahl und Größe der RAID-Gruppen, die für die Größe des Aggregats erforderlich sind.
+. Planen der Größe der Array-LUNs, die in den ONTAP RAID-Gruppen benötigt werden:
++
+** Um eine Beeinträchtigung der Performance zu vermeiden, sollten alle Array LUNs einer bestimmten ONTAP RAID-Gruppe die gleiche Größe aufweisen.
+** Die Array-LUNs sollten in allen RAID-Gruppen im gleichen Aggregat die gleiche Größe haben.
+
+
+. Kommunikation mit dem Storage-Array-Administrator zur Erstellung der Anzahl der Array-LUNs der für das Aggregat erforderlichen Größe
++
+Die Array-LUNs sollten gemäß den Anweisungen in der Herstellerdokumentation des Speicher-Arrays für die Performance optimiert werden.
+
+
+
+Weitere Empfehlungen zum Einrichten von ONTAP-RAID-Gruppen für die Verwendung mit Speicher-Arrays finden Sie unter https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["_Festplatten und Aggregate Management_"].

@@ -1,0 +1,21 @@
+---
+permalink: install/concept_advantages_of_four_paths_to_an_array_lun_clustered_data_ontap_8_1_and_later.html 
+sidebar: sidebar 
+keywords: advantages, four, paths, array, lun 
+summary: Bei der Planung der Anzahl der Pfade zu einer Array-LUN für ONTAP müssen Sie berücksichtigen, ob Sie zwei oder vier Pfade einrichten möchten. 
+---
+= Vorteile von vier Pfaden zu einer Array-LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Planung der Anzahl der Pfade zu einer Array-LUN für ONTAP müssen Sie berücksichtigen, ob Sie zwei oder vier Pfade einrichten möchten.
+
+Die Einrichtung von vier Pfaden zu einer Array-LUN bietet unter anderem folgende Vorteile:
+
+* Wenn ein Switch ausfällt, sind beide Speicher-Array-Controller weiterhin verfügbar.
+* Wenn ein Speicher-Array-Controller ausfällt, sind beide Switches weiterhin verfügbar.
+* Die Performance kann verbessert werden, da die Lastverteilung über vier anstatt zwei Pfade erfolgt.
+

@@ -1,0 +1,63 @@
+---
+permalink: install/concept_planning_summary_for_a_v_series_system_using_native_disks.html 
+sidebar: sidebar 
+keywords: plan, summary, v-series, system, native, disks, additional, considerations, setup, array, luns 
+summary: Sie können native Platten-Shelfs auf neuen oder vorhandenen V-Series Systemen installieren. Bei einer V-Series-Installation müssen Sie im Vergleich mit der Installation der Festplatten-Shelfs auf FAS Systemen jedoch auch einige zusätzliche Faktoren berücksichtigen. 
+---
+= Planungsübersicht für ein V-Series System mithilfe nativer Festplatten
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können native Platten-Shelfs auf neuen oder vorhandenen V-Series Systemen installieren. Bei einer V-Series-Installation müssen Sie im Vergleich mit der Installation der Festplatten-Shelfs auf FAS Systemen jedoch auch einige zusätzliche Faktoren berücksichtigen.
+
+
+
+== Weitere Planungsüberlegungen zum Basis-Setup auf V-Series Systemen mit Festplatten
+
+Beachten Sie beim ermitteln grundlegender Setup- und Installationsanforderungen für Ihr V-Series System, das native Festplatten verwendet, Folgendes:
+
+* Bei Bestellung des V-Series Systems mit Festplatten-Shelfs konfiguriert das Root-Volume werkseitig sowie Lizenzen und ONTAP Software (wie bei FAS Systemen).
+* Wenn das V-Series System nicht mit Festplatten-Shelfs bestellt wird, müssen Sie die Installation der ONTAP Software und die entsprechenden Lizenzen planen.
+* ONTAP weist nativen Festplatten, die an das V-Series System angeschlossen sind, automatisch die Eigentumsrechte zu.
+
+
+
+
+== Weitere Planungsüberlegungen, wenn das V-Series System Festplatten und Array LUNs verwendet
+
+In der folgenden Tabelle sind weitere Planungsüberlegungen und der Speicherort der Informationen zusammengefasst, die Ihnen bei jeder Aufgabe helfen.
+
+|===
+| Überlegungen zur Planung | Wo finde ich Richtlinien 
+
+
+ a| 
+Speicherort des Root-Volumes
+ a| 
+xref:concept_location_of_the_root_volume.adoc[Speicherort des Root-Volumes]
+
+
+
+ a| 
+Wie viele Festplatten und Array LUNs zusammen können zugewiesen werden, ohne die unterstützte Höchstgrenze für das V-Series System zu überschreiten
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Verwendung des FC-Initiator-Ports
+ a| 
+xref:concept_requirements_for_v_series_fc_initiator_port_usage.adoc[Anforderungen für die Verwendung des FC-Initiator-Ports]
+
+
+
+ a| 
+Die Art der Daten, die auf den Festplatten gespeichert werden sollen, und die Art der Daten, die auf den Array-LUNs liegen sollten
+ a| 
+Sie müssen den Datentyp bewerten, der gemanagt werden muss, und dann entscheiden, ob die Daten auf nativen Festplatten oder Array-LUNs liegen dürfen.
+
+|===

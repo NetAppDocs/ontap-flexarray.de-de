@@ -1,0 +1,42 @@
+---
+permalink: implement-third-party/concept_3par_storage_array_families.html 
+sidebar: sidebar 
+keywords: 3par, storage, array, families 
+summary: ONTAP unterstützt nicht die Kombination einiger Storage-Typen in Aggregaten. Damit Sie die Array-LUNs besser ermitteln können, die in einem Aggregat gemischt werden können, werden die Storage-Arrays aller Anbieter in Familien gruppiert. Wenn Sie Aggregate erstellen, können Sie Array-LUNs verschiedener Anbieter und aus verschiedenen Storage-Array-Familien im selben Aggregat nicht zusammen verwenden. 
+---
+= 3PAR Storage-Array-Familien
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt nicht die Kombination einiger Storage-Typen in Aggregaten. Damit Sie die Array-LUNs besser ermitteln können, die in einem Aggregat gemischt werden können, werden die Storage-Arrays aller Anbieter in Familien gruppiert. Wenn Sie Aggregate erstellen, können Sie Array-LUNs verschiedener Anbieter und aus verschiedenen Storage-Array-Familien im selben Aggregat nicht zusammen verwenden.
+
+Storage-Arrays in derselben Familie nutzen dieselben Performance- und Failover-Merkmale. Beispielsweise führen alle Mitglieder derselben Produktfamilie aktiv/aktiv-Failover oder aktiv/Passiv-Failover aus. Es können mehrere Faktoren verwendet werden, um Speicher-Array-Familien zu bestimmen. Beispielsweise würden Storage-Arrays mit unterschiedlichen Architekturen unterschiedliche Familien unterstützen, obwohl andere Merkmale identisch sein könnten.
+
+In der folgenden Liste sind die unterstützten 3PAR-Speicher-Arrays aufgeführt, die nach verschiedenen Familien geordnet sind:
+
+* Produktfamilie: 3PAR InServ Storage
++
+** Tx00
+
+
+* Produktfamilie 2: 3PAR InServ Storage
++
+** Fx00
+
+
+* Produktfamilie 3: 3PAR StoreServ Storage
++
+** 20000
+** 208xx
+
+
+
+
+Die Interoperabilitäts-Matrix ist die endgültige Instanz für Informationen zu den von den einzelnen Anbietern unterstützten Storage Arrays.
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

@@ -1,0 +1,71 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_3par_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, 3par, arrays, ontap, systems, host, persona, settings, port, 
+summary: Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann. 
+---
+= Erforderliche Parameter für 3PAR-Arrays mit ONTAP-Systemen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann.
+
+
+
+== Host-Persona-Einstellungen
+
+Für 3PAR-Arrays mit Firmware 2.3.1 und höher müssen die erforderlichen Host-Persona-Werte wie in der folgenden Tabelle dargestellt festgelegt werden:
+
+|===
+| Verbindungstyp | Host-Persona 
+
+
+ a| 
+Direktverbindung
+ a| 
+10
+
+
+
+ a| 
+Mit Fabric-Anbindung
+ a| 
+10
+
+|===
+Die Hostdefinition mit der erforderlichen Host-Persona sollte auf einem 3PAR-Speicher-Array erstellt werden, bevor der Switch in Zonen aufgeteilt wird, um das ONTAP-System mit einem 3PAR-Speicher-Array zu verbinden. Wenn Zoning vor der Host-Definition konfiguriert ist, erkennt ONTAP eine 3PAR-LUN als LUN 254 und Produkttyp-SES, die von ONTAP nicht verwendet werden können. Dies führt dazu, dass neu zugeordnete 3PAR LUNs nicht dem ONTAP System zugewiesen werden können. Einige 3PAR-LUNs, die möglicherweise bereits zu einem Aggregat hinzugefügt wurden, können nicht verwendet werden, da ONTAP eine LUN 254 statt einer 3PAR-LUN erkennt. Wenn dieses Problem auftritt, generiert ONTAP die folgende EMS-Meldung:
+
+[listing]
+----
+mlm.array.unknown:warning - Array LUN XXXXXXXX.126L254 [S/N 'XXXXXXX' vendor '3PARdata' product 'SES'] is unknown and is not supported in this version of Data ONTAP.
+----
+Wenn das Zoning vor der Hostdefinition konfiguriert wurde, können Sie das Problem beheben, indem Sie eine erneute Pfadinitialisierung durchführen, um eine erneute Erkennung der Array-LUNs zu erzwingen, die vom 3PAR-Speicher-Array zugeordnet sind. Informationen zur Problemumgehung für dieses Problem finden Sie im Abschnitt „Problemumgehung für das unbekannte Gerät (L254/SES) mit 3PAR-Speicherarrays“.
+
+xref:reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.adoc[Problemumgehung für das unbekannte Geräteproblem (L254/SES) mit 3PAR-Speicherarrays]
+
+
+
+== Port-Persona-Einstellungen
+
+Für 3PAR-Arrays mit Firmware 2.2.x müssen die erforderlichen Port-Persona-Werte wie in der folgenden Tabelle dargestellt festgelegt werden:
+
+|===
+| Verbindungstyp | Port-Persona 
+
+
+ a| 
+Direktverbindung
+ a| 
+18
+
+
+
+ a| 
+Mit Fabric-Anbindung
+ a| 
+19
+
+|===

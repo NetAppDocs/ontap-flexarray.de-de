@@ -1,0 +1,39 @@
+---
+permalink: install/concept_requirement_for_redundant_setup_of_components_in_a_path.html 
+sidebar: sidebar 
+keywords: requirements, redundant, setup, components, path, fc switch, ontap, systems, storage, array 
+summary: 'ONTAP Systeme müssen über ein redundantes Fibre Channel (FC)-Netzwerk mit dem Storage Array verbunden werden. Zum Schutz vor einem Verbindungsausfalls sind zwei FC-Netzwerke erforderlich, damit Fabric Ports oder Switches für Upgrades oder den Austausch offline geschaltet werden können, ohne die ONTAP Systeme zu beeinträchtigen.' 
+---
+= Anforderungen für das redundante Einrichten von Komponenten in einem Pfad
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Systeme müssen über ein redundantes Fibre Channel (FC)-Netzwerk mit dem Storage Array verbunden werden. Zum Schutz vor einem Verbindungsausfalls sind zwei FC-Netzwerke erforderlich, damit Fabric Ports oder Switches für Upgrades oder den Austausch offline geschaltet werden können, ohne die ONTAP Systeme zu beeinträchtigen.
+
+
+
+== Anforderungen an die ONTAP-Systemredundanz
+
+* Sie müssen jede Verbindung mit einem anderen FC-Initiator-Port im Port-Paar auf den ONTAP-Systemen verbinden.
+* Jeder FC-Initiator-Port im gleichen FC-Initiator-Port-Paar muss sich auf einem anderen Bus befinden.
+
+
+
+
+== Redundanzanforderungen für FC-Switch
+
+* Sie müssen redundante Switches verwenden.
+
+
+
+
+== Anforderungen an die Storage Array-Redundanz
+
+Vergewissern Sie sich, dass die Ports auf dem Storage-Array, die Sie für den Zugriff auf eine bestimmte LUN auswählen, aus unterschiedlichen Komponenten stammen, um einen Single Point of Failure zu vermeiden, z. B. von alternativen Controllern, Clustern oder Gehäusen. Der Grund ist, dass Sie nicht möchten, dass alle Zugriffe auf eine Array-LUN verloren gehen, wenn eine Komponente ausfällt.
+
+Die folgende Abbildung zeigt die korrekte und falsche Auswahl des Speicherarray-Ports für Redundanz. Die Pfadeinrichtung im Beispiel auf der linken Seite ist korrekt, da die Pfade zur Array-LUN redundant sind - jede Verbindung ist mit einem Port auf einem anderen Controller auf dem Speicher-Array.
+
+image::../media/redundant_array_port_selection.gif[Pfade zu einer Array-LUN müssen redundant sein. Es ist falsch, dass beide Pfade zum selben Storage Array Controller gehen.]

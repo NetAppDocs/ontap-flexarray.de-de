@@ -1,0 +1,36 @@
+---
+permalink: implement-third-party/concept_requirements_for_formatting_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, formatting, array, luns 
+summary: Sie können verschiedene Arten der LUN-Formatierung des Arrays durchführen. Jeder Typ hat Auswirkungen auf die Verfügbarkeit von LUNs oder des gesamten Storage-Arrays. 
+---
+= Anforderungen für das Formatieren von Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können verschiedene Arten der LUN-Formatierung des Arrays durchführen. Jeder Typ hat Auswirkungen auf die Verfügbarkeit von LUNs oder des gesamten Storage-Arrays.
+
+Wenn Sie dem ONTAP-System sofort eine neue LUN präsentieren müssen, sollten Sie die Schnellformatierung verwenden. Wenn Sie in Zukunft LUNs dem ONTAP-System präsentieren möchten, wird eine schnelle Formatierung empfohlen, die Online-Formatierung kann jedoch akzeptiert werden.
+
+Eine schnelle Formatierung wird empfohlen, da sowohl die Online- als auch die Offline-Formatierung die Festplattenerkennung verzögern, bis die LUN-Formatierung abgeschlossen ist, wie in der folgenden Liste beschrieben:
+
+* Online-Formatierung nimmt die Array-LUN, die vollständig offline formatiert wird, und die Array-LUN reagiert nicht auf SCSI-Befehle.
++
+Die Formatierung wird für eine Array-LUN gleichzeitig durchgeführt, bis alle Array-LUNs formatiert sind.
+
+* Durch Offline-Formatierung wird das gesamte Speicher-Array offline geschaltet, und das Speicher-Array reagiert nicht auf SCSI-Befehle.
++
+Die Array-LUNs werden sechs Mal pro Controller formatiert, bis die Formatierung abgeschlossen ist.
+
++
+Das Speicher-Array reagiert erst, wenn die gesamte Formatierung abgeschlossen ist.
+
+* Wenn Sie Array-LUNs (für einen beliebigen Host) nach der ersten Einrichtung des ONTAP-Systems erstellen und Offline-Formatierung verwenden, gibt es eine Systempanik.
++
+Alle Array-LUNs, die dem ONTAP-System zugeordnet sind, einschließlich Array-LUNs im Root-Volume, sind bis zum Abschluss der Formatierung nicht mehr verfügbar.
+
+* Online- und schnelle Formatierung von LUNs für andere Hosts wirken sich nicht auf das ONTAP-System aus.
+

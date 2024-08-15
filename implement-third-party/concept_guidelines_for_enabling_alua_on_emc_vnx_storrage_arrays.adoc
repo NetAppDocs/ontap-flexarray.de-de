@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_enabling_alua_on_emc_vnx_storrage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, enabling, alua, emc, vnx, storage arrays 
+summary: 'Unterstützung für Asymmetric Logical Unit Access (ALUA) mit CLARiiON- und VNX-Arrays wurde hinzugefügt.' 
+---
+= Richtlinien für die Aktivierung von ALUA auf EMC VNX-Speicherarrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Unterstützung für Asymmetric Logical Unit Access (ALUA) mit CLARiiON- und VNX-Arrays wurde hinzugefügt.
+
+Standardmäßig ist die Unterstützung für ALUA in ONTAP aktiviert. Um sie zu verwenden, muss ALUA auf dem Storage Array aktiviert sein.
+
+ALUA sollte nur in neuen Konfigurationen aktiviert werden. Sie sollten ALUA in einer vorhandenen Konfiguration nicht aktivieren.
+
+Wenn Sie ALUA auf dem Speicher-Array einrichten, müssen Sie sicherstellen, dass sich alle Hosts einer Speichergruppe im gleichen Failover-Modus befinden, d. h. im Failover-Modus 4 (ALUA).

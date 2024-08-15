@@ -1,0 +1,16 @@
+---
+permalink: install/concept_zoning_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, configuration, storage, arrays 
+summary: Das Zoning ermöglicht es einem Speicheradministrator, die Array-LUNs einzuschränken, auf die ein bestimmtes ONTAP-System zugreifen kann. Für ONTAP muss eine Array-LUN für jeden Initiator-Port nur auf einem Zielport sichtbar sein. 
+---
+= Zoning in einer Konfiguration mit Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Das Zoning ermöglicht es einem Speicheradministrator, die Array-LUNs einzuschränken, auf die ein bestimmtes ONTAP-System zugreifen kann. Für ONTAP muss eine Array-LUN für jeden Initiator-Port nur auf einem Zielport sichtbar sein.
+
+Durch die Konfiguration von Zoning auf einem Fibre Channel (FC)-Switch können Sie Pfade zwischen verbundenen Knoten definieren, wodurch die Sichtbarkeit und Konnektivität zwischen Geräten, die mit einem gemeinsamen FC-SAN verbunden sind, eingeschränkt wird.

@@ -1,0 +1,16 @@
+---
+permalink: install/concept_considering_checksum_type_when_planning_array_lun_size_and_number.html 
+sidebar: sidebar 
+keywords: consider, checksum, type, plan, array, lun, size, number 
+summary: Bei der Planung der Anzahl und Größe der Array-LUNs, die Sie für ONTAP benötigen, müssen Sie die Auswirkungen des Prüfsummentyps auf den nutzbaren Speicherplatz in der Array-LUN berücksichtigen. Für jede Array-LUN, die einem ONTAP-System zugewiesen ist, muss ein Prüfsummentyp angegeben werden. 
+---
+= Berücksichtigen Sie den Prüfsummentyp bei der Planung der Array-LUN-Größe und -Anzahl
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Planung der Anzahl und Größe der Array-LUNs, die Sie für ONTAP benötigen, müssen Sie die Auswirkungen des Prüfsummentyps auf den nutzbaren Speicherplatz in der Array-LUN berücksichtigen. Für jede Array-LUN, die einem ONTAP-System zugewiesen ist, muss ein Prüfsummentyp angegeben werden.
+
+Wenn eine Array-LUN auf dem Speicher-Array zugeordnet ist, um von einem ONTAP-System verwendet zu werden, behandelt ONTAP die Array-LUN als eine rohe, unformatierte Festplatte. Wenn Sie eine Array-LUN einem ONTAP-System zuweisen, geben Sie den Prüfsummentyp an, die ONTAP darüber informiert, wie die RAW Array-LUN formatiert werden soll. Die Auswirkungen des Prüfsummentyp auf Zonenebene auf dem verfügbaren Speicherplatz hängt von dem Prüfsummentyp auf Zonenebene ab, den Sie für die LUN angeben.

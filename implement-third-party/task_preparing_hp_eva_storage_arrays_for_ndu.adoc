@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/task_preparing_hp_eva_storage_arrays_for_ndu.html 
+sidebar: sidebar 
+keywords: prepare, hp, eva, storage, arrays, ndu 
+summary: HP EVA Storage Arrays neigen dazu, Ziel-Ports während eines Firmware-Upgrades offline zu schalten. ONTAP bietet Befehle zur Erhöhung der ONTAP-Stabilität, sodass das ONTAP System nicht unterbrochen wird, wenn Zielports während des Firmware-Upgrades offline geschaltet werden. Diese Befehle können nur in Storage-Systemen mit ONTAP verwendet werden. 
+---
+= Vorbereiten von HP EVA-Speicher-Arrays für NDU
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+HP EVA Storage Arrays neigen dazu, Ziel-Ports während eines Firmware-Upgrades offline zu schalten. ONTAP bietet Befehle zur Erhöhung der ONTAP-Stabilität, sodass das ONTAP System nicht unterbrochen wird, wenn Zielports während des Firmware-Upgrades offline geschaltet werden. Diese Befehle können nur in Storage-Systemen mit ONTAP verwendet werden.
+
+Sie müssen die von HP zur Durchführung der Firmware-Aktualisierung bereitgestellten Richtlinien befolgen, einschließlich der Richtlinien zur Lastempfehlung (HP EVA). Sie können nur auf Firmware aktualisieren, die von HP unterstützt wird. Dieses Verfahren bezieht sich auf den Upgrade-Typ der HP EVA-Firmware _online Upgrade_.
+
+[NOTE]
+====
+Während des Firmware-Upgrades werden beide HP EVA Controller neu gestartet.
+
+====
+Dieses Verfahren weist Sie an, ONTAP-Befehle zu verwenden, die die ONTAP-Ausfallsicherheit während des Firmware-Upgrades erhöhen. Nach Abschluss des Firmware-Upgrades verwenden Sie erneut die ONTAP-Befehle, um die Ports in den normalen Betriebsmodus zurückzukehren.
+
+.Schritte
+. Legen Sie auf dem ONTAP-System die Berechtigungsebene der Befehlssitzung auf erweitert: * Fest *`set -privilege advanced`
+. Setzen Sie den `is-upgrade-pending` Parameter für das HP EVA-Speicher-Array, das eine Firmware-Aktualisierung durchläuft, auf *true*: *`storage array modify -name array_name -is-upgrade-pending true`*
+. Starten Sie auf dem Speicher-Array die Firmware-Aktualisierung.
+. Stellen Sie nach Abschluss des Firmware-Upgrades die Berechtigungsebene bei Bedarf erneut auf erweitert ein, und setzen Sie dann auf dem ONTAP-System den `is-upgrade-pending` Parameter auf *false*, um die Speicherarray-Ports wieder in den normalen Betrieb zu bringen: *`storage array modify -name array_name -is-upgrade-pending false`*
++
+Wenn Sie den erweiterten Modus in Schritt 2 nicht verlassen haben, müssen Sie nicht erneut darauf zugreifen.
+
++
+Der `is-upgrade-pending` Parameter enthält die folgenden Funktionen, um die ordnungsgemäße Verwendung des Befehls zu gewährleisten:
+
++
+** Wenn Sie versuchen, auf *false* zu setzen `is-upgrade-pending` , während das Upgrade auf dem Speicher-Array ausgeführt wird, schlägt der Befehl fehl und es wird eine EMS-Meldung ausgegeben.
+** Wenn der `is-upgrade-pending` Status nicht innerhalb von 60 Minuten nach der Einstellung auf *true* auf *false* zurückgestellt wird, werden EMS-Nachrichten stündlich protokolliert, bis sie wieder auf *false* zurückgegeben werden `is-upgrade-pending` .
+
+
+

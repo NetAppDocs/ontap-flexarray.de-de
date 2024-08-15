@@ -1,0 +1,14 @@
+---
+permalink: install/reference_relationship_between_zoning_and_host_group_configuration.html 
+sidebar: sidebar 
+keywords: relationship, between, zone, host, group, configuration 
+summary: Wenn Sie die Zoning-Konfigurationsfehler beheben, müssen Sie manchmal auch die Konfiguration der Host-Gruppe und umgekehrt ändern. 
+---
+= Beziehung zwischen Zoning und Host-Gruppen-Konfiguration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie die Zoning-Konfigurationsfehler beheben, müssen Sie manchmal auch die Konfiguration der Host-Gruppe und umgekehrt ändern.

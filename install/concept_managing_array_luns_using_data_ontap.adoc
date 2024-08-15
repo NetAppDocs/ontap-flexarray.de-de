@@ -1,0 +1,14 @@
+---
+permalink: install/concept_managing_array_luns_using_data_ontap.html 
+sidebar: sidebar 
+keywords: manage, array, luns, ontap 
+summary: Wenn der Storage-Array-Administrator Konfigurationsänderungen an einer Array-LUN vornehmen möchte, nachdem sie einem Node zugewiesen wurde, beispielsweise um die Größe zu ändern, müssen Sie möglicherweise einige Aktivitäten in ONTAP ausführen, bevor die LUN auf dem Storage-Array neu konfiguriert werden kann. 
+---
+= Management von Array-LUNs mithilfe von ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn der Storage-Array-Administrator Konfigurationsänderungen an einer Array-LUN vornehmen möchte, nachdem sie einem Node zugewiesen wurde, beispielsweise um die Größe zu ändern, müssen Sie möglicherweise einige Aktivitäten in ONTAP ausführen, bevor die LUN auf dem Storage-Array neu konfiguriert werden kann.

@@ -1,0 +1,34 @@
+---
+permalink: install/reference_factors_impacting_the_required_number_of_array_luns.html 
+sidebar: sidebar 
+keywords: factors, impact, required, number, array, luns 
+summary: Bei der Planung der Nutzung von Array LUNs durch ONTAP müssen Sie Faktoren wie die Array-LUN-Größe, den ONTAP-Overhead und den Prüfsummentyp berücksichtigen, die sich auf die Anzahl der in der ONTAP-Umgebung erforderlichen Array LUNs auswirken. 
+---
+= Faktoren, die sich auf die erforderliche Anzahl von Array-LUNs auswirken
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Planung der Nutzung von Array LUNs durch ONTAP müssen Sie Faktoren wie die Array-LUN-Größe, den ONTAP-Overhead und den Prüfsummentyp berücksichtigen, die sich auf die Anzahl der in der ONTAP-Umgebung erforderlichen Array LUNs auswirken.
+
+Beachten Sie Folgendes, wenn Sie die erforderliche Anzahl von Array-LUNs ermitteln:
+
+* Je kleiner die Array-LUNs, desto mehr LUNs benötigen Sie für den Speicher.
++
+Idealerweise sollte eine große Array-LUN aus einer bestimmten Speicher-Array-RAID-Gruppe erstellt werden.
+
+* Durch die Gerätebegrenzungen wird die maximale Anzahl von Festplatten und Array-LUNs definiert, die einem ONTAP-System zugewiesen werden können.
++
+Das _Hardware Universe_ enthält Informationen zu Gerätebegrenzungen.
+
+* Je mehr nutzbarer Speicherplatz in einer Array-LUN, desto weniger Array-LUNs sind erforderlich.
++
+Die Menge des nutzbaren Speicherplatzes in einer Array-LUN wird durch den von ONTAP benötigten Speicherplatz, den Prüfsummentyp auf Zonenebene und zusätzliche Faktoren wie der für optionale Snapshot Reserven erforderliche Speicherplatz bestimmt.
+
+* Verschiedene Applikationen erzeugen unterschiedliche Workloads.
++
+Bei der Ermittlung der Zuweisung von Array-LUNs zu ONTAP-Systemen müssen Sie berücksichtigen, für welchen Speicher der Speicher verwendet wird und wie viele Anforderungen wahrscheinlich von verschiedenen Anwendungen generiert werden.
+
+

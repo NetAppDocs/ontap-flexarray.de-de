@@ -1,0 +1,41 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth 
+summary: Die standardmäßige Warteschlangentiefe für das Ziel ist für die meisten Implementierungen akzeptabel, kann jedoch geändert werden, wenn Performance-Probleme auftreten. 
+---
+= Festlegen der Zielwarteschlangentiefe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die standardmäßige Warteschlangentiefe für das Ziel ist für die meisten Implementierungen akzeptabel, kann jedoch geändert werden, wenn Performance-Probleme auftreten.
+
+Sie können die Zielwarteschlangentiefe nach Speicherarray oder pro Zielport festlegen.
+
+.Schritt
+. Verwenden Sie einen der folgenden Befehle, um die Warteschlangentiefe für den Zielport auf allen Zielports oder auf einem bestimmten Zielport eines Speicherarrays festzulegen.
++
+|===
+| Ihr Ziel ist | Diese Befehlssequenz verwenden... 
+
+
+ a| 
+Legen Sie die Warteschlangentiefe für den Zielport auf allen Zielports für ein Speicher-Array fest
+ a| 
+`set advanced` `storage array port modify -name array_name -max-queue-depth value`
+
+
+
+ a| 
+Legen Sie die Warteschlangentiefe des Zielports auf einem bestimmten Zielport auf einem Speicherarray fest
+ a| 
+`set advanced` `storage array port modify -name array_name -wwnn value -wwpn value -max-queue-depth value`
+
+|===
++
+Weitere Informationen zu diesen Befehlen finden Sie in den man-Pages.
+
+

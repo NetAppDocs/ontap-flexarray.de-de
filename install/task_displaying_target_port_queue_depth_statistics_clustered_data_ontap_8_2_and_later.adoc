@@ -1,0 +1,80 @@
+---
+permalink: install/task_displaying_target_port_queue_depth_statistics_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: display, target, queue, depth, statistics 
+summary: Wenn Sie vermuten, dass eine Einstellung für die Warteschlangentiefe Performance-Probleme auf Ihrem Speicher-Array verursacht, sollten Sie den Wert prüfen, der für die Warteschlangentiefe festgelegt ist, und den Status der Anforderungen auf den FC-Initiator-Ports überprüfen. 
+---
+= Anzeigen von Statistiken zur Warteschlangentiefe des Ziels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie vermuten, dass eine Einstellung für die Warteschlangentiefe Performance-Probleme auf Ihrem Speicher-Array verursacht, sollten Sie den Wert prüfen, der für die Warteschlangentiefe festgelegt ist, und den Status der Anforderungen auf den FC-Initiator-Ports überprüfen.
+
+Es gibt verschiedene Detailebenen, auf die Sie zugreifen können, um festzustellen, ob Probleme bei der Verarbeitung von Anforderungen an Zielports auftreten. Im Folgenden wird beschrieben, wie Sie die aktuelle Einstellung für die Warteschlangentiefe des Zielports ermitteln, bestimmen, ob Anforderungen an die Ports warten, und detaillierte Portstatistiken anzeigen, um Ihnen das Verständnis der Auslastung auf dem Port zu erleichtern.
+
+.Schritte
+. Verwenden Sie den `storage array show` Befehl mit dem `-instance` Parameter, um den aktuellen Wert der Warteschlangentiefe des Zielports anzuzeigen.
++
+[listing]
+----
+> set advanced
+> storage array show -instance
+
+Name: HP2
+                 Prefix: HP-2
+                 Vendor: HP
+                  Model: HSV300
+                options:
+          Serial Number: 50014380025d1500
+Target Port Queue Depth: 512
+        LUN Queue Depth: 32
+        Upgrade Pending: false
+    Optimization Policy: eALUA
+               Affinity: aaa
+             Error Text: -
+----
+. Verwenden Sie den `storage array port show -fields max-queue-depth` Befehl, um die Einstellung für die Warteschlangentiefe für jeden Port im Speicher-Array anzuzeigen.
++
+[listing]
+----
+> set advanced
+> storage array port show -fields max-queue-depth
+
+name            wwnn             wwpn             max-queue-depth
+--------------- ---------------- ---------------- ---------------
+EMC_SYMMETRIX_1 50060480000001a0 50060480000001a0 -
+EMC_SYMMETRIX_1 50060480000001a1 50060480000001a1 -
+EMC_SYMMETRIX_1 50060480000001b0 50060480000001b0 -
+EMC_SYMMETRIX_1 50060480000001b1 50060480000001b1 256
+----
++
+Der Wert „`-` for `Max Queue Depth` “ gibt an, dass der Port keine bestimmte Einstellung für die maximale Warteschlangentiefe hat und den auf der Ebene des Speicher-Arrays eingestellten Wert verwendet.
+
+. Verwenden Sie den `storage array port show` Befehl, um Performance-Informationen zu Speicher-Array-Ziel-Ports anzuzeigen.
++
+Die Ergebnisse dieses Befehls können Sie feststellen, ob Performance-Probleme im Zusammenhang mit den Ports auftreten. Die `%busy` Werte und `%waiting` bieten einen allgemeinen Überblick über die Performance eines Ports. Wenn diese Werte einen hohen Prozentsatz von Anfragen anzeigen, die auf die Verarbeitung warten, oder zeigen, dass der Port einen großen Prozentsatz an Zeit belegt ist, sollten Sie den Status des Ports genauer untersuchen.
+
++
+[listing]
+----
+
+vgv3070f51::*> storage array port show
+
+Array Name: HP2
+WWNN: 50014380025d1500
+WWPN: 50014380025d1508
+Connection Type: fabric
+Switch Port: vgbr300s70:9
+Link Speed: 4   GB/s
+Max Queue Depth: -
+                              LUN                                 Link
+Node       Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+---------  ---------  -----  ------  ------  -------  ----------  ----
+vgv51-02       0a     21       2      53        0           0     0
+vgv51-01       0a     21       2      48        1           0     0
+----
+. Ausführlichere Informationen über Ports erhalten Sie über den Befehl mit den `storage array port show -fields` `average-latency-per-iop`Feldern , , `average-pending` `average-waiting`, `max-pending`oder `max-waiting` .
+

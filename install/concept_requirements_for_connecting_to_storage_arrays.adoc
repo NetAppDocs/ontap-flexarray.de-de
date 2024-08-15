@@ -1,0 +1,27 @@
+---
+permalink: install/concept_requirements_for_connecting_to_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, connect, storage, arrays 
+summary: Bei der Verbindung Ihres ONTAP-Systems mit einem Storage-Array muss Ihr Plan für die Port-zu-Port-Konnektivität Redundanz, Pathing und andere Richtlinien berücksichtigen. 
+---
+= Anforderungen für die Verbindung mit Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Verbindung Ihres ONTAP-Systems mit einem Storage-Array muss Ihr Plan für die Port-zu-Port-Konnektivität Redundanz, Pathing und andere Richtlinien berücksichtigen.
+
+Die Voraussetzungen für die Einrichtung von Verbindungen sind wie folgt:
+
+* Jede Verbindung in einem redundanten Portpaar auf dem Speicher-Array muss mit einem anderen FC-Initiator-Port auf dem ONTAP-System verbunden sein.
+* Die auf den FC-Switches verwendeten Ports müssen redundant sein.
+* Zur Vermeidung eines SPOF muss eine Konnektivität eingerichtet werden.
++
+Vergewissern Sie sich, dass die Ports auf dem Storage-Array, die Sie für den Zugriff auf eine bestimmte LUN auswählen, aus unterschiedlichen Komponenten stammen, um einen Single Point of Failure zu vermeiden, z. B. von alternativen Controllern, Clustern oder Gehäusen. Der Grund ist, dass Sie nicht möchten, dass alle Zugriffe auf eine Array-LUN verloren gehen, wenn eine Komponente ausfällt.
+
+* Die Anzahl der Pfade darf die Anzahl der für Ihre ONTAP-Version unterstützten Pfade nicht überschreiten.
+* Wenn Sie eine Konfiguration einrichten möchten, bei der ein FC-Initiator-Port von mehreren Ziel-Ports gemeinsam genutzt wird oder ein Ziel-Port von mehreren FC-Initiator-Ports gemeinsam genutzt wird, müssen Sie die entsprechenden Regeln befolgen.
+* Wenn Ihr Speicher-Array weniger LUNs pro Host-Gruppe pro Port unterstützt als die Anzahl der LUNs, die von den ONTAP-Systemen verwendet werden, müssen Sie weitere Kabel zwischen dem ONTAP-System und dem Speicher-Array hinzufügen.
+

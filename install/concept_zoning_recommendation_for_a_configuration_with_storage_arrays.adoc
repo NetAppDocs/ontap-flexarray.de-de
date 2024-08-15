@@ -1,0 +1,20 @@
+---
+permalink: install/concept_zoning_recommendation_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, recommendation, configuration, storage, arrays 
+summary: 'Der empfohlene Zoning-Typ für eine Konfiguration mit Speicher-Arrays ist 1:1 Zoning. Bei 1:1-Zoning enthält jede Zone einen einzelnen FC-Initiator-Port und einen einzelnen Ziel-Port des Storage-Arrays.' 
+---
+= Zoning-Empfehlung für eine Konfiguration mit Storage-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Der empfohlene Zoning-Typ für eine Konfiguration mit Speicher-Arrays ist 1:1 Zoning. Bei 1:1-Zoning enthält jede Zone einen einzelnen FC-Initiator-Port und einen einzelnen Ziel-Port des Storage-Arrays.
+
+Das Erstellen des 1:1-Zoning bietet folgende Vorteile:
+
+* Sie begrenzen die Anzahl der Ports, über die auf eine bestimmte Array-LUN zugegriffen werden kann.
+* Es gibt Verbesserungen bei der Erkennungs- und Boot-Zeit, da die FC-Initiatoren ONTAP-Systeme nicht versuchen, sich gegenseitig zu erkennen.
+

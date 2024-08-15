@@ -1,0 +1,39 @@
+---
+permalink: install/concept_number_of_storage_arrays_supported_with_a_ontap_system.html 
+sidebar: sidebar 
+keywords: considerations, connect, multiple, storage, arrays, ontap, system 
+summary: Je nach den von ONTAP Systemen unterstützten Storage Array-Modellen können Sie mehrere Storage-Arrays oder ein einzelnes Storage-Array mit dem ONTAP System verbinden. 
+---
+= Überlegungen beim Anschließen mehrerer Speicher-Arrays an ein ONTAP-System
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Je nach den von ONTAP Systemen unterstützten Storage Array-Modellen können Sie mehrere Storage-Arrays oder ein einzelnes Storage-Array mit dem ONTAP System verbinden.
+
+[NOTE]
+====
+Die Interoperabilitäts-Matrix identifiziert jedes Storage Array-Modell, für das ein ONTAP System nur ein Storage Array unterstützt.
+
+====
+Beachten Sie beim Verbinden mehrerer Speicher-Arrays mit einem ONTAP System Folgendes:
+
+* Wenn Sie mehrere Arrays desselben unterstützten Storage Array-Modells mit dem ONTAP System verbinden können, ist die Anzahl der zu implementierenden Storage Arrays unbegrenzt.
+* Die Storage-Arrays können entweder von demselben oder von verschiedenen Anbietern unterstützt werden.
++
+Wenn die Storage Arrays vom selben Anbieter stammen, können sie aus derselben Produktfamilie oder aus verschiedenen Familien stammen.
+
+
+
+[NOTE]
+====
+Storage-Arrays in derselben Familie nutzen dieselben Performance- und Failover-Merkmale. Beispielsweise führen alle Mitglieder derselben Produktfamilie aktiv/aktiv-Failover oder aktiv/Passiv-Failover aus. Es können mehrere Faktoren verwendet werden, um Speicher-Array-Familien zu bestimmen. Beispielsweise würden Storage-Arrays mit unterschiedlichen Architekturen unterschiedliche Familien unterstützen, obwohl andere Merkmale identisch sein könnten.
+
+====
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["FlexArray Virtualisierungs-Implementierung für Storage von Drittanbietern"]
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

@@ -1,0 +1,79 @@
+---
+permalink: install/concept_back_end_configuration_errors_detected_by_ontap_commands.html 
+sidebar: sidebar 
+keywords: back-end, configuration, errors, detected, ontap, commands, output, examples 
+summary: Der Befehl Storage Errors show enthält auf Array-LUN-Ebene Details zu häufigen Back-End-Konfigurationsfehlern. Sie können die Fehler auch mithilfe der Befehle error show der Speicherfestplatte und show -errors anzeigen. 
+---
+= Back-End-Konfigurationsfehler durch ONTAP-Befehle erkannt
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Der `storage errors show` Befehl enthält Details auf der Array-LUN-Ebene zu häufigen Back-End-Konfigurationsfehlern. Sie können die Fehler auch mit `storage disk error show` den Befehlen und `storage disk show -errors` anzeigen.
+
+Sie müssen die durch diese Befehle identifizierten Back-End-Konfigurationsfehler beheben, bevor Sie ONTAP für die Verwendung mit Array-LUNs konfigurieren können.
+
+[NOTE]
+====
+Der `storage errors show` Befehl liefert Fehlerdetails, die nur Array-LUNs betreffen, `storage disk error show` und die Befehle können Fehlerdetails zu Array-LUNs und `storage disk show -errors` Festplatten liefern.
+
+====
+Wenn ein Back-End-Konfigurationsfehler auftritt, der eine Kooperation der Geräte in der Konfiguration verhindert, weist der `storage array config show` Befehl Sie an, Storage Errors show auszuführen, um die Details des Fehlers zu erhalten.
+
+
+
+== Liste der Back-End-Konfigurationsfehler
+
+Mit den `storage errors show`Befehlen , `storage disk error show`und `storage disk show -errors` können Sie Back-End-Konfigurationsfehler wie die folgenden identifizieren:
+
+* Zu einer Array-LUN gibt es weniger als zwei Pfade.
+* Alle Pfade zu einer Array-LUN befinden sich auf demselben Storage Array Controller.
+* Zwei Array-LUNs erhalten dieselbe LUN-ID.
+* Die LUN-IDs für denselben LDEV stimmen nicht auf allen Zielports überein, über die der LDEV sichtbar ist.
+* Die Array-LUN überschreitet die maximale LUN-Größe der ONTAP.
+* Die Array-LUN entspricht nicht der minimalen LUN-Größe von ONTAP.
+* Die Blockgröße einer Array-LUN ist ungültig.
+* Eine Zugriffs-LUN wird ONTAP präsentiert.
+
+
+
+
+== Ausgabebeispiele, die die Back-End-Konfigurationsfehler anzeigen
+
+Die `storage errors show` Ausgabe wird nach Speicherarray gruppiert (wenn hinter dem ONTAP-System mehr als ein Speicherarray vorhanden ist). Der Name und die eindeutige Kennung (UID) einer Array-LUN werden angezeigt, sofern zutreffend.
+
+Das folgende Ausgabebeispiel zeigt einen Fehlertyp - nur einen Pfad zu einer Array-LUN. Dies ist ein Fehler, da ONTAP zwei Pfade zu einer Array-LUN benötigt.
+
+[NOTE]
+====
+Vier Pfade zu einer Array-LUN werden für geclusterte Konfigurationen unterstützt.
+
+====
+Im folgenden Beispiel werden die Fehler angezeigt, die vom Befehl zurückgegeben werden `storage errors show` , weil nur ein einzelner Pfad für eine Array-LUN konfiguriert ist:
+
+[listing]
+----
+
+systemf47ab::*> storage errors show
+DGC-1.51         onepath           DGC-1.51 (6006016044d03500ae553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.54         onepath           DGC-1.54 (6006016044d03500b4553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.55         onepath           DGC-1.55 (6006016044d03500b6553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.56         onepath           DGC-1.56 (6006016044d03500b8553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.57         onepath           DGC-1.57 (6006016044d03500ba553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.58         onepath           DGC-1.58 (6006016044d03500bc553e55b09fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+----
+Im folgenden Beispiel werden ähnliche Fehler angezeigt, die vom Befehl zurückgegeben werden `storage disk show -errors` :
+
+[listing]
+----
+
+systemf47ab::*> storage disk show -errors
+DGC-1.2          onepath           DGC-1.2 (6006016044d03500e0720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.3          onepath           DGC-1.3 (6006016044d03500e2720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.4          onepath           DGC-1.4 (6006016044d03500e3720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.5          onepath           DGC-1.5 (6006016044d03500e4720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.6          onepath           DGC-1.6 (6006016044d03500e5720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+DGC-1.7          onepath           DGC-1.7 (6006016044d03500e6720e22b59fe311): This array LUN is only available on one path. Proper configuration requires two paths.
+----

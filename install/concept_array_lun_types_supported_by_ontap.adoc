@@ -1,0 +1,20 @@
+---
+permalink: install/concept_array_lun_types_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: array, lun, type, supported, ontap 
+summary: Sie können ONTAP nur Storage Array LUNs zuordnen. Sie können LUN 0 ONTAP zuordnen, wenn es sich um eine Storage-Typ-LUN handelt. 
+---
+= Von ONTAP unterstützter Array-LUN-Typ
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können ONTAP nur Storage Array LUNs zuordnen. Sie können LUN 0 ONTAP zuordnen, wenn es sich um eine Storage-Typ-LUN handelt.
+
+Einige Speicher-Arrays verfügen über eine nicht-Speicher-_Command_ LUN. Sie können einem ONTAP System keine Befehlstyp LUN zuordnen.
+
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["FlexArray Virtualisierungs-Implementierung für Storage von Drittanbietern"]

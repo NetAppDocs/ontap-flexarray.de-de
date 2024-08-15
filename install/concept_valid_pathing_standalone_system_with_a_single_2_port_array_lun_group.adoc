@@ -1,0 +1,39 @@
+---
+permalink: install/concept_valid_pathing_standalone_system_with_a_single_2_port_array_lun_group.html 
+sidebar: sidebar 
+keywords: valid, path, stand-alone, system, single, 2-port, array, lun, group 
+summary: Ein Fabric-Attached Standalone-System mit einer Array-LUN-Gruppe mit 2 Ports wird für alle ONTAP Versionen mit den meisten Storage-Arrays unterstützt. 
+---
+= Gültiges Pathing: Eigenständiges System mit einer einzelnen Array-LUN-Gruppe mit 2 Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ein Fabric-Attached Standalone-System mit einer Array-LUN-Gruppe mit 2 Ports wird für alle ONTAP Versionen mit den meisten Storage-Arrays unterstützt.
+
+[NOTE]
+====
+Unterschiedliche Storage Arrays – selbst die vom selben Anbieter – könnten die Ports anders kennzeichnen als die im Beispiel gezeigten. Auf Ihrem Speicher-Array müssen Sie sicherstellen, dass die von Ihnen ausgewählten Ports auf alternativen Controllern sind.
+
+====
+Die folgende Abbildung zeigt eine einzelne Array-LUN-Gruppe mit 2 Ports und einem eigenständigen ONTAP-System:
+
+image::../media/one_standalone_2_port_array_lun_group_array_port_labels.gif[In einer einzelnen Array-LUN-Gruppenkonfiguration mit 2 Ports mit einem eigenständigen System]
+
+Wenn Sie Ihre Installation validieren, können Sie Ihre Befehlsausgabe anhand des folgenden Beispiels überprüfen, um sicherzustellen, dass die Anzahl der LUN-Gruppen Ihren Zweck entspricht und dass es redundante Pfade gibt.
+
+.Beispiel
+Das folgende Beispiel zeigt die erwartete `storage array config show` Ausgabe für die bebilderte Konfiguration - eine einzelne LUN-Gruppe (LUN-Gruppe 0) mit zwei redundanten Pfaden zu jeder Array-LUN. (Die redundanten Pfade im Ausgang, die der Abbildung entsprechen, sind in den Array-Ziel-Port-Namen 20**1A**00a0b80fee04 und 20**2A**00a0b80fee0420 dargestellt.)
+
+[listing]
+----
+
+vs1::> storage array config show
+             LUN   LUN
+Node         Group Count     Array Name    Array Target Port   Initiator
+------------ ----- ----- ----------------- ------------------- ----------
+vs1           0    50        DGC_RAID5_1	 201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0h
+----

@@ -1,0 +1,54 @@
+---
+permalink: install/reference_reasons_for_fewer_array_lun_groups_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, fewer, array, lun, groups, expected, resolve, issue 
+summary: Wenn Sie die Back-End-Konfiguration überprüfen, müssen Sie die Ausgabe der Speicher-Array-Konfiguration anzeigen überprüfen, um festzustellen, ob die Anzahl der Array-LUN-Gruppen in der Ausgabe den gewünschten Wert hat. 
+---
+= Gründe für weniger Array-LUN-Gruppen als erwartet
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie die Back-End-Konfiguration validieren, müssen Sie die Ausgabe prüfen `storage array config show` , um festzustellen, ob die Anzahl der Array-LUN-Gruppen in der Ausgabe den gewünschten entspricht.
+
+
+
+== Erklärung
+
+Der wahrscheinlichste Grund für weniger als erwartet LUN-Gruppen ist, dass die LDEV-zu-LUN-Zuordnung für beide FC-Initiator-Port-Paare auf dem ONTAP-System gleich ist. Wenn die LDEV-zu-LUN-Zuordnung für beide FC-Initiator-Port-Paare identisch ist, wird in der `storage array config show` Ausgabe eine LUN-Gruppe weniger als erwartet angezeigt.
+
+In der folgenden `storage array config show` Ausgabe wird nur eine Array-LUN-Gruppe angezeigt, da beide FC-Initiator-Port-Paare dem gleichen Ziel-Port-Paar zugeordnet sind:
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+         LUN   LUN
+Node     Group Count Array Name  Array Target Ports      Switch Port    Initiator
+------   ----- ----- ---------- -------------------      -----------    ---------
+
+mysystem1  0     2   DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5   0a
+                                  20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0c
+                                  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5   0b
+                                  20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0d
+----
+In der Spalte Array Target Ports wird innerhalb der LUN-Gruppe mehrmals der gleiche Zielport angezeigt, und jedes Vorkommen hat einen anderen Initiator.
+
+* Die Initiatoren 0a und 0b haben beide Zugriff auf den Speicher-Array-Port 1A.
+* Die Initiatoren 0c und 0d haben beide Zugriff auf den Speicher-Array-Port 2A.
+
+
+
+
+== Lösung des Problems
+
+ONTAP kennzeichnet dies nicht als Fehler, da ein ONTAP-System ausgeführt werden kann, wenn die LDEV-zu-LUN-Zuordnung für beide FC-Initiator-Port-Paare identisch ist. Es werden jedoch nicht mehrere FC-Initiatoren für denselben Ziel-Port unterstützt. Sie sollten die Zuordnung so korrigieren, dass das ONTAP-System einer unterstützten Konfiguration folgt und Sie über die Anzahl der gewünschten LUN-Gruppen verfügen.
+
+Wenn Sie dieses Problem beheben möchten, gehen Sie wie folgt vor:
+
+. Korrigieren Sie die Zuordnung auf dem Storage-Array, sodass die Zuordnung des FC-Initiator-Port-Paars für beide FC-Initiator-Port-Paare auf dem ONTAP-System nicht mehr identisch ist.
+. Führen Sie auf dem ONTAP System `storage array config show` erneut aus und bestätigen Sie, dass die Anzahl der erwarteten LUN-Gruppen angezeigt wird und dass FC-Initiator-Port-Paare nicht auf dieselben Ziel-Ports zugreifen.
+

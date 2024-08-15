@@ -1,0 +1,30 @@
+---
+permalink: install/concept_guidelines_for_specifying_the_appropriate_target_queue_depth.html 
+sidebar: sidebar 
+keywords: guidelines, specify, appropriate, target, queue, depth 
+summary: Sie müssen die Auswirkungen aller Initiatoren, die auf den Speicher-Array-Port zugreifen, berücksichtigen, wenn Sie die Konfiguration für ein bestimmtes ONTAP-System oder einen bestimmten Host planen, auf dem ONTAP nicht ausgeführt wird. 
+---
+= Richtlinien für die Angabe der entsprechenden Warteschlangentiefe für das Ziel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die Auswirkungen aller Initiatoren, die auf den Speicher-Array-Port zugreifen, berücksichtigen, wenn Sie die Konfiguration für ein bestimmtes ONTAP-System oder einen bestimmten Host planen, auf dem ONTAP nicht ausgeführt wird.
+
+Wenn Ihre Bereitstellung mehr als einen Initiator auf einem Zielport enthält, müssen Sie die Gesamtanzahl der Befehle berücksichtigen, die von allen Initiatoren an einen Zielport gesendet werden, wenn Sie die Zielwarteschlangentiefe festlegen.
+
+Richtlinien zur Festlegung der entsprechenden Warteschlangentiefe für das Ziel sind wie folgt:
+
+* Konfigurieren Sie keinen Wert 0 (Null).
++
+Ein Wert von 0 bedeutet, dass keine Begrenzung für die ausstehenden Befehle besteht.
+
+* Betrachten wir das Volumen an Befehlen, die bestimmte Initiatoren wahrscheinlich an den Zielport senden.
++
+Sie können dann höhere Werte für Initiatoren konfigurieren, die wahrscheinlich eine größere Anzahl von Anforderungen senden, und einen niedrigeren Wert für Initiatoren, die wahrscheinlich eine geringere Anzahl von Anforderungen senden.
+
+* Konfigurieren Sie Hosts, die ONTAP nicht gemäß den Richtlinien für diese Hosts ausführen.
+* Sie sollten die Warteschlangentiefe pro Ziel-Port festlegen, wenn sich die Workloads über die Ports hinweg unterscheiden.
+

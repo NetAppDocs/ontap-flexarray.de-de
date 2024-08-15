@@ -1,0 +1,32 @@
+---
+permalink: install/concept_prerequisites_to_reconfiguring_an_array_lun_on_the_storage_array.html 
+sidebar: sidebar 
+keywords: prerequisites, reconfigure, array. lun, storage, array 
+summary: 'Wenn eine Array-LUN bereits (über ONTAP) einem bestimmten ONTAP-System zugewiesen wurde, müssen die Informationen, die ONTAP auf die Array-LUN geschrieben hat, entfernt werden, bevor der Speicheradministrator versucht, die Array-LUN auf dem Speicher-Array neu zu konfigurieren.' 
+---
+= Voraussetzungen für die Neukonfiguration einer Array-LUN auf dem Speicher-Array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn eine Array-LUN bereits (über ONTAP) einem bestimmten ONTAP-System zugewiesen wurde, müssen die Informationen, die ONTAP auf die Array-LUN geschrieben hat, entfernt werden, bevor der Speicheradministrator versucht, die Array-LUN auf dem Speicher-Array neu zu konfigurieren.
+
+Wenn das Speicherarray ONTAP eine Array-LUN zur Verfügung stellt, sammelt ONTAP Informationen über die Array-LUN (z. B. deren Größe) und schreibt diese Informationen auf die Array-LUN. ONTAP kann keine Informationen, die an eine Array-LUN geschrieben wurden, dynamisch aktualisieren. Bevor der Speicher-Array-Administrator eine Array-LUN neu konfiguriert, müssen Sie daher den Status der Array-LUN mithilfe von ONTAP in _unused_ ändern. Die Array-LUN wird aus Sicht von ONTAP nicht genutzt.
+
+Beim Ändern des Status der Array-LUN in „nicht verwendet“ führt ONTAP Folgendes aus:
+
+* Beendet I/O-Vorgänge für die Array-LUN
+* Entfernt die Bezeichnung für RAID-Konfigurationsinformationen und die dauerhaften Reservierungen von der Array-LUN, wodurch die Array-LUN von jedem ONTAP-System nicht im Besitz ist
+
+
+Nach Abschluss dieses Prozesses verbleiben keine ONTAP-Informationen in der Array-LUN.
+
+Sie können Folgendes tun, nachdem der Status der Array-LUN in „nicht verwendet“ geändert wurde:
+
+* Entfernen Sie die Zuordnung der Array-LUN zu ONTAP, und stellen Sie die Array-LUN anderen Hosts zur Verfügung.
+* Ändern Sie die Größe der Array-LUN oder deren Zusammensetzung.
+
+
+Wenn ONTAP die Verwendung der Array-LUN nach der Änderung ihrer Größe oder Zusammensetzung fortsetzen soll, müssen Sie die Array-LUN erneut ONTAP anzeigen und die Array-LUN erneut einem ONTAP-System zuweisen. ONTAP kennt die neue Array-LUN-Größe oder -Zusammensetzung.

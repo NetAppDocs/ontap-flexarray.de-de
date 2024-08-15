@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_how_emc_vnx_storage_arrays_control_access_to_data.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, array, control, access, data 
+summary: EMC VNX-Array Verwenden Sie Speichergruppen zur Steuerung des Datenzugriffs. Eine Speichergruppe ist eine oder mehrere LUNs innerhalb des Speicherarrays, auf die nur der Host oder die Hosts zugreifen können, die Sie den Array-LUNs zuordnen. Ein Host kann nicht auf Daten in Array-LUNs zugreifen oder diese ändern, die nicht Teil seiner Speichergruppe sind. 
+---
+= Wie das EMC VNX-Speicher-Array den Zugriff auf Daten steuert
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+EMC VNX-Array Verwenden Sie Speichergruppen zur Steuerung des Datenzugriffs. Eine Speichergruppe ist eine oder mehrere LUNs innerhalb des Speicherarrays, auf die nur der Host oder die Hosts zugreifen können, die Sie den Array-LUNs zuordnen. Ein Host kann nicht auf Daten in Array-LUNs zugreifen oder diese ändern, die nicht Teil seiner Speichergruppe sind.
+
+ONTAP unterstützt mehrere Speichergruppen, wenn folgende Regeln befolgt werden:
+
+* Switch-Zoning muss festlegen, welche Zielports die FC-Initiator-Ports auf dem ONTAP-System für den Zugriff auf jede Array-LUN-Gruppe verwenden.
+* Die LUN-Maskierung muss verwendet werden, um den Hostzugriff auf Array-LUNs einzuschränken.
+* Speichergruppen müssen definieren, welche Array-LUN-Gruppen jedem FC-Initiator-Port präsentiert werden.
+* Für jede Array-LUN-Gruppe ist ein FC-Initiator-Port-Paar auf jedem ONTAP-System erforderlich.
+
+
+Wenn Array-LUN-Viertel verwendet werden, müssen sich die V-Series Systeme in derselben Umgebung in derselben Storage-Gruppe befinden.

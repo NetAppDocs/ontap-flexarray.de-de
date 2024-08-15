@@ -1,0 +1,27 @@
+---
+permalink: install/reference_requirements_for_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, zone, configuration, storage, arrays 
+summary: Sie müssen die Zoning-Anforderungen in der ONTAP-Konfiguration mit Speicher-Arrays erfüllen, um sicherzustellen, dass das ONTAP-System auf die richtigen LUNs zugreifen kann. 
+---
+= Anforderungen für das Zoning in einer Konfiguration mit Storage-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die Zoning-Anforderungen in der ONTAP-Konfiguration mit Speicher-Arrays erfüllen, um sicherzustellen, dass das ONTAP-System auf die richtigen LUNs zugreifen kann.
+
+* Die _Interoperabilitätsmatrix_ muss einen Switch und die Switch-Firmware als für die ONTAP-Konfiguration unterstützt identifizieren.
+* Das Zoning muss so konfiguriert werden, dass jeder Initiator-Port auf einen einzelnen Ziel-Port auf jedem Speicher-Array beschränkt wird.
+* Auf dem Switch müssen Ports auf dem ONTAP-System und Ports auf dem Speicher-Array derselben Zone zugewiesen werden.
++
+Dadurch können die ONTAP-Systeme auf die LUNs auf den Speicherarrays zugreifen.
+
+* Wenn Storage Array Ports über heterogene Systeme hinweg gemeinsam genutzt werden, können Array LUNs des ONTAP Systems nicht von anderen Systemen offengelegt werden.
++
+LUN-Sicherheit oder Array-LUN-Maskierung muss verwendet werden, um sicherzustellen, dass die Array-LUNs für ONTAP-Speicher nur für die ONTAP-Systeme sichtbar sind.
+
+* Ein Host-Konfigurationsport darf nicht in derselben Zone wie ein Zielport enthalten sein.
+

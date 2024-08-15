@@ -1,0 +1,32 @@
+---
+permalink: implement-third-party/concept_requirements_for_implementing_lun_security_on_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, implementing, lun, security, emc, symmetrix, storage, arrays 
+summary: Sie verwenden die LUN-Sicherheit, um die Möglichkeit zu eliminieren, dass ein Host Daten auf eine LUN schreibt, die nicht zum Eigentum dieses Hosts gehört. 
+---
+= Anforderungen für die Implementierung der LUN-Sicherheit auf EMC Symmetrix-Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie verwenden die LUN-Sicherheit, um die Möglichkeit zu eliminieren, dass ein Host Daten auf eine LUN schreibt, die nicht zum Eigentum dieses Hosts gehört.
+
+Um das Überschreiben von EMC Symmetrix-Array-LUNs, die einem ONTAP-System gehören, oder umgekehrt zu vermeiden, müssen Sie die logischen Symmetrix-Devices über die Host-(Channel-)Director-Ports auf eine der folgenden Arten bereitstellen:
+
+* Präsentieren Sie nur die logischen Symmetrix-Devices für ONTAP auf spezifischen Symmetrix-Host-(Channel-)Director-Ports, die für die Verwendung mit ONTAP reserviert sind.
++
+Wenn Ports nicht ONTAP zugewiesen werden können, sollten Sie sicherstellen, dass alle anderen Hosts, die diese Ports verwenden, mit den ONTAP-Anforderungen kompatibel sind. Dies liegt daran, dass jeder mit dem Symmetrix-Array verbundene Host verschiedene Port-Attributeinstellungen hat. Die gemeinsame Nutzung von Ports zwischen mehreren Hosts, die mit dem Symmetrix-Speicher-Array verbunden sind, kann zu einer Konfiguration führen, die nicht implementiert werden kann.
+
+* Erstellen Sie für VMAX-Speicher-Arrays Maskierungsansichten für die erforderliche Zuordnung und Maskierung, indem Sie Portgruppen, Speichergruppen und Initiatorgruppen erstellen.
++
+Um dies zu erreichen, müssen Sie zunächst das ACLX-Portattribut auf den VMAX-Speicher-Array-Ports aktivieren.
+
+
+
+[NOTE]
+====
+Präsentieren Sie die VCMDB-LUN nicht standardmäßig allen Hosts. Konfigurieren Sie die globale Einstellung, um die Sichtbarkeit auf die VCMDB einzuschränken, es sei denn, sie wurde speziell für einen bestimmten Host sichtbar gemacht.
+
+====

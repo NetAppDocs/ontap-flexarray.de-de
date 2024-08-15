@@ -1,0 +1,307 @@
+---
+section: install
+title: FlexArray wird installiert
+url: "/install/index.html"
+entries:
+- title: Überblick über die FlexArray Virtualisierungstechnologie – ​using Array LUNs
+    für Storage
+  url: "/install/concept_flexarray_virtualization_technology_overview_using_array_luns_for_storage.html"
+  entries:
+  - title: ONTAP-Systeme, die Array-LUNs auf Storage-Arrays verwenden können
+    url: "/install/concept_systems_that_can_use_array_luns_on_storage_arrays.html"
+  - title: Überlegungen beim Anschließen mehrerer Speicher-Arrays an ein ONTAP-System
+    url: "/install/concept_number_of_storage_arrays_supported_with_a_ontap_system.html"
+  - title: Unterstützte Methoden zum Verbinden eines ONTAP-Systems mit einem Speicherarray
+    url: "/install/concept_supported_methods_for_connecting_a_v_series_system_to_a_storage_array.html"
+  - title: Gemeinsame Nutzung von Speicher-Arrays unter Hosts
+    url: "/install/concept_sharing_storage_arrays_among_hosts.html"
+  - title: Anforderungen für MetroCluster-Konfigurationen mit Array-LUNs
+    url: "/install/concept_support_for_metrocluster_configurations_that_can_use_array_luns.html"
+- title: Zoning in einer Konfiguration mit Speicher-Arrays
+  url: "/install/concept_zoning_for_a_configuration_with_storage_arrays.html"
+  entries:
+  - title: Anforderungen für das Zoning in einer Konfiguration mit Storage-Arrays
+    url: "/install/reference_requirements_for_zoning_in_a_configuration_with_storage_arrays.html"
+  - title: Zoning-Empfehlung für eine Konfiguration mit Storage-Arrays
+    url: "/install/concept_zoning_recommendation_for_a_configuration_with_storage_arrays.html"
+  - title: Beispiel für Zoning in einer Konfiguration mit Speicher-Arrays
+    url: "/install/concept_example_of_zoning_in_a_configuration_with_storage_arrays.html"
+- title: Planen einer Konfiguration mit Array-LUNs
+  url: "/install/concept_planning_a_configuration_with_array_luns.html"
+  entries:
+  - title: Wo finden Sie Informationen für Konfigurationen mit Speicher-Arrays
+    url: "/install/concept_where_to_find_information_for_configurations_with_storage_arrays.html"
+    entries:
+    - title: Grenzwerte für Konfigurationen mit Speicherarrays
+      url: "/install/concept_limits_information_for_a_configuration_with_storage_arrays.html"
+    - title: Hier finden Sie Informationen über ONTAP-Unterstützung für Speicher-Arrays
+      url: "/install/concept_where_to_find_information_about_support_for_storage_arrays.html"
+    - title: Einschränkungen bei der Systemkonfiguration 32xx
+      url: "/install/concept_32xx_configuration_restrictions.html"
+  - title: Implementierungsstufen für ein System unter Verwendung von Array-LUNs
+    url: "/install/concept_stages_of_implementation_for_a_system_using_array_luns.html"
+  - title: Planungsübersicht für ein V-Series System mithilfe nativer Festplatten
+    url: "/install/concept_planning_summary_for_a_v_series_system_using_native_disks.html"
+  - title: Planungsübersicht für ONTAP-Systeme unter Verwendung von Array-LUNs
+    url: "/install/concept_planning_summary_for_a_ontap_system_using_array_luns.html"
+- title: Planen der RAID-Implementierung
+  url: "/install/concept_planning_for_raid_implementation.html"
+  entries:
+  - title: RAID-Sicherung für Array-LUNs
+    url: "/install/concept_raid_protection_for_array_luns.html"
+  - title: Planungsüberlegungen für ONTAP RAID-Gruppen
+    url: "/install/concept_planning_considerations_for_ontap_raid_groups.html"
+- title: Planen der Verwendung von Array-LUNs durch ONTAP
+  url: "/install/concept_planning_for_ontap_use_of_array_luns.html"
+  entries:
+  - title: Wie Array-LUNs für den Host zur Verfügung gestellt werden
+    url: "/install/concept_how_array_luns_are_made_available_for_host_use.html"
+  - title: So werden Array-LUNs zur Verwendung mit ONTAP Storage verfügbar
+    url: "/install/concept_how_array_luns_become_available_for_ontap_storage_use.html"
+    entries:
+    - title: Überlegungen bei der Planung des Festplattenbesitzes
+      url: "/install/concept_considerations_when_planning_for_disk_ownership.html"
+    - title: Änderungen an der Array-LUN-Zuweisung
+      url: "/install/concept_array_lun_assignment_changes.html"
+  - title: Von ONTAP unterstützter Array-LUN-Typ
+    url: "/install/concept_array_lun_types_supported_by_ontap.html"
+  - title: Faktoren, die sich auf die Anzahl und Größe der benötigten Array-LUNs auswirken
+    url: "/install/concept_factors_that_impact_the_number_and_size_of_array_luns_you_need.html"
+    entries:
+    - title: Faktoren, die sich auf die erforderliche Anzahl von Array-LUNs auswirken
+      url: "/install/reference_factors_impacting_the_required_number_of_array_luns.html"
+    - title: Mindestanzahl erforderlicher Array LUNs pro ONTAP System
+      url: "/install/concept_minimum_number_of_array_luns_required_per_ontap_system.html"
+    - title: Ersatz-Array-LUN-Anforderungen für Core Dumps
+      url: "/install/concept_spare_core_array_lun_requirement_for_core_dumps.html"
+    - title: Minimale und maximale unterstützte Array-LUN-Größen für ONTAP Konfigurationen
+      url: "/install/concept_minimum_and_maximum_array_lun_sizes_supported_by_ontap.html"
+    - title: Array-LUN-Größe, die für das Root-Volume erforderlich ist
+      url: "/install/concept_minimum_array_lun_size_for_the_root_volume.html"
+    - title: Elemente, die den nutzbaren Speicherplatz in einer Array-LUN reduzieren
+      url: "/install/concept_elements_that_reduce_the_usable_space_in_an_array_lun.html"
+    - title: Berücksichtigen Sie den Prüfsummentyp bei der Planung der Array-LUN-Größe
+        und -Anzahl
+      url: "/install/concept_considering_checksum_type_when_planning_array_lun_size_and_number.html"
+      entries:
+      - title: Eigenschaften der von ONTAP unterstützten Prüfsummentypen
+        url: "/install/concept_characteristics_of_checksum_types_that_ontap_supports.html"
+      - title: Formeln zur Berechnung der Array-LUN-Größe basierend auf dem Prüfsummentyp
+        url: "/install/concept_formulas_for_calculating_array_lun_size_considering_checksum_type.html"
+  - title: Speicherort des Root-Volumes
+    url: "/install/concept_location_of_the_root_volume.html"
+- title: Planen der LUN-Sicherheit auf den Speicher-Arrays
+  url: "/install/concept_planning_for_lun_security_on_storage_arrays.html"
+  entries:
+  - title: Verfügbare LUN-Sicherheitsmethoden
+    url: "/install/concept_available_lun_security_methods.html"
+- title: Planen von Pfaden zu Array-LUNs
+  url: "/install/concept_planning_for_paths_to_array_luns.html"
+  entries:
+  - title: Anforderungen für das redundante Einrichten von Komponenten in einem Pfad
+    url: "/install/concept_requirement_for_redundant_setup_of_components_in_a_path.html"
+    entries:
+    - title: Wann nach redundanten Pfaden zu Array-LUNs zu suchen ist
+      url: "/install/concept_when_to_check_for_redundant_paths_to_array_luns.html"
+  - title: Erforderliche Anzahl von Pfaden zu einer Array-LUN
+    url: "/install/concept_required_number_of_paths_to_an_array_lun.html"
+    entries:
+    - title: Vorteile von vier Pfaden zu einer Array-LUN
+      url: "/install/concept_advantages_of_four_paths_to_an_array_lun_clustered_data_ontap_8_1_and_later.html"
+    - title: Zur Lastverteilung können mehrere Pfade zu einer Array-LUN verwendet
+        werden
+      url: "/install/concept_multiple_paths_to_an_array_lun_can_be_used_to_distribute_load.html"
+  - title: Vorteile durch die Verwendung mehrerer LUN-Gruppen
+    url: "/install/concept_using_lun_groups_to_partition_the_load_over_v_series_connections.html"
+    entries:
+    - title: Implementierungsanforderungen für eine Konfiguration mit mehreren LUN-Gruppen
+      url: "/install/concept_implementation_requirements_for_a_multiple_lun_group_configuration.html"
+    - title: Beispiel einer Konfiguration mit mehreren LUN-Gruppen
+      url: "/install/concept_example_of_a_configuration_with_multiple_lun_groups.html"
+  - title: Format für Array-LUN-Namen
+    url: "/install/concept_array_lun_name_format.html"
+  - title: Format für LUN-Namen vor dem Cluster
+    url: "/install/concept_pre_cluster_array_lun_name_format.html"
+  - title: Wie der Array-LUN-Name in ONTAP angezeigt wird
+    url: "/install/concept_how_the_array_lun_name_is_displayed_in_ontap.html"
+  - title: 'Gültiges Pathing: Eigenständiges System mit einer einzelnen Array-LUN-Gruppe
+      mit 2 Ports'
+    url: "/install/concept_valid_pathing_standalone_system_with_a_single_2_port_array_lun_group.html"
+  - title: 'Gültiges Pathing: Eine Array-LUN-Gruppe mit 4 Ports in einer Fabric-Attached-Konfiguration'
+    url: "/install/concept_valid_pathing_a_single_4_port_array_lun_group_in_a_fabric_attached_configuration.html"
+  - title: 'Gültiges Pathing: Konfiguration der Array-LUN-Gruppe mit acht Ports'
+    url: "/install/concept_valid_pathing_eight_port_array_lun_group_configuration.html"
+- title: Planung eines Anschlussschemas zwischen Port und Port
+  url: "/install/concept_planning_a_port_to_port_connectivity_scheme.html"
+  entries:
+  - title: Anforderungen für die Verwendung von FC-Initiator-Ports
+    url: "/install/concept_requirements_for_v_series_fc_initiator_port_usage.html"
+  - title: Wie FC-Initiator-Ports gekennzeichnet werden
+    url: "/install/concept_how_fc_initiator_ports_are_labeled.html"
+  - title: Konfigurieren von FC-Ports als Initiatoren
+    url: "/install/task_configuring_fc_ports_as_initiators_clustered_data_ontap.html"
+  - title: Regeln für die gemeinsame Nutzung eines FC-Initiator-Ports mit mehreren
+      Ziel-Ports
+    url: "/install/concept_rules_for_sharing_an_fc_initiator_port_with_multiple_target_ports.html"
+  - title: 'Beispielkonfiguration: Gemeinsame FC-Initiator-Ports'
+    url: "/install/concept_example_configuration_shared_fc_initiator_ports.html"
+  - title: Regeln für die gemeinsame Nutzung eines Ziel-Ports mit mehreren FC-Initiator-Ports
+    url: "/install/concept_rules_for_sharing_a_target_port_with_multiple_fc_initiator_ports.html"
+  - title: 'Beispielkonfiguration: Gemeinsame Zielports'
+    url: "/install/concept_example_configuration_shared_target_ports.html"
+  - title: Überprüfen der Anzahl der Array-LUNs, die auf einem FC-Initiator-Port sichtbar
+      sind
+    url: "/install/task_checking_the_number_of_array_luns_visible_on_an_fc_initiator_port.html"
+  - title: Anforderungen für die Verbindung mit Speicher-Arrays
+    url: "/install/concept_requirements_for_connecting_to_storage_arrays.html"
+  - title: Richtlinien zur Verbindung eines V-Series Systems mit nativen Platten-Shelves
+    url: "/install/concept_guidelines_for_connecting_a_v_series_system_to_native_disk_shelves.html"
+  - title: Für die Verbindung mit nativen Festplatten sind FC-Initiator-Ports erforderlich
+    url: "/install/reference_fc_initiator_ports_required_for_connection_with_disks.html"
+  - title: Beispiel für die nicht optimierte Nutzung eines Zielports des Speicherarrays
+    url: "/install/concept_example_of_non_optimized_usage_of_a_storage_array_target_port.html"
+- title: Ermitteln der Array-LUNs für spezifische Aggregate
+  url: "/install/concept_determining_the_array_luns_for_specific_aggregates.html"
+  entries:
+  - title: Regeln für die Kombination von Storage in Array-LUN-Aggregaten
+    url: "/install/concept_rules_for_mixing_storage_in_aggregates_for_v_series_systems.html"
+  - title: Wie der Prüfsummentyp auf Zonenebene für Array-LUN-Aggregate ermittelt
+      wird
+    url: "/install/concept_how_the_checksum_type_is_determined_for_aggregates_with_array_luns.html"
+  - title: Überlegungen zum Prüfsummentyp beim Hinzufügen von Ersatz-Array-LUNs zu
+      Aggregaten
+    url: "/install/concept_considerations_for_checking_the_checksum_type_of_spare_array_luns.html"
+  - title: Aggregieren Sie Regeln, wenn die Speicher-Arrays aus der gleichen Familie
+      stammen
+    url: "/install/concept_aggregate_rules_when_the_storage_arrays_are_from_the_same_family.html"
+  - title: Aggregieren Sie Regeln, wenn die Storage-Arrays von verschiedenen Anbietern
+      oder Familien stammen
+    url: "/install/concept_aggregate_rules_when_the_storage_arrays_are_from_different_vendor_or_family.html"
+- title: Vorbereiten eines Speicher-Arrays für die Verwendung mit ONTAP-Systemen
+  url: "/install/task_preparing_a_storage_array_for_use_with_ontap_systems.html"
+- title: Verbinden eines ONTAP-Systems mit einem Speicher-Array
+  url: "/install/task_connecting_an_ontap_system_to_a_storage_array.html"
+- title: Einrichten der Schalter
+  url: "/install/task_setting_up_the_switches.html"
+- title: Die LUN-Sicherheit wird konfiguriert
+  url: "/install/task_configuring_lun_security.html"
+- title: Einrichten von ONTAP für die Verwendung mit Array-LUNs
+  url: "/install/concept_overview_of_setting_up_ontap_to_work_with_array_luns.html"
+  entries:
+  - title: Konfigurieren von ONTAP auf einem System, das nur Array-LUNs verwendet
+    url: "/install/task_configuring_ontap_on_a_system_that_uses_only_array_luns.html"
+  - title: Installieren der Lizenz für die Verwendung von Array-LUNs
+    url: "/install/task_installing_the_license_for_using_array_luns.html"
+  - title: Eigentümerschaft von Array LUNs wird zugewiesen
+    url: "/install/task_assigning_ownership_of_array_luns.html"
+- title: Befehle zum Prüfen der Back-End-Konfiguration
+  url: "/install/reference_commands_for_checking_back_end_configuration.html"
+  entries:
+  - title: Back-End-Konfigurationsfehler durch ONTAP-Befehle erkannt
+    url: "/install/concept_back_end_configuration_errors_detected_by_ontap_commands.html"
+  - title: Situationen, die nicht durch Befehle identifiziert werden, die die Back-End-Konfiguration
+      überprüfen
+    url: "/install/concept_situations_not_identified_by_commands_that_check_back_end_configuration.html"
+- title: Überprüfen der Installation mit Speicher-Arrays
+  url: "/install/concept_verifying_an_installation_with_storage_arrays.html"
+  entries:
+  - title: Prüfen auf Back-End-Konfigurationsfehler, die den Systembetrieb verhindern
+    url: "/install/task_checking_for_back_end_configuration_errors_preventing_system_operation.html"
+    entries:
+    - title: Die Speicherfehler zeigen Meldungen und deren Auflösung an
+      url: "/install/reference_the_storage_errors_show_messages_and_their_resolution.html"
+    - title: Die Array-LUN-Größe ist entweder kleiner oder größer als die unterstützten
+        Werte
+      url: "/install/reference_array_lun_is_either_smaller_or_larger_than_the_supported_values.html"
+    - title: Die LUN-IDs für dasselbe LDEV stimmen nicht überein
+      url: "/install/reference_lun_ids_for_the_same_ldev_do_not_match.html"
+    - title: Die Adressierung des Volume-Satzes ist inkonsistent
+      url: "/install/reference_volume_set_addressing_is_inconsistent.html"
+    - title: Doppelte LUN-IDs an einem Zielport
+      url: "/install/reference_duplicate_lun_ids_on_a_target_port.html"
+    - title: Weniger als zwei Pfade zu einer Array-LUN
+      url: "/install/reference_fewer_than_two_paths_to_an_array_lun.html"
+    - title: Eine LUN zur Zugriffssteuerung wird ONTAP angezeigt
+      url: "/install/reference_an_access_control_lun_is_presented_to_ontap.html"
+    - title: Alle Pfade zu einer Array-LUN befinden sich auf demselben Storage Array
+        Controller
+      url: "/install/reference_all_paths_to_an_array_lun_are_on_the_same_storage_array_controller.html"
+    - title: Array-LUNs werden mit widersprüchlichen Failover-Modi konfiguriert
+      url: "/install/reference_array_luns_are_configured_with_conflicting_failover_modes_clustered_data_ontap_8_2_and_later.html"
+    - title: Array-LUN ist als fremd markiert und hat eine Reservierung
+      url: "/install/reference_array_lun_is_marked_foreign_and_has_a_reservation_data_ontap_8_3_and_later.html"
+  - title: Überprüfen, ob die Back-End-Konfiguration mit der beabsichtigten Konfiguration
+      übereinstimmt
+    url: "/install/task_verifying_if_the_back_end_configuration_matches_the_expected_output.html"
+    entries:
+    - title: Gründe für keine LUNs in der Array-LUN-Gruppe
+      url: "/install/reference_reasons_for_no_luns_in_the_array_lun_group.html"
+    - title: Gründe für weniger Array-LUN-Gruppen als erwartet
+      url: "/install/reference_reasons_for_fewer_array_lun_groups_than_expected.html"
+    - title: Gründe für mehr Array-LUN-Gruppen als erwartet
+      url: "/install/reference_reasons_for_more_array_lun_groups_than_expected.html"
+    - title: Gründe für mehr Pfade zu einer Array-LUN als erwartet
+      url: "/install/reference_reasons_for_more_paths_to_an_array_lun_than_expected.html"
+    - title: Gründe für die falsche Anzahl von LUNs in Array-LUN-Gruppen
+      url: "/install/reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.html"
+    - title: Gründe, warum Speicher-Arrays in der Befehlsausgabe fehlen
+      url: "/install/reference_reasons_storage_arrays_are_missing_from_command_output.html"
+- title: Management von Array-LUNs mithilfe von ONTAP
+  url: "/install/concept_managing_array_luns_using_data_ontap.html"
+  entries:
+  - title: Ändern der Zuweisung von Ersatz-Array-LUNs
+    url: "/install/task_modifying_assignment_of_spare_array_luns.html"
+  - title: Prüfen des Prüfsummentyps der Spare Array-LUNs
+    url: "/install/task_checking_the_checksum_type_of_spare_array_luns.html"
+  - title: Ändern des Prüfsummentyps einer Array-LUN
+    url: "/install/task_changing_the_checksum_type_of_an_array_lun.html"
+  - title: Voraussetzungen für die Neukonfiguration einer Array-LUN auf dem Speicher-Array
+    url: "/install/concept_prerequisites_to_reconfiguring_an_array_lun_on_the_storage_array.html"
+  - title: Ändern der Array-LUN-Größe oder -Zusammensetzung
+    url: "/install/task_changing_array_lun_size_or_composition.html"
+  - title: Entfernen einer Array-LUN aus der Verwendung durch ONTAP
+    url: "/install/task_removing_one_array_lun_from_use_by_data_ontap.html"
+  - title: Vorbereiten von Array-LUNs vor dem Entfernen eines ONTAP-Systems aus dem
+      Dienst
+    url: "/install/task_preparing_array_luns_before_removing_a_v_series_system_from_service.html"
+- title: Fehlerbehebung bei Konfigurationen mit Speicher-Arrays
+  url: "/install/concept_troubleshooting.html"
+  entries:
+  - title: Erste Schritte mit der Fehlerbehebung bei einer ONTAP-Konfiguration mit
+      Array-LUNs
+    url: "/install/task_getting_started_with_troubleshooting.html"
+  - title: Ungültige Beispiele für Pfadeinstellungen
+    url: "/install/concept_invalid_path_setup_examples.html"
+    entries:
+    - title: 'Ungültiges Pfad-Setup: Alternative Pfade sind nicht konfiguriert'
+      url: "/install/concept_invalid_path_setup_alternate_paths_are_not_configured.html"
+  - title: Was passiert, wenn eine Verbindung ausfällt
+    url: "/install/concept_what_happens_when_a_link_failure_occurs.html"
+  - title: Beziehung zwischen Zoning und Host-Gruppen-Konfiguration
+    url: "/install/reference_relationship_between_zoning_and_host_group_configuration.html"
+    entries:
+    - title: Abhängigkeit zwischen Zonen- und Hostgruppendefinitionen
+      url: "/install/concept_dependency_between_zone_and_host_group_definitions.html"
+    - title: Beispiel für Konfigurationsfehler bei kaskadierendem Zoning und Host-Gruppe
+      url: "/install/concept_example_of_cascading_zoning_and_host_group_configuration_errors.html"
+- title: Zusätzliche Aufgaben nach dem Installieren und Testen einer ONTAP-Konfiguration
+    mit Array-LUNs
+  url: "/install/concept_additional_tasks_after_installing_and_testing_a_ontap_configuration_with_array_luns.html"
+- title: Manuelles Abrufen von WWPNs
+  url: "/install/task_obtaining_wwns_manually.html"
+- title: Anpassung der Warteschlangentiefe
+  url: "/install/concept_target_queue_depth_customization.html"
+  entries:
+  - title: Richtlinien für die Angabe der entsprechenden Warteschlangentiefe für das
+      Ziel
+    url: "/install/concept_guidelines_for_specifying_the_appropriate_target_queue_depth.html"
+  - title: Festlegen der Zielwarteschlangentiefe (ONTAP vor 8.2)
+    url: "/install/task_setting_the_target_queue_depth_clustered_data_ontap_prior_to_8_2.html"
+  - title: Festlegen der Zielwarteschlangentiefe
+    url: "/install/task_setting_the_target_queue_depth_clustered_data_ontap_8_2_and_later.html"
+  - title: Anzeigen von Statistiken zur Warteschlangentiefe des Ziels
+    url: "/install/task_displaying_target_port_queue_depth_statistics_clustered_data_ontap_8_2_and_later.html"
+  - title: Richtlinieneinstellungen für die Auslastung des Zielports
+    url: "/install/concept_target_port_utilization_policy_settings.html"
+- title: Terminologievergleich zwischen Anbietern von Storage-Arrays
+  url: "/install/reference_terminology_comparison_between_storage_array_vendors.html"

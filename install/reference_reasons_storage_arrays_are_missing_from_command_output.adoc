@@ -1,0 +1,28 @@
+---
+permalink: install/reference_reasons_storage_arrays_are_missing_from_command_output.html 
+sidebar: sidebar 
+keywords: reasons, storage, arrays, miss, command, output 
+summary: Ein Speicher-Array, das nicht mit dem ONTAP-System verbunden ist, wird nicht in der Ausgabe der Speicher-Array-Konfiguration angezeigt. Probleme bei Verkabelung, Zoning und Konfiguration von Hostgruppen können eine Verbindung zwischen den beiden Geräten verhindern. 
+---
+= Gründe, warum Speicher-Arrays in der Befehlsausgabe fehlen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ein Speicher-Array, das nicht mit dem ONTAP-System verbunden ist, wird in der Ausgabe nicht angezeigt `storage array config show` . Probleme bei Verkabelung, Zoning und Konfiguration von Hostgruppen können eine Verbindung zwischen den beiden Geräten verhindern.
+
+
+
+== Lösung des Problems
+
+. Überprüfen Sie die Verkabelung, die Konfiguration der Host-Gruppen und das Zoning wie folgt:
++
+** Überprüfen Sie, ob die Kabel angeschlossen sind.
+** Überprüfen Sie, ob die WWPNs für die FC-Initiatoren auf den ONTAP-Systemen in der Host-Gruppe vorhanden sind.
+** Überprüfen Sie, ob sich das Speicher-Array und der FC-Initiator in derselben Zone befinden.
+
+
+. Nachdem das Problem behoben ist, führen Sie in ONTAP aus `storage array config show` , um zu bestätigen, dass das Problem behoben wurde.
+

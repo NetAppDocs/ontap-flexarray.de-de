@@ -1,0 +1,86 @@
+---
+permalink: install/concept_example_of_a_configuration_with_multiple_lun_groups.html 
+sidebar: sidebar 
+keywords: example, configuration, multiple, lun, groups 
+summary: Sie können eine Konfiguration mit mehreren LUN-Gruppen verwenden, um die Systemperformance zu verbessern, indem Sie den Workload auf mehrere Ziel-Ports verteilen. 
+---
+= Beispiel einer Konfiguration mit mehreren LUN-Gruppen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können eine Konfiguration mit mehreren LUN-Gruppen verwenden, um die Systemperformance zu verbessern, indem Sie den Workload auf mehrere Ziel-Ports verteilen.
+
+Eine Konfiguration mehrerer LUN-Gruppen wird für die meisten Speicher-Arrays unterstützt. Überprüfen Sie anhand der _Interoperabilitätsmatrix_, ob diese Konfiguration mit Ihrem Speicher-Array unterstützt wird.
+
+In der folgenden Abbildung wird gezeigt, wie ein FC-Initiator-Port-Paar (0c und 0f) auf einem ONTAP-System über ein Storage Array-Port-Paar auf eine LUN-Gruppe zugreift, und ein zweites FC-Initiator-Port-Paar (0a und 0h) greift über ein anderes Storage-Array-Port-Paar auf eine zweite LUN-Gruppe im selben Storage-Array zu.
+
+Diese Konfiguration wird als _Standalone mit zwei Array-LUN-Gruppen mit 2 Ports_ bezeichnet. Bei einer Konfiguration mehrerer LUN-Gruppen kann es sich um ein HA-Paar statt um ein eigenständiges System handelt.
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Diese Grafik wird durch den umgebenden Text beschrieben.]
+
+Diese Konfiguration mehrerer LUN-Gruppen ermöglicht es Ihnen, die I/O-Vorgänge auf die RAID-Gruppen (Paritätsgruppen) auf dem Speicher-Array zu verteilen. Richten Sie Ihre Konfiguration so ein, dass verschiedene FC-Initiator-Port-Paare auf verschiedene Gruppen von LUNs im Storage Array zugreifen. Das ONTAP-System erkennt eine beliebige Array-LUN nur über zwei Pfade, da ein bestimmtes LDEV (logisches Gerät) nur zwei redundanten Ports auf dem Speicher-Array zugeordnet ist. Auf jede LUN-Gruppe wird über ein anderes Ziel-Port-Paar zugegriffen.
+
+Jede LDEV wird extern durch eine LUN-ID identifiziert. Das LDEV muss auf allen Speicher-Array-Ports, über die es für ONTAP-Systeme sichtbar ist, derselben LUN-ID zugeordnet sein.
+
+[NOTE]
+====
+Dieselbe LUN-ID kann sich nicht auf zwei verschiedene LDEVs beziehen, selbst wenn sich die LUNs mit derselben ID in verschiedenen Host-Gruppen auf einem Zielport befinden. Obwohl die Wiederverwendung der LUN-ID auf demselben Zielport nicht unterstützt wird, wird die Wiederverwendung der LUN-ID auf einem Speicherarray unterstützt, wenn die LUNs unterschiedlichen Speicherarray-Ports zugeordnet sind.
+
+====
+Die folgende Tabelle fasst das Zoning für dieses Beispiel zusammen. Das Einzel-Initiator-Zoning wird als Zoning-Strategie empfohlen.
+
+|===
+| Zone | FC-Initiator-Port auf dem ONTAP-System | Storage Array erledigen 
+
+
+ a| 
+Schalter 1
+
+
+
+ a| 
+z1
+ a| 
+Port 0a
+ a| 
+Controller 1, Port B
+
+
+
+ a| 
+z2
+ a| 
+Anschluss 0c
+ a| 
+Controller 1 Port A
+
+
+
+ a| 
+Schalter 2
+
+
+
+ a| 
+z3
+ a| 
+Anschluss 0f
+ a| 
+Controller 2, Port A
+
+
+
+ a| 
+z4
+ a| 
+Anschluss 0h
+ a| 
+Controller 2, Port B
+
+|===
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

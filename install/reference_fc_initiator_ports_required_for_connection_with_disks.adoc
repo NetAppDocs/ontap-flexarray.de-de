@@ -1,0 +1,38 @@
+---
+permalink: install/reference_fc_initiator_ports_required_for_connection_with_disks.html 
+sidebar: sidebar 
+keywords: fc initiator, ports, required, connection, native, disks 
+summary: Sie müssen ein V-Series-System über die FC Initiator-Ports mit nativen Platten-Shelves verbinden. Die Anzahl der für die Verbindung erforderlichen Initiator-Ports hängt davon ab, ob das V-Series System ein Standalone-System oder ein HA-Paar ist. 
+---
+= Für die Verbindung mit nativen Festplatten sind FC-Initiator-Ports erforderlich
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen ein V-Series-System über die FC Initiator-Ports mit nativen Platten-Shelves verbinden. Die Anzahl der für die Verbindung erforderlichen Initiator-Ports hängt davon ab, ob das V-Series System ein Standalone-System oder ein HA-Paar ist.
+
+In der folgenden Tabelle ist die je nach Systemkonfiguration erforderliche Anzahl von FC-Initiator-Ports zum Anschließen eines V-Series Systems an native Festplatten-Shelfs aufgeführt:
+
+|===
+| Konfiguration | Anzahl der FC-Initiator-Ports 
+
+
+ a| 
+Eigenständiges System
+ a| 
+* Wenn Sie eine Schleife verwenden, einen FC-Initiator-Port
+* Wenn Sie zwei Loops verbinden, zwei FC-Initiator-Ports: Einen für jede Schleife
+
+
+
+
+ a| 
+HA-Paar
+ a| 
+* Wenn Sie Multipath Storage verwenden, haben Sie zwei FC Initiator Ports für jede Schleife
+* Wenn Sie Multipath Storage nicht verwenden, muss für jeden Loop in der Konfiguration ein FC-Initiator-Port pro Controller verwendet werden
+
+
+|===

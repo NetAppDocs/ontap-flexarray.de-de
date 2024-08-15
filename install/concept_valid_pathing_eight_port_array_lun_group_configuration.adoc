@@ -1,0 +1,222 @@
+---
+permalink: install/concept_valid_pathing_eight_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: valid, path, eight-port, array, lun, group, configuration, variation, back-end, connections, crossed, fc initiator, maximum 
+summary: Sie können eine LUN-Gruppenkonfiguration mit acht Ports verwenden, um Storage-Arrays in großen Cluster-Umgebungen mit ONTAP-Systemen zu verbinden, die eine höhere Pfadredundanz und einen größeren Lastausgleich erfordern als mit weniger Ports pro LUN-Gruppe. 
+---
+= Gültiges Pathing: Konfiguration der Array-LUN-Gruppe mit acht Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können eine LUN-Gruppenkonfiguration mit acht Ports verwenden, um Storage-Arrays in großen Cluster-Umgebungen mit ONTAP-Systemen zu verbinden, die eine höhere Pfadredundanz und einen größeren Lastausgleich erfordern als mit weniger Ports pro LUN-Gruppe.
+
+Sie können diese Konfiguration mit gekreuzten oder nicht angekreuzten Back-End-Verbindungen einrichten.
+
+
+
+== Variation, bei der Back-End-Verbindungen gekreuzt werden
+
+In einer Konfiguration mit überkreuzten Back-End-Verbindungen werden die FC-Verbindungen vom selben Storage-Array-Controller zu beiden Fabric Switches (redundant) geschaltet.
+
+Dieses Verbindungsschema nutzt sowohl Switch-Ports als auch Storage-Array-Ports besser als bei nicht gekreuzten Back-End-Verbindungen, wodurch die Auswirkungen eines Switch- oder Storage-Array-Controller-Ausfalls reduziert werden.
+
+Bei Storage Arrays mit nur zwei Controllern ist eine durchgestrichene LUN-Gruppenkonfiguration mit acht Ports vorzuziehen. Eine nicht durchgestrichene Array-LUN-Gruppenkonfiguration mit acht Ports ist jedoch vorzuziehen.
+
+Die Array-LUN-Gruppe mit acht Ports kann nur dann durchquert werden, wenn von jedem Node dedizierte Pfade vorhanden sind (ein FC-Initiator-zu-einem-Ziel-Port-Zoning pro Pfad).
+
+image::../media/eight_port_array_lun_group_configuration_crossed.gif[Konfiguration der Array-lun-Gruppe mit acht Ports überschritten]
+
+In dieser Abbildung über gekreuzte Back-End-Verbindungen ist zu beachten, wie die ONTAP Systeme mit den Switches und dem Storage-Array verbunden sind. VS1 verwendet Switch 1 beim Anschluss an das Speicher-Array Controller 1-Port 1A und Controller 2-Port 2C und verwendet Switch 2 beim Anschluss an Speicher-Array Controller 2-Ports 2A und Controller 1-Port 1C.
+
+Die folgende Tabelle fasst das Zoning für eine Array-LUN-Gruppe mit acht Ports und gekreuzten Back-End-Verbindungen zusammen. Das Einzel-Initiator-Zoning wird als Zoning-Strategie empfohlen.
+
+|===
+| Zone | FC-Initiator-Port auf dem ONTAP-System | Storage Array erledigen 
+
+
+ a| 
+Schalter 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, Port 0a
+ a| 
+Controller 1, Port 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, Port 0a
+ a| 
+Controller 1, Port 1B
+
+
+
+ a| 
+z3
+ a| 
+vs1, Port 0b
+ a| 
+Controller 2, Port 2C
+
+
+
+ a| 
+z4
+ a| 
+vs2, Port 0b
+ a| 
+Controller 2, Port 2D
+
+
+
+ a| 
+Schalter 2
+
+
+
+ a| 
+z5
+ a| 
+vs1, Port 0c
+ a| 
+Controller 2, Port 2A
+
+
+
+ a| 
+z6
+ a| 
+vs2, Port 0c
+ a| 
+Controller 2, Port 2B
+
+
+
+ a| 
+z7
+ a| 
+vs1, Port 0d
+ a| 
+Controller 1, Port 1C
+
+
+
+ a| 
+z8
+ a| 
+vs2, Port 0d
+ a| 
+Controller 1, Port 1D
+
+|===
+
+
+== Variation, bei der Back-End-Verbindungen _nicht_ gekreuzt werden
+
+In einer Konfiguration, bei der die Back-End-Verbindungen nicht überschritten werden, gehen die FC-Verbindungen vom selben Storage Array Controller nur zu einem Fabric Switch.
+
+Die folgende Abbildung zeigt das Pathing in einer Konfiguration mit einer Array-LUN-Gruppe mit acht Ports, in der die Back-End-Verbindungen nicht überschritten werden:
+
+image::../media/eight_port_array_lun_group_configuration.gif[Konfiguration von Array lun-Gruppen mit acht Ports]
+
+Die folgende Tabelle fasst das Zoning für eine Array-LUN-Gruppe mit acht Ports zusammen, wenn die Back-End-Verbindungen nicht überschritten werden. Das Einzel-Initiator-Zoning wird als Zoning-Strategie empfohlen.
+
+|===
+| Zone | FC-Initiator-Port auf dem ONTAP-System | Storage Array erledigen 
+
+
+ a| 
+Schalter 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, Port 0a
+ a| 
+Controller 1, Port 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, Port 0a
+ a| 
+Controller 1, Port 1B
+
+
+
+ a| 
+z3
+ a| 
+vs1, Port 0b
+ a| 
+Controller 1, Port 1C
+
+
+
+ a| 
+z4
+ a| 
+vs2, Port 0b
+ a| 
+Controller 1, Port 1D
+
+
+
+ a| 
+Schalter 2
+
+
+
+ a| 
+z5
+ a| 
+vs1, Port 0c
+ a| 
+Controller 2, Port 2A
+
+
+
+ a| 
+z6
+ a| 
+vs2, Port 0c
+ a| 
+Controller 2, Port 2B
+
+
+
+ a| 
+z7
+ a| 
+vs1, Port 0d
+ a| 
+Controller 2, Port 2C
+
+
+
+ a| 
+z8
+ a| 
+vs2, Port 0d
+ a| 
+Controller 2, Port 2D
+
+|===
+
+
+== Überlegungen zur maximalen Anzahl von Array-LUNs pro FC-Initiator
+
+Wenn Sie eine Konfiguration mit einer Array-LUN-Gruppe mit acht Ports einrichten, können Sie die Anzahl der Array-LUNs, die ONTAP pro FC-Initiator-Port unterstützt, nicht überschreiten.

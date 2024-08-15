@@ -1,0 +1,28 @@
+---
+permalink: install/concept_elements_that_reduce_the_usable_space_in_an_array_lun.html 
+sidebar: sidebar 
+keywords: elements, reduce, usable, space, array, lun 
+summary: Mehrere Faktoren wirken sich auf den nutzbaren Speicherplatz in einer Array-LUN aus. Wenn Sie die erforderliche Anzahl und Größe der Array-LUNs planen, müssen Sie den nutzbaren Speicherplatz in der Array-LUN entsprechend dem verwendeten Prüfsummen-Typ und den Elementen, die Sie möglicherweise konfigurieren, berücksichtigen. 
+---
+= Elemente, die den nutzbaren Speicherplatz in einer Array-LUN reduzieren
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mehrere Faktoren wirken sich auf den nutzbaren Speicherplatz in einer Array-LUN aus. Wenn Sie die erforderliche Anzahl und Größe der Array-LUNs planen, müssen Sie den nutzbaren Speicherplatz in der Array-LUN entsprechend dem verwendeten Prüfsummen-Typ und den Elementen, die Sie möglicherweise konfigurieren, berücksichtigen.
+
+Bei der Berechnung des nutzbaren Speicherplatzes in einer Array-LUN müssen Sie die folgenden Faktoren berücksichtigen, die den nutzbaren Speicherplatz der LUN verringern:
+
+* Speicherplatz, der von ONTAP reserviert ist
+* Platz für Core Dump
+* Snapshot Reserve auf Volume-Ebene
+* Snapshot Kopie auf Aggregatebene
+* Prüfsummentyp (Sie weisen einen Typ zu):
++
+** Blockprüfsumme (BCS)
+** Erweiterte Prüfsummen (AZCS)
+
+
+

@@ -1,0 +1,58 @@
+---
+permalink: install/reference_reasons_for_no_luns_in_the_array_lun_group.html 
+sidebar: sidebar 
+keywords: reasons, luns, array, group, host, ontap, operation, empty 
+summary: Wenn Sie die Back-End-Konfiguration validieren, sollten Sie die Ausgabe der Speicher-Array-Konfiguration prüfen, um festzustellen, ob LUNs in den LUN-Gruppen angezeigt werden. Wenn die Ausgabe der Speicher-Array-Konfiguration keine LUNs in einer Array-LUN-Gruppe anzeigt, kann ONTAP den Ziel-Port auf der Fabric sehen, aber der Ziel-Port stellt keine Array-LUNs an ONTAP bereit. 
+---
+= Gründe für keine LUNs in der Array-LUN-Gruppe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie die Back-End-Konfiguration validieren, sollten Sie die Ausgabe prüfen `storage array config show` , um festzustellen, ob LUNs in den LUN-Gruppen angezeigt werden. Wenn in der `storage array config show` Ausgabe keine LUNs in einer Array-LUN-Gruppe angezeigt werden, kann ONTAP den Ziel-Port auf der Fabric sehen, aber der Ziel-Port stellt ONTAP keine Array-LUNs bereit.
+
+Es gibt verschiedene Gründe, warum ein Zielport ONTAP möglicherweise keine Array-LUNs zur Verfügung stellt (ein _open Ziel-Port_). Die Gründe für einen offenen Zielport können zwischen verschiedenen Speicherarrays variieren. Darüber hinaus unterscheiden sich die Methoden zur Behandlung von Problemen mit offenen Zielports bei Speicherarrays. Bei allen Speicher-Arrays sollte die Fehlerbehebung für die Ursache eines offenen Ziel-Ports die Überprüfung der Speicher-Array-Konfiguration einschließlich der Host-Gruppen-Konfiguration umfassen.
+
+Die Ursache könnte zum Beispiel eine _empty Host Group_ sein, die sich ONTAP als Open Target Port darstellt. Bei einer leeren Host-Gruppe definiert die Host-Gruppe den FC-Initiator und die Ziel-Ports, führt jedoch keine Array-LUNs auf (d. h. die Host-Gruppe ist leer).
+
+[NOTE]
+====
+Der Betrieb der ONTAP-Systeme wird nicht durch eine leere Host-Gruppe beeinträchtigt.
+
+====
+Die folgende Abbildung zeigt eine offene Port-Zielport-Situation und eine leere Host-Gruppe. (Aus Vereinfachen wird in der Abbildung ein eigenständiges ONTAP-System verwendet.)
+
+Der offene Zielport wird durch fehlende LUN-IDs in der Hostgruppendefinition für Speicher-Controller 1A verursacht. In der Definition der Host-Gruppe für Storage Controller 1A ist der FC-Initiator 0b auf den Ziel-Port begrenzt, und es ist eine Host-Gruppe für FC-Initiator-Port 0b definiert, aber es gibt keine LUN-IDs in der Host-Gruppe. Wie in der Abbildung gezeigt, umfasst die Hostgruppendefinition für Storage Controller 2A sowohl Initiatoren als auch LUNs.
+
+Die leere Host-Gruppe wird dadurch verursacht, dass Array-LUNs nicht in der Hostgruppendefinition für Speicher-Controller 1B und 2B aufgeführt werden. Die FC-Initiatoren 0a und 0d sind in die Ziel-Ports Zonen unterteilt, es werden jedoch keine LUNs angezeigt.
+
+image::../media/ldevs_missing_from_host_group.gif[ldevs fehlen in Host-Gruppe]
+
+Das folgende Beispiel zeigt die `storage array config show` Ausgabe für die dargestellten Situationen, in denen das ONTAP-System auf das Speicher-Array begrenzt ist, aber keine LUNs in den Host-Gruppen-Definitionen für den Speicher-Controller 1A vorhanden sind, was zu einem offenen Ziel-Port führt. Die Controller 1B und 2B haben keine LUNs in ihren jeweiligen Host-Gruppen-Definitionen, was zu einer leeren Host-Gruppe führt.
+
+In der Ausgabe für die dargestellten Situationen werden für die FC-Initiatoren 0a, 0b und 0d im Feld „LUN-Anzahl“ keine LUNs angezeigt. Für den FC-Initiator 0c werden in der LUN-Gruppe 1 zwei LUNs angezeigt.
+
+[listing]
+----
+cluster-1::> storage array config show
+          LUN   LUN
+Node      Group Count  Array Name       Array Target Port   Initiator
+--------- ----- -----  ------------     ------------------- ---------
+vs1
+           0     2     EMC_SYMMETRIX_1  50060480000001b0       0c
+
+           1     0     EMC_SYMMETRIX_1  50060480000001a0       0b
+
+           2     0     EMC_SYMMETRIX_1  50060480000001b1       0a
+
+                 0     EMC_SYMMETRIX_1  50060480000001a1       0d
+
+4 entries were displayed.
+----
+[NOTE]
+====
+Von der Ausgabe aus können Sie bestimmen, dass das Problem nicht auf fehlende FC-Initiatoren in der Host-Gruppe zurückzuführen ist. Wenn die FC-Initiatoren in der Host-Gruppe fehlen, kann ONTAP die LUN-Gruppen nicht sehen, die keine LUNs haben.
+
+====

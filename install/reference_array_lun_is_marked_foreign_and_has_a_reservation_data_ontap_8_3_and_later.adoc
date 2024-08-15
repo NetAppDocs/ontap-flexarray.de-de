@@ -1,0 +1,60 @@
+---
+permalink: install/reference_array_lun_is_marked_foreign_and_has_a_reservation_data_ontap_8_3_and_later.html 
+sidebar: sidebar 
+keywords: array, lun, marked, foreign, reservation, show, message, troubleshoot, resolution, problem 
+summary: Sie können Daten, die auf Array-LUNs gehostet werden, in ihrem nativen Format in ONTAP importieren. Der Prozess des Imports des Inhalts einer solchen Array-LUN, die als fremd markiert ist, kann beeinträchtigt werden, wenn die Array-LUN während des Imports über externe Hostreservierungen verfügt. 
+---
+= Array-LUN ist als fremd markiert und hat eine Reservierung
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Daten, die auf Array-LUNs gehostet werden, in ihrem nativen Format in ONTAP importieren. Der Prozess des Imports des Inhalts einer solchen Array-LUN, die als *fremd* gekennzeichnet ist, kann beeinträchtigt werden, wenn die Array-LUN während des Imports externe Hostreservierungen hat.
+
+
+
+== Speicherfehler zeigen Meldung
+
+[listing]
+----
+
+EMC-1.3 (600000e00d1000000010000e00030000): This array LUN is marked foreign and has a reservation.
+----
+
+
+== Erklärung
+
+Diese Fehlerbedingung tritt auf, wenn die von externen Hostanwendungen auf der LUN erstellten Reservierungen nicht gelöscht werden, bevor der ONTAP-Administrator den Importvorgang initiiert. Der Importvorgang schlägt fehl, und die Meldung wird als Ausgabe des Befehls angezeigt `storage errors show` .
+
+Die Reservierungen müssen gelöscht werden, damit der Importvorgang erfolgreich durchgeführt werden kann.
+
+
+
+== Fehlerbehebung und Problemlösung
+
+Um das Problem zu beheben, muss der Speicher-Array-Administrator die dauerhafte Reservierung von der Array-LUN entfernen.
+
+Sie können die persistente Reservierung entweder vom externen Host entfernen, der im nativen Format auf die Array-LUN-Daten zugreift, oder Sie verwenden ONTAP-Befehle. Sie können die Reservierung mit den folgenden ONTAP-Befehlen entfernen:
+
+. Überprüfen Sie die `storage errors show` Ausgabe, um die Array-LUN mit Reservierungen zu identifizieren, wie im folgenden Beispiel gezeigt:
++
+[listing]
+----
+
+system1a::> storage errors show
+EMC_SYMMETRIX_1
+--------------------------------------
+EMC-1.3 (600000e00d1000000010000e00030000): This array LUN is marked foreign and has a reservation.
+----
+. Führen Sie den Befehl aus `set -privilege advanced` , um in den Modus _Advanced_ zu wechseln, da Sie den Inhalt der Array-LUN nicht im Modus _admin_ importieren können.
+. Verwenden Sie den `storage disk -remove-reservation` Befehl, um die persistente Reservierung aus der identifizierten Array-LUN zu entfernen.
++
+[listing]
+----
+
+system1a::>* storage disk remove-reservation -disk EMC-1.3
+----
+. Verwenden Sie den `lun import start` Befehl, um den Importprozess der Array-LUN-Inhalte in ONTAP zu starten.
+

@@ -1,0 +1,20 @@
+---
+permalink: install/concept_flexarray_virtualization_technology_overview_using_array_luns_for_storage.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, technology, overview, use, array, luns, storage 
+summary: Die ONTAP Software bietet eine Unified Storage-Software-Plattform, die das Management von nativen Platten-Shelfs und LUNs in Storage Arrays vereinfacht. Sie können ohne Unterbrechungen Storage je nach Bedarf jederzeit und überall hinzufügen. Diese Funktionalität wird von der FlexArray Virtualisierungssoftware bereitgestellt, die vormals unter dem Namen V-Series bekannt ist. 
+---
+= Überblick über die FlexArray Virtualisierungstechnologie – ​using Array LUNs für Storage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die ONTAP Software bietet eine Unified Storage-Software-Plattform, die das Management von nativen Platten-Shelfs und LUNs in Storage Arrays vereinfacht. Sie können ohne Unterbrechungen Storage je nach Bedarf jederzeit und überall hinzufügen. Diese Funktionalität wird von _FlexArray Virtualisierungssoftware_ bereitgestellt, früher unter dem Namen V-Serie bekannt.
+
+Die folgende Abbildung zeigt eine Konfiguration, bei der ONTAP-Systeme, die für die Anbindung an Storage-Arrays lizenziert sind, LUNs von den Storage-Arrays zusammenfassen und den Storage den Clients bereitstellen.
+
+image::../media/how_v_series_uses_storage.gif[Diese Grafik wird durch den umgebenden Text beschrieben.]
+
+Ein ONTAP-System stellt Speicher für Clients entweder in Form von ONTAP-Dateisystemvolumes zur Verfügung, die Sie mithilfe der ONTAP-Managementfunktionen auf dem System managen, oder als SCSI-Ziel, das LUNs für die Verwendung durch Clients erstellt. In beiden Fällen (Dateisystem-Clients und LUN-Clients) kombinieren Sie die Array-LUNs auf den Systemen, die Array-LUNs verwenden können, zu einem oder mehreren Array-LUN-Aggregaten. In einer ONTAP Umgebung können Sie diese Array-LUN-Aggregate mit Storage Virtual Machines (SVMs) verknüpfen und ONTAP Volumes zur Präsentation für die Clients als Dateien oder als LUNs erstellen, die von ONTAP bereitgestellt werden.

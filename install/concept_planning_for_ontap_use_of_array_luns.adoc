@@ -1,0 +1,27 @@
+---
+permalink: install/concept_planning_for_ontap_use_of_array_luns.html 
+sidebar: sidebar 
+keywords: plan, ontap, use, array, luns 
+summary: Damit ONTAP Array-LUNs verwenden kann, muss ein Speicher-Array-Administrator zunächst LUNs auf dem Speicher-Array erstellen und ONTAP zur Verfügung stellen. Anschließend muss der ONTAP-Administrator ONTAP konfigurieren, um die Array-LUNs zu verwenden, die das Speicher-Array zur Verfügung gestellt hat. 
+---
+= Planen der Verwendung von Array-LUNs durch ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Damit ONTAP Array-LUNs verwenden kann, muss ein Speicher-Array-Administrator zunächst LUNs auf dem Speicher-Array erstellen und ONTAP zur Verfügung stellen. Anschließend muss der ONTAP-Administrator ONTAP konfigurieren, um die Array-LUNs zu verwenden, die das Speicher-Array zur Verfügung gestellt hat.
+
+Bei der Planung der Bereitstellung von Array-LUNs für ONTAP werden folgende Aspekte berücksichtigt:
+
+* Die von ONTAP unterstützten Array-LUNs
+* Minimale und maximale Array-LUN-Größe für ONTAP
+* Die Anzahl der benötigten Array-LUNs
+
+
+[NOTE]
+====
+ONTAP betrachtet eine Array-LUN als virtuelle Festplatte.
+
+====

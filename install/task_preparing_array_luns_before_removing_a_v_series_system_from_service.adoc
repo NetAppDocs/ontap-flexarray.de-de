@@ -1,0 +1,20 @@
+---
+permalink: install/task_preparing_array_luns_before_removing_a_v_series_system_from_service.html 
+sidebar: sidebar 
+keywords: prepare, array, luns, before, remove, ontap, system, service 
+summary: Sie müssen die dauerhaften Reservierungen für alle Array-LUNs freigeben, die einem ONTAP-System zugewiesen sind, bevor Sie das System aus dem Dienst entfernen. 
+---
+= Vorbereiten von Array-LUNs vor dem Entfernen eines ONTAP-Systems aus dem Dienst
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die dauerhaften Reservierungen für alle Array-LUNs freigeben, die einem ONTAP-System zugewiesen sind, bevor Sie das System aus dem Dienst entfernen.
+
+Wenn Sie eine Array-LUN als ONTAP-Eigentümer zuweisen, platziert ONTAP persistente Reservierungen (Besitzsperren) auf dieser Array-LUN, um zu ermitteln, welches ONTAP-System Eigentümer der LUN ist. Wenn die Array-LUNs für andere Host-Typen verfügbar sein sollen, müssen Sie die dauerhaften Reservierungen entfernen, die ONTAP für diese Array-LUNs setzen. einige Arrays erlauben es Ihnen nicht, eine reservierte LUN zu zerstören, wenn Sie die Eigentumsrechte und die dauerhaften Reservierungen, die ONTAP auf diese LUN geschrieben hat, nicht entfernen.
+
+Beispielsweise verfügt das Hitachi USP-Speicher-Array nicht über einen Benutzerbefehl zum Entfernen persistenter Reservierungen aus LUNs. Wenn Sie persistente Reservierungen nicht über ONTAP entfernen, bevor Sie das ONTAP-System aus dem Service entfernen, müssen Sie sich an den technischen Support von Hitachi wenden, um die Reservierungen zu entfernen.
+
+Siehe Knowledge Base-Artikel https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_are_SCSI_Reservations_and_SCSI_Persistent_Reservations["Was sind SCSI Reservations und SCSI Persistent Reservations"^]

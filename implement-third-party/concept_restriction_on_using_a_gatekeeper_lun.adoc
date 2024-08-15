@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_restriction_on_using_a_gatekeeper_lun.html 
+sidebar: sidebar 
+keywords: restriction, using, gatekeeper, luns 
+summary: 'Wenn ein logisches Gatekeeper-Gerät (LUN) angezeigt wird, dürfen Sie es nicht dem ONTAP-System zuordnen. ONTAP-Systeme können keine Gatekeeper-LUNs verwenden. Eine Gatekeeper-LUN ist ein logisches Symmetrix-Gerät, über das SYMAPI oder der ControlCenter-Agent mit dem Speicher-Array kommuniziert.' 
+---
+= Einschränkung der Verwendung von Gatekeeper-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn ein logisches Gatekeeper-Gerät (LUN) angezeigt wird, dürfen Sie es nicht dem ONTAP-System zuordnen. ONTAP-Systeme können keine Gatekeeper-LUNs verwenden. Eine Gatekeeper-LUN ist ein logisches Symmetrix-Gerät, über das SYMAPI oder der ControlCenter-Agent mit dem Speicher-Array kommuniziert.

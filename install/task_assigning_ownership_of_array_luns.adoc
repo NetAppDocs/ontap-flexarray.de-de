@@ -1,0 +1,45 @@
+---
+permalink: install/task_assigning_ownership_of_array_luns.html 
+sidebar: sidebar 
+keywords: assign, ownership, array, luns 
+summary: Auf einem ONTAP System, wo das Root-Volume sich auf Festplatten-Shelfs befindet, müssen Sie einem Node die Eigentümerschaft der Array-LUNs zuweisen, bevor Sie sie einem Aggregat hinzufügen, um sie als Storage zu nutzen. 
+---
+= Eigentümerschaft von Array LUNs wird zugewiesen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Auf einem ONTAP System, wo das Root-Volume sich auf Festplatten-Shelfs befindet, müssen Sie einem Node die Eigentümerschaft der Array-LUNs zuweisen, bevor Sie sie einem Aggregat hinzufügen, um sie als Storage zu nutzen.
+
+*Was Sie brauchen*
+
+* Back-End-Konfigurationstests (Tests der Konnektivität und Konfiguration von Geräten hinter den ONTAP-Systemen) müssen abgeschlossen sein.
+* Array-LUNs, die Sie zuweisen möchten, müssen den ONTAP Systemen vorgelegt werden.
+
+
+Sie können Array-LUNs mit den folgenden Eigenschaften zuweisen:
+
+* Sie sind ohne Besitzer.
+* Es gibt keine Konfigurationsfehler für das Storage-Array, wie z. B. die folgenden:
++
+** Die Array-LUN ist kleiner oder größer als die von ONTAP unterstützte Größe.
+** Die LDEV ist nur auf einem Port zugeordnet.
+** Der LDEV weist inkonsistente LUN-IDs zu.
+** Die LUN ist nur auf einem Pfad verfügbar.
+
+
+
+
+ONTAP gibt eine Fehlermeldung aus, wenn Sie versuchen, die Eigentümerschaft einer Array-LUN mit Back-End-Konfigurationsfehlern zuzuweisen, die das ONTAP-System beeinträchtigen würden und das Storage-Array zusammen arbeiten. Sie müssen solche Fehler beheben, bevor Sie mit der Array-LUN-Zuweisung fortfahren können.
+
+ONTAP benachrichtigt Sie, wenn Sie versuchen, eine Array-LUN mit einem Redundanzfehler zuzuweisen: Zum Beispiel sind alle Pfade zu dieser Array-LUN mit dem gleichen Controller oder nur einem Pfad zur Array-LUN verbunden. Sie können einen Redundanzfehler vor oder nach dem Zuweisen des Eigentums an der LUN beheben.
+
+.Schritte
+. Geben Sie den folgenden Befehl ein, um die Array-LUNs anzuzeigen, die noch keinem Node zugewiesen wurden:``storage disk show -container-type unassigned``
+. Geben Sie den folgenden Befehl ein, um diesem Node eine Array-LUN zuzuweisen:``storage disk assign -disk arrayLUNname -owner nodename``
++
+Wenn Sie nach der Festplattenzuordnung einen Redundanzfehler beheben möchten, anstatt vorher, müssen Sie den Parameter mit dem Befehl verwenden `-force` `storage disk assign` .
+
+

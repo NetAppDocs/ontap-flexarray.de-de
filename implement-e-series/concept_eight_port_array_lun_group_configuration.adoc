@@ -1,0 +1,42 @@
+---
+permalink: implement-e-series/concept_eight_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: eight-port, array, lun group, configuration, crossed, back-end, connections, not 
+summary: Eine Konfiguration von LUN-Gruppen mit acht Ports wird auf geclusterten V-Series Systemen und auf ONTAP Systemen, die Array LUNs verwenden können, unterstützt. 
+---
+= Konfiguration von Array LUN-Gruppen mit acht Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Eine Konfiguration von LUN-Gruppen mit acht Ports wird auf geclusterten V-Series Systemen und auf ONTAP Systemen, die Array LUNs verwenden können, unterstützt.
+
+Diese Konfiguration wird für die Verwendung mit allen in der Interoperabilitäts-Matrix aufgeführten Storage Arrays unterstützt, da sie für die Version von ONTAP auf dem System unterstützt wird.
+
+Diese Konfiguration kann auf zwei Arten bereitgestellt werden: Gekreuzte und nicht gekreuzte Back-End-Verbindungen.
+
+
+
+== Gekreuzte Back-End-Verbindungen
+
+Bei dieser Konfiguration werden bei gekreuzten Back-End-Verbindungen die FC-Verbindungen vom selben Storage-Array-Controller zu beiden Fabric Switches (redundant) geschaltet.
+
+In dieser Abbildung der gekreuzten Back-End-Verbindungen ist zu beachten, wie die Nodes mit den Switches und dem Speicher-Array verbunden sind. VS1 verwendet Switch 1 beim Anschluss an das Speicher-Array Controller 1-Port 1A und Controller 2-Port 2C und verwendet Switch 2 beim Anschluss an Speicher-Array Controller 2-Ports 2A und Controller 1-Port 1C. So wird die Nutzung von Switch-Ports und Array-Ports optimiert, was die Auswirkungen eines Switch- oder Speicher-Array-Controller-Ausfalls reduziert.
+
+image::../media/eight_port_array_lun_group_configuration_crossed.gif[Konfiguration der Array-lun-Gruppe mit acht Ports überschritten]
+
+
+
+== Back-End-Verbindungen werden nicht gekreuzt
+
+Bei dieser Konfiguration, bei der die Back-End-Verbindungen nicht überschritten werden, gehen die FC-Verbindungen vom selben Storage Array Controller nur zu einem Fabric Switch.
+
+Die folgende Abbildung zeigt diese Konfiguration, wenn die Back-End-Verbindungen nicht gekreuzt werden.
+
+image::../media/eight_port_array_lun_group_configuration.gif[Konfiguration von Array lun-Gruppen mit acht Ports]
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

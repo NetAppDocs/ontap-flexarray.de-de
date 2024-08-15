@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: plan, paths, array, luns 
+summary: 'Pfade sind die physischen Verbindungen zwischen dem ONTAP-System und dem Speicher-Array. Redundante Pfade sind erforderlich, um jegliche Single Point of Failure (SPOF) zwischen dem ONTAP System und dem Storage Array zu eliminieren.' 
+---
+= Planen von Pfaden zu Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pfade sind die physischen Verbindungen zwischen dem ONTAP-System und dem Speicher-Array. Redundante Pfade sind erforderlich, um jegliche Single Point of Failure (SPOF) zwischen dem ONTAP System und dem Storage Array zu eliminieren.

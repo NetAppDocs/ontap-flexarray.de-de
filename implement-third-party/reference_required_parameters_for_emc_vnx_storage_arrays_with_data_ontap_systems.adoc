@@ -1,0 +1,62 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_emc_vnx_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, emc, vnx, storage, arrays, ontap, systems 
+summary: Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann. 
+---
+= Erforderliche Parameter für EMC VNX-Speicherarrays mit ONTAP-Systemen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Speicher-Array sind bestimmte Parametereinstellungen erforderlich, damit das Speicher-Array erfolgreich mit ONTAP-Systemen arbeiten kann.
+
+Die Host-Konfigurationsparameter, die auf dem Speicher-Array festgelegt werden müssen, sind in der folgenden Tabelle aufgeführt.
+
+|===
+| Parameter | Einstellung 
+
+
+ a| 
+`Initiator type`
+ a| 
+CLARiiON/VNX
+
+
+
+ a| 
+`Array Com Path`
+ a| 
+Aktiviert
+
+
+
+ a| 
+`Failover mode`
+ a| 
+4
+
+
+
+ a| 
+`Unit serial number`
+ a| 
+LUN
+
+
+
+ a| 
+`Host name`
+ a| 
+Vom Benutzer bereitgestellter Hostname und Portnummer
+
+
+
+ a| 
+`IP address`
+ a| 
+Eindeutige gefälschte IP-Adresse Sie müssen sicherstellen, dass Sie diese IP-Adresse nirgendwo anders in der Speicher-Array-Konfiguration eingegeben haben und dass es sich nicht um eine im Netzwerk vorhandene IP-Adresse handelt.
+
+|===

@@ -1,0 +1,30 @@
+---
+permalink: install/concept_location_of_the_root_volume.html 
+sidebar: sidebar 
+keywords: location, root, volume 
+summary: Der Speicherort des Root-Volumes hängt davon ab, ob das ONTAP-System mit nativen Festplatten vorbestellt ist oder ob Sie Festplatten zu einem ONTAP-System hinzufügen, das für Array-LUNs konfiguriert ist. 
+---
+= Speicherort des Root-Volumes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Der Speicherort des Root-Volumes hängt davon ab, ob das ONTAP-System mit nativen Festplatten vorbestellt ist oder ob Sie Festplatten zu einem ONTAP-System hinzufügen, das für Array-LUNs konfiguriert ist.
+
+Befolgen Sie die folgenden Richtlinien zum ermitteln des Speicherorts des Root-Volumes auf dem ONTAP-System:
+
+* Das Root-Volume kann sich auf einem Storage-Array oder auf einem nativen Festplatten-Shelf befinden.
++
+Sie sollten das Root-Volume jedoch auf einer nativen Festplatte installieren, wenn das ONTAP-System sowohl native Festplatten als auch Array-LUNs besitzt.
+
++
+Wenn Sie Ihr Speichersystem mit Festplatten bestellen, wird das Root-Volume werkseitig auf einer nativen Festplatte installiert.
+
+* In einem HA-Paar sollte sich das Root-Volume für beide Nodes auf demselben Storage-Typ befinden – entweder in einem nativen Festplatten-Shelf oder in einem Storage-Array für beide Nodes.
+* Bei MetroCluster-Konfigurationen mit Festplatten und Array-LUNs sollten Sie das Root-Volume auf einer Festplatte erstellen, wenn Sie eine neue Konfiguration einrichten.
++
+Wenn Sie einer vorhandenen MetroCluster-Konfiguration mit Array-LUNs Festplatten hinzufügen, können Sie das Root-Volume auf einer Array-LUN belassen.
+
+

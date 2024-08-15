@@ -1,0 +1,24 @@
+---
+permalink: implement-e-series/concept_stand_alone_system_with_two_2_port_array_lun_groups.html 
+sidebar: sidebar 
+keywords: stand-alone, system, two, 2-port, array, lun, groups 
+summary: In einem eigenständigen ONTAP-System in einer einfachen Fabric-Attached-Konfiguration greift jedes auf dem ONTAP-System vorhandene FC-Initiator-Port-Paar auf eine separate Array-LUN-Gruppe zu. 
+---
+= Eigenständiges System mit zwei Array-LUN-Gruppen mit 2 Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In einem eigenständigen ONTAP-System in einer einfachen Fabric-Attached-Konfiguration greift jedes auf dem ONTAP-System vorhandene FC-Initiator-Port-Paar auf eine separate Array-LUN-Gruppe zu.
+
+Diese Konfiguration wird für die Verwendung mit allen in der Interoperabilitäts-Matrix aufgeführten Storage Arrays unterstützt, da sie für die Version von ONTAP auf dem System unterstützt wird.
+
+Die folgende Abbildung zeigt eine einfache Fabric-Attached-Konfiguration:
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Diese Grafik wird durch den umgebenden Text beschrieben.]
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

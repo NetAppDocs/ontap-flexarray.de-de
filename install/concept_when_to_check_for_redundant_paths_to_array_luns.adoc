@@ -1,0 +1,32 @@
+---
+permalink: install/concept_when_to_check_for_redundant_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: when, check, redundant, paths, array, luns 
+summary: Sie müssen nach der Installation und während der Strukturwartungsaktivitäten nach redundanten Pfaden zu einer Array-LUN suchen. 
+---
+= Wann nach redundanten Pfaden zu Array-LUNs zu suchen ist
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen nach der Installation und während der Strukturwartungsaktivitäten nach redundanten Pfaden zu einer Array-LUN suchen.
+
+Überprüfen Sie die Pfadredundanz erneut, wenn Sie die folgenden Aktivitäten durchführen:
+
+* Erstinstallation
+* Fabric-Wartung, zum Beispiel:
++
+** Vor, während und nach einem Infrastruktur-Upgrade
+** Vor und nach dem Wechsel zur Wartung außer Betrieb
++
+Bevor Sie einen Switch zwischen den ONTAP-Systemen und dem Storage-Array entfernen, vergewissern Sie sich, dass die Pfade als redundante Pfade konfiguriert sind, damit der Zugriff auf die Array-LUNs nicht unterbrochen wird.
+
+** Vor und nach der Wartung der Hardware auf einem Speicher-Array
++
+Sie sollten beispielsweise erneut auf Pfadredundanz prüfen, wenn Sie die Hardwarekomponente beibehalten, auf der sich die Host-Adapter und Ports befinden. (Der Name dieser Komponente variiert je nach Speicherarray-Modell.)
+
+
+
+

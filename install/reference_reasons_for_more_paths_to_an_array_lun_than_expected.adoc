@@ -1,0 +1,60 @@
+---
+permalink: install/reference_reasons_for_more_paths_to_an_array_lun_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, paths, array, lun, expected, output, show, config, issue 
+summary: Die Hauptgründe für einen unerwarteten zusätzlichen Pfad zu einer Array-LUN sind Zoning-Probleme und zu viele Kabel. Drei Pfade zu einer Array-LUN sind keine Best Practice, Sie müssen dieses Problem jedoch nicht beheben. 
+---
+= Gründe für mehr Pfade zu einer Array-LUN als erwartet
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Hauptgründe für einen unerwarteten zusätzlichen Pfad zu einer Array-LUN sind Zoning-Probleme und zu viele Kabel. Drei Pfade zu einer Array-LUN sind keine Best Practice, Sie müssen dieses Problem jedoch nicht beheben.
+
+
+
+== Beispiel der Speicher-Array-Konfiguration zeigt die Ausgabe
+
+Das FC-Initiator-Port-Paar im ONTAP-System lautet 0a und 0c. Das folgende Beispiel zeigt einen zusätzlichen Pfad, 0b, in der `storage array config show` Ausgabe:
+
+[listing]
+----
+
+mysystem1::> storage array config show
+             LUN   LUN
+Node         Group Count   Array Name       Array Target Port   Initiator
+----------   ----- -----  ----------------  ------------------  ----------
+mysystem1a    1     3     HITACHI_DF600F_1  50060e80004291c0    0a
+                                            50060e80004291c1    0b
+                                                                0c
+
+3 entries were displayed.
+----
+[NOTE]
+====
+Wenn einem Initiator in der `storage array config show` Ausgabe kein Array-Zielport vorangestellt ist, stellt der Initiator eine Verbindung mit demselben Array-Zielport her wie der Initiator darüber.
+
+====
+
+
+== Erklärung
+
+Drei Pfade innerhalb einer LUN-Gruppe zeigen an, dass ein zusätzlicher Pfad vorhanden ist. Bei ONTAP Konfigurationen besteht die Best Practice aus zwei oder vier Pfaden.
+
+Gründe, warum es mehr Pfade geben könnte als erwartet:
+
+* Es wurden mehr Kabel angeschlossen, als benötigt werden.
+* Ein Zoning-Konfigurationsfehler hat einen zusätzlichen Pfad verursacht.
+
+
+
+
+== Lösung des Problems
+
+Ein zusätzlicher Pfad zu haben, ist keine Best Practice, aber aus Sicht des Systems ist er nicht falsch. Sie müssen dieses Problem nicht beheben. Wenn Sie das Problem beheben möchten, um es an Ihre beabsichtigte Konfiguration anzupassen, führen Sie die folgenden Schritte aus:
+
+. Überprüfen Sie die Verkabelung und die Zoning-Konfiguration auf die Ursache, und beheben Sie dann das Problem, das den zusätzlichen Pfad verursacht.
+. Nachdem das Problem behoben wurde, führen Sie `storage array config show` erneut aus, um zu bestätigen, dass der zusätzliche Pfad verschwunden ist.
+

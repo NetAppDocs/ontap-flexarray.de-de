@@ -1,0 +1,16 @@
+---
+permalink: install/concept_32xx_configuration_restrictions.html 
+sidebar: sidebar 
+keywords: 32xx, system, configuration, restrictions 
+summary: Es gibt einige Einschränkungen für 32xx-Systeme, die nicht für andere Modelle gelten. Diese müssen Sie bei der Konfiguration der Systeme beachten. 
+---
+= Einschränkungen bei der Systemkonfiguration 32xx
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es gibt einige Einschränkungen für 32xx-Systeme, die nicht für andere Modelle gelten. Diese müssen Sie bei der Konfiguration der Systeme beachten.
+
+Die beiden integrierten FC-Ports mit der Bezeichnung 0c und 0d befinden sich nicht in unabhängigen Bussen. Aus diesem Grund bieten sie keine Storage-Redundanz. Einige Port-Fehler können zu einem Panikzustand des Systems führen. Um redundante Port-Paare zu konfigurieren, müssen Sie einen FC HBA in einem verfügbaren Erweiterungssteckplatz verwenden.

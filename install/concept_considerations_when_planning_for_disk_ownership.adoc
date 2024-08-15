@@ -1,0 +1,30 @@
+---
+permalink: install/concept_considerations_when_planning_for_disk_ownership.html 
+sidebar: sidebar 
+keywords: considerations, plan, disk, ownership 
+summary: Wenn Sie mehrere ONTAP-Systeme für die Verwendung mit Array-LUNs bereitstellen, müssen Sie ermitteln, welches System über welche Array-LUNs verfügt. Disk Ownership stellt sicher, dass nur das ONTAP-System, das Eigentümer einer bestimmten Array-LUN ist, Daten von der Array-LUN lesen und auf diese schreiben kann. 
+---
+= Überlegungen bei der Planung des Festplattenbesitzes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie mehrere ONTAP-Systeme für die Verwendung mit Array-LUNs bereitstellen, müssen Sie ermitteln, welches System _besitzt_ welche Array-LUNs sind. Disk Ownership stellt sicher, dass nur das ONTAP-System, das Eigentümer einer bestimmten Array-LUN ist, Daten von der Array-LUN lesen und auf diese schreiben kann.
+
+Bei der Planung, welches System über welche Array-LUNs verfügt, sollten Sie Folgendes beachten:
+
+* Die von Ihrer Plattform unterstützte maximale Anzahl zugewiesener Geräte
++
+Das _Hardware Universe_ zeigt die maximal zugewiesene Gerätebegrenzung an, die für verschiedene Plattformen unterstützt wird. Dies ist ein hartcodierter Grenzwert. Wenn das System Array-LUNs und Festplatten verwendet, ist diese Höchstgrenze die maximale Anzahl an Festplatten und Array-LUNs zusammen. Sie müssen beide Speichertypen berücksichtigen, wenn Sie bestimmen, wie viele Array-LUNs und -Festplatten Sie einem System zuweisen können.
+
+* Die Lasten, die Sie erwarten, von verschiedenen Applikationen in Ihrer Umgebung generiert zu werden
++
+Einige Applikationen generieren höchstwahrscheinlich zahlreiche Anforderungen, während andere Applikationen (z. B. Archivierungsapplikationen) die Anzahl der Anfragen reduzieren. Möglicherweise sollten Sie die Zuordnung von Besitzrechten auf der Grundlage der erwarteten Last aus bestimmten Anwendungen abwägen.
+
+
+
+*Verwandte Informationen*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

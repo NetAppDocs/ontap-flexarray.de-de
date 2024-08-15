@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_configuring_ports_on_hp_xp_storage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, configuring, ports, hp xp, storage, arrays 
+summary: Beachten Sie bei der Konfiguration von Ports auf HP XP-Speicherarrays bestimmte Richtlinien. 
+---
+= Richtlinien für die Konfiguration von Ports auf HP XP-Speicherarrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Beachten Sie bei der Konfiguration von Ports auf HP XP-Speicherarrays bestimmte Richtlinien.
+
+Die Richtlinien für die Konfiguration von Ports auf HP XP-Speicherarrays lauten wie folgt:
+
+* Sie sollten nur eine Host-Gruppe pro Port hinzufügen.
+* Sie sollten sicherstellen, dass eine Host-Gruppe alle FC-Initiator-Ports der V-Series-Systeme in einer Array-LUN-Nachbarschaft umfasst.
+

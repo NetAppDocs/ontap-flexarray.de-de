@@ -1,0 +1,34 @@
+---
+permalink: implement-third-party/concept_hp_xp_storage_array_families.html 
+sidebar: sidebar 
+keywords: hp, xp, storage, array, families 
+summary: ONTAP unterstützt nicht die Kombination einiger Storage-Typen in Aggregaten. Damit Sie die Array-LUNs besser ermitteln können, die in einem Aggregat gemischt werden können, werden die Storage-Arrays aller Anbieter in Familien gruppiert. Wenn Sie Aggregate erstellen, können Sie Array-LUNs verschiedener Anbieter und aus verschiedenen Storage-Array-Familien im selben Aggregat nicht zusammen verwenden. 
+---
+= HP XP-Speicher-Array-Produktfamilien
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP unterstützt nicht die Kombination einiger Storage-Typen in Aggregaten. Damit Sie die Array-LUNs besser ermitteln können, die in einem Aggregat gemischt werden können, werden die Storage-Arrays aller Anbieter in Familien gruppiert. Wenn Sie Aggregate erstellen, können Sie Array-LUNs verschiedener Anbieter und aus verschiedenen Storage-Array-Familien im selben Aggregat nicht zusammen verwenden.
+
+Storage-Arrays in derselben Familie nutzen dieselben Performance- und Failover-Merkmale. Beispielsweise führen alle Mitglieder derselben Produktfamilie aktiv/aktiv-Failover oder aktiv/Passiv-Failover aus. Es können mehrere Faktoren verwendet werden, um Speicher-Array-Familien zu bestimmen. Beispielsweise würden Storage-Arrays mit unterschiedlichen Architekturen unterschiedliche Familien unterstützen, obwohl andere Merkmale identisch sein könnten.
+
+Die folgende Liste zeigt die Speicherarrays nach Familie geordnet:
+
+Die folgende Liste zeigt die HP XP-Speicherarray-Familie, die von ONTAP-Systemen unterstützt wird:
+
+* Familie 1
++
+** P9500
+** XP7
+
+
+
+
+Die Interoperabilitäts-Matrix ist die endgültige Instanz für Informationen zu den von den einzelnen Anbietern unterstützten Storage Arrays.
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

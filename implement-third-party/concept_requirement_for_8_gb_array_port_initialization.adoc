@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_requirement_for_8_gb_array_port_initialization.html 
+sidebar: sidebar 
+keywords: requirement, 8-Gb array, port, initialization 
+summary: 'In einer typischen Fibre Channel (FC)-Fabric werden die Speicher-Array-Ports als N-Ports (Node-Ports) initialisiert und die entsprechenden Switch-Ports werden als F-Ports (Fabric-Ports) initialisiert. In einigen Fällen können diese F-Ports offline geschaltet werden und den Betrieb als L-Ports (Loop-Ports) fortsetzen, was zu Fabric-Fehlern führt.' 
+---
+= Anforderung für 8-GB-Array-Port-Initialisierung
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In einer typischen Fibre Channel (FC)-Fabric werden die Speicher-Array-Ports als N-Ports (Node-Ports) initialisiert und die entsprechenden Switch-Ports werden als F-Ports (Fabric-Ports) initialisiert. In einigen Fällen können diese F-Ports offline geschaltet werden und den Betrieb als L-Ports (Loop-Ports) fortsetzen, was zu Fabric-Fehlern führt.
+
+Dieses Verhalten wird durch Probleme mit der automatischen Topologieaushandlung im Brocade-Switch verursacht.
+
+Um sicherzustellen, dass Switch-Ports immer als F-Ports initialisiert werden, müssen Sie den Befehl an Brocade-Switch-Ports ausführen `portcfggport` ``<portnumber> 1` , die mit Speicher-Arrays verbunden sind. Sie müssen diesen Befehl ausführen, wenn Sie mit der Konfiguration des Systems beginnen, um dieses Problem zu vermeiden, und Sie müssen das Problem gegebenenfalls beheben.
+
+Um die Effizienz auf der Fabric als Ganzes zu fördern, können Sie diese Problemumgehung auch bei allen an ONTAP-Initiator-Ports angeschlossenen Brocade-Ports verwenden.

@@ -1,0 +1,24 @@
+---
+permalink: install/concept_spare_core_array_lun_requirement_for_core_dumps.html 
+sidebar: sidebar 
+keywords: spare, array, lun, requirement, core, dumps 
+summary: Sie müssen sowohl für eigenständige ONTAP-Systeme als auch für Nodes in HA-Paaren eine Ersatz-Array-LUN mit ausreichender Größe erstellen, um Core Dumps zu speichern, wenn keine freie Festplatte verfügbar ist. 
+---
+= Ersatz-Array-LUN-Anforderungen für Core Dumps
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen sowohl für eigenständige ONTAP-Systeme als auch für Nodes in HA-Paaren eine Ersatz-Array-LUN mit ausreichender Größe erstellen, um Core Dumps zu speichern, wenn keine freie Festplatte verfügbar ist.
+
+Auf einem System, das sowohl Festplatten als auch Array-LUNs verwendet, ist für einen Core Dump keine zusätzliche Array-LUN erforderlich, wenn eine Ersatzfestplatte verfügbar ist. Wenn weder eine Ersatzarray-LUN noch eine Ersatzfestplatte verfügbar ist, gibt es keinen Platz für das Ablegen des Kerns.
+
+Ein Core Dump enthält den Inhalt von Arbeitsspeicher und NVRAM. Während einer Systempanik lädt ONTAP Core auf eine Ersatz-Array-LUN oder Ersatz-Festplatte ab, wenn ein Ersatzteil vorhanden ist. Beim Neustart wird der Core vom Spare gelesen und auf einem Core Dump im Root-Dateisystem gespeichert. Der technische Support kann dann den Core Dump verwenden, um die Fehlerbehebung zu unterstützen.
+
+Das _Hardware Universe_ enthält die minimale freie Core Array LUN-Größe für jede Plattform.
+
+*Verwandte Informationen*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

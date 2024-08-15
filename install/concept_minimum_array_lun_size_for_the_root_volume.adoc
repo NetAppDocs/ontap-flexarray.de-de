@@ -1,0 +1,20 @@
+---
+permalink: install/concept_minimum_array_lun_size_for_the_root_volume.html 
+sidebar: sidebar 
+keywords: array, lun, size, required, root, volume 
+summary: Sie müssen die Größe des Root-Volumes auf größer als die unterstützte minimale Array-LUN-Größe festlegen, um sicherzustellen, dass im Root-Volume genügend Speicherplatz für Systemdateien, Protokolldateien und Core-Dateien vorhanden ist. Wenn ein Systemproblem auftritt, müssen Sie diese Dateien dem technischen Support bereitstellen. 
+---
+= Array-LUN-Größe, die für das Root-Volume erforderlich ist
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die Größe des Root-Volumes auf größer als die unterstützte minimale Array-LUN-Größe festlegen, um sicherzustellen, dass im Root-Volume genügend Speicherplatz für Systemdateien, Protokolldateien und Core-Dateien vorhanden ist. Wenn ein Systemproblem auftritt, müssen Sie diese Dateien dem technischen Support bereitstellen.
+
+In _Hardware Universe_ wird die minimale Array-LUN-Größe für ein Root-Volume aufgeführt.
+
+*Verwandte Informationen*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

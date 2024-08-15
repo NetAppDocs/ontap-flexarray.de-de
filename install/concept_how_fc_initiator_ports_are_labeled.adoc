@@ -1,0 +1,27 @@
+---
+permalink: install/concept_how_fc_initiator_ports_are_labeled.html 
+sidebar: sidebar 
+keywords: how, fc initiator, ports, labeled 
+summary: Alle FC-Initiator-Ports in ONTAP Systemen sind durch eine Zahl und einen Buchstaben gekennzeichnet. Die Kennzeichnung hängt davon ab, ob sich die Ports auf der Hauptplatine oder Karten in Erweiterungssteckplätzen befinden. 
+---
+= Wie FC-Initiator-Ports gekennzeichnet werden
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Alle FC-Initiator-Ports in ONTAP Systemen sind durch eine Zahl und einen Buchstaben gekennzeichnet. Die Kennzeichnung hängt davon ab, ob sich die Ports auf der Hauptplatine oder Karten in Erweiterungssteckplätzen befinden.
+
+* Portnummerierung auf der Hauptplatine
++
+Die Ports sind mit 0a, 0b, 0c, 0d... nummeriert.
+
+* Portnummerierung auf Erweiterungskarten
++
+Die Anschlüsse werden entsprechend dem Steckplatz nummeriert, in dem die Erweiterungskarte installiert ist. Eine Karte in Steckplatz 3 liefert die Anschlüsse 3A und 3B.
+
++
+Die FC-Initiator-Ports sind mit 1 und 2 gekennzeichnet. Die Software bezeichnet sie jedoch als A und B. Sie sehen diese Bezeichnungen auf der Benutzeroberfläche und auf der Konsole angezeigte Systemmeldungen.
+
+

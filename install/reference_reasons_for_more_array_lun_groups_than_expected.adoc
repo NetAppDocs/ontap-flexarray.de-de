@@ -1,0 +1,97 @@
+---
+permalink: install/reference_reasons_for_more_array_lun_groups_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, array, lun, groups, expected 
+summary: Wenn Sie Ihre Konfiguration überprüfen, sollten Sie die Ausgabe von Speicher-Array-config show überprüfen, um sicherzustellen, dass die Anzahl der LUN-Gruppen Ihren Zweck entspricht. Der häufigste Grund für zusätzliche Array-LUN-Gruppen ist, dass der LDEV Zielportpaare überspannt. 
+---
+= Gründe für mehr Array-LUN-Gruppen als erwartet
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie Ihre Konfiguration validieren, sollten Sie die Ausgabe prüfen `storage array config show` , um sicherzustellen, dass die Anzahl der LUN-Gruppen Ihren Verwendungszweck entspricht. Der häufigste Grund für zusätzliche Array-LUN-Gruppen ist, dass der LDEV Zielportpaare überspannt.
+
+
+
+== Erklärung
+
+Häufige Gründe, warum Sie mehr LUN-Gruppen als erwartet sehen würden, sind wie folgt:
+
+* Ein LDEV ist keinem redundanten Ziel-Port-Paar zugeordnet.
++
+Die häufigste Ursache für eine zusätzliche LUN-Gruppe ist, dass die LDEV Pfadpaare überspannt. Ein LDEV wird als _Spanning Path Pairs_ bezeichnet, wenn übereinstimmende LUN-IDs für das LDEV nicht einem redundanten Ziel-Port-Paar auf dem Speicher-Array angezeigt werden.
+
+
+
+[NOTE]
+====
+Auf vielen Speicher-Arrays ist es nicht möglich, ein LDEV für nicht redundante Zielports bereitzustellen, wenn Sie den herkömmlichen Prozess zum Erstellen und Zuordnen von LDEVs befolgen.
+
+====
+* ONTAP versucht während der Migration von Array-LUNs von einer LUN-Gruppe zur anderen die Last über die Ziel-Ports auszugleichen.
++
+In diesem Fall ist das LDEV Spanning Path Pairs ein Übergangszustand.
+
+* Es sind zu viele Verbindungen eingerichtet.
+
+
+ONTAP kann mit einer einzelnen Array-LUN-Gruppe oder mehreren Array-LUN-Gruppen ausgeführt werden. Aus diesem Grund betrachtet ONTAP keine Anzahl von LUN-Gruppen als Fehlkonfiguration. Mehrere LUN-Gruppen werden jedoch nicht für alle Storage Arrays in allen ONTAP Versionen unterstützt. Während der Konfigurationsplanung sollten Sie die Informationen in der Interoperabilitätsmatrix überprüfen, um zu überprüfen, ob mehrere Array-LUN-Gruppen für die in Ihrer ONTAP-Konfiguration verwendeten Speicher-Arrays unterstützt werden.
+
+
+
+== Problemszenario
+
+Angenommen, es gibt zwei vorhandene LUN-Gruppen, die LUN-Gruppe 0 und die LUN-Gruppe 1. LUN-Gruppe 0 verfügt über zwei Array-LUNs und LUN-Gruppe 1 über drei Array-LUNs. Der Administrator erstellte ein neues LDEV Z, in der Absicht, LUN 3 zur LUN-Gruppe 0 hinzuzufügen. Der Administrator hat LDEV Z auf zwei Speicher-Array-Ports als LUN 3 zugeordnet. Die Ports, denen LUN 3 zugeordnet ist, Speicher-Array-Ports 1A und 2B sind jedoch kein redundantes Ziel-Port-Paar, wie in der folgenden Abbildung gezeigt.
+
+image::../media/ldev_spans_path_pairs_v2.gif[Diese Grafik wird im umgebenden Text beschrieben.]
+
+Die Folge dieses Fehlers ist, dass eine dritte, nicht beabsichtigte LUN-Gruppe erstellt wird (Gruppe 2), wie das folgende Beispiel zeigt:
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+          LUN   LUN
+Node      Group Count  Array Name  	Array Target Ports     	Switch Port  	Initiator
+-------   ----- ------ ----------- 	-------------------    	-----------  	---------
+
+mysystem1  0     3     DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5    0a
+                                   	20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0c
+           1     3     DGC_RAID5_1  20:1B:00:a0:b8:0f:ee:04  vnbr20es25:7    0b
+                                   	20:2B:00:a0:b8:0f:ee:04  vnci9124s53:8   0d
+           2     1     DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5    0a
+                                   	20:2B:00:a0:b8:0f:ee:04  vnci9124s53:8   0d
+----
+Sie können aus den Informationen in der Spalte Array Target Ports für Gruppen 0 und 1 ableiten, dass die Pfade zu den Array-Zielports redundant sind. Gruppe 0 geht zu den Zielports 1A und 2A, einem Zielportpaar. Gruppe 1 geht auf 1B und 2B, ein anderes Ziel-Port-Paar.
+
+Die Informationen in der Spalte Array Target Ports für Gruppe 2 legen jedoch nahe, dass die Pfade nicht redundant sind. Ein Pfad führt zum Zielport 1A und der andere zum Zielport 2B. Dies ist kein redundantes Ziel-Port-Paar; die Array-LUN umfasst LUN-Gruppen. Die Array-LUN sollte entweder 1A und 2A oder 1B und 2B zugeordnet sein.
+
+Da das ONTAP-System mit einem LDEV-Spanning-Pfadpaar ausgeführt werden kann, wird die Meldung, die Sie ausführen müssen `storage errors show` , nach der Ausführung des Befehls nicht angezeigt `storage array config show` . Dies ist jedoch keine Best Practice-Konfiguration.
+
+
+
+== Lösung des Problems
+
+. Warten Sie eine Minute, und führen Sie dann erneut aus `storage array config show` , um zu sehen, ob die zusätzliche LUN-Gruppe noch in der Ausgabe angezeigt `storage array config show` wird.
++
+** Wenn die zusätzliche LUN-Gruppe nicht mehr in der Ausgabe enthalten ist, können Sie feststellen, dass das Problem eine Übergangsphase war.
+** Wenn die zusätzliche LUN-Gruppe weiterhin in der Ausgabe angezeigt wird, muss der Speicher-Array-Administrator die LDEV neu zuordnen, wie in den nächsten Schritten dokumentiert.
++
+Sie müssen die Redundanz aufrechterhalten, während Sie dieses Problem beheben. Dieses Verfahren weist Sie an, den LDEV dem korrekten Zielport _before_ zuzuordnen, um die Zuordnung zum falschen Zielport zu entfernen. Redundanz bleibt in diesem Fall erhalten, da Sie die Anzahl der Pfade vorübergehend auf drei erhöhen, anstatt die Anzahl der Pfade auf einen zu reduzieren, während Sie das Problem beheben.
+
+
+
+. Entscheiden Sie, welche der inkonsistenten Zielports neu zugeordnet werden sollen.
+. Ordnen Sie das LDEV auf dem Speicher-Array dem neuen (richtigen) Zielport zu.
+. Führen Sie in ONTAP aus `storage array config show` , um zu bestätigen, dass drei Pfade angezeigt werden.
+. Entfernen Sie die falsche Zuordnung.
+. Warten Sie eine Minute, bis ONTAP die LUN erkennt.
+. Führen Sie in ONTAP erneut aus `storage array config show` , um sicherzustellen, dass die zusätzliche LUN-Gruppe verschwunden ist.
+
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

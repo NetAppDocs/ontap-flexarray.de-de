@@ -1,0 +1,192 @@
+---
+permalink: install/concept_formulas_for_calculating_array_lun_size_considering_checksum_type.html 
+sidebar: sidebar 
+keywords: formulas, calculate, array, lun, size, checksum, type, usable, capacity, snapshot, reserve, maximum 
+summary: Eine Reihe von Elementen, einschließlich des Prüfsummentyps, wirkt sich auf die nutzbare Kapazität einer Array-LUN aus. Sie können eine Formel verwenden, um zu berechnen, wie viel nutzbare Kapazität in einer Array-LUN einer bestimmten Größe vorhanden ist, oder um zu berechnen, wie groß eine Array-LUN sein muss, um die gewünschte Speichermenge bereitzustellen. 
+---
+= Formeln zur Berechnung der Array-LUN-Größe basierend auf dem Prüfsummentyp
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Eine Reihe von Elementen, einschließlich des Prüfsummentyps, wirkt sich auf die nutzbare Kapazität einer Array-LUN aus. Sie können eine Formel verwenden, um zu berechnen, wie viel nutzbare Kapazität in einer Array-LUN einer bestimmten Größe vorhanden ist, oder um zu berechnen, wie groß eine Array-LUN sein muss, um die gewünschte Speichermenge bereitzustellen.
+
+Eine Reihe von Elementen, einschließlich des Prüfsummentyps, beeinflussen die Größe der Array-LUN, die Sie für die Menge der _nutzbaren Kapazität_ benötigen. Die nutzbare Kapazität ist die Menge an Speicherplatz, die für den Speicher verfügbar ist.
+
+Die folgende Tabelle zeigt, wie Sie die erforderliche Array-LUN-Größe berechnen können:
+
+[cols="2*"]
+|===
+| Wenn Sie wissen... | Sie möchten mehr erfahren... 
+
+
+ a| 
+Wie groß sind Ihre Array-LUNs
+ a| 
+Wie viel Kapazität (nutzbare Kapazität) für Storage verfügbar ist Dabei müssen Sie die Menge an Platz berücksichtigen, die für alle Elemente erforderlich ist.
+
+
+
+ a| 
+Wie viel Speicher Sie im Array-LUN benötigen
+ a| 
+Wie groß ist eine Array-LUN, die Sie benötigen. Sie müssen den erforderlichen Speicherplatz und den Platzbedarf für andere Elemente berücksichtigen.
+
+|===
+[NOTE]
+====
+2 TB in diesen Formeln stehen für 2 tib oder 2199023255552 Byte, was 2097.152 GnaB oder 2.097 TnaB entspricht, je nachdem, wie ONTAP Messungen berechnet.
+
+====
+
+
+== Formel zur Berechnung der nutzbaren Kapazität
+
+Wenn Sie wissen, wie groß die Array-LUNs sind, können Sie die folgende Formel verwenden, um die nutzbare Kapazität für den Speicher in einer Array-LUN zu ermitteln. Diese Formel berücksichtigt die Snapshot Reserve.
+
+* Y ist die nutzbare Kapazität für den Speicher.
+* N ist die Gesamtkapazität der Array-LUN.
+
+
+[cols="2*"]
+|===
+| Prüfsummentyp | Formel 
+
+
+ a| 
+BCS--Array LUNs kleiner als 2 TB
+ a| 
+N x {0.875 x 0.9 x 0.99 x (1 - Snapshot Reserve)} = Y
+
+
+
+ a| 
+BCS- Array LUNs größer als 2 TB
+ a| 
+N x {0.875 x 0.9 x 0.998 x (1 - Snapshot Reserve)} = Y
+
+
+
+ a| 
+AZCS- Array LUNs weniger als 2 TB
+ a| 
+N x {0.984 x 0.9 x 0.99 x (1 - Snapshot Reserve)} = Y
+
+
+
+ a| 
+AZCS--Array LUNs über 2 TB
+ a| 
+N x {0.984 x 0.9 x 0.998 x (1 - Snapshot Reserve)} = Y
+
+|===
+
+
+== Beispiel 1: Berechnungen _mit_ einer Snapshot Reserve
+
+Im folgenden Beispiel beträgt die Gesamtkapazität der Array-LUN 4 GB, wobei eine Volume-Snapshot-Reserve auf den Standardwert für Data ONTAP 8.1.1 (5 Prozent) eingestellt ist.
+
+Die folgenden Beispiele gelten für eine Array-LUN unter 2 TB:
+
+[cols="2*"]
+|===
+| Prüfsummentyp | Formel 
+
+
+ a| 
+BCS (Array LUN weniger als 2 TB)
+ a| 
+4 x {0.875 x 0.9 x 0.99 x 0.95}= 2.96 GB nutzbarer Speicherplatz
+
+
+
+ a| 
+AZCS (Array-LUN weniger als 2 TB)
+ a| 
+4 x {0.984 x 0.9 x 0.99 x 0.95} = 3.33 GB nutzbarer Speicherplatz
+
+|===
+
+
+== Formel zur Berechnung der maximalen erforderlichen Array-LUN-Größe
+
+Wenn Sie wissen, welche Array-LUN-Kapazität erforderlich ist, um die gewünschte Speicherkapazität zu erhalten, können Sie die folgende Formel verwenden, um die gesamte Array-LUN-Größe zu ermitteln, die Sie benötigen, unter Berücksichtigung von Elementen, die Speicherplatz in der LUN benötigen.
+
+* Y ist die genaue Menge an Speicherplatz in der Array-LUN, die Sie benötigen.
+* Bei Verwendung von Snapshot-Kopien wird die Snapshot Reserve berücksichtigt.
+
+
+Die folgenden Beispiele gelten für eine Array-LUN unter 2 TB:
+
+[cols="2*"]
+|===
+| Prüfsummentyp | Formel 
+
+
+ a| 
+BCS (Array LUN weniger als 2 TB)
+ a| 
+Y ÷ {0.875 x 0.9 x 0.99 x (1 - Snapshot Reserve)} = tatsächlich benötigte Kapazität
+
+
+
+ a| 
+AZCS (Array-LUN weniger als 2 TB)
+ a| 
+Y ÷ {0.984 x 0.9 x 0.99 x (1 - Snapshot Reserve)} = tatsächlich benötigte Kapazität
+
+|===
+
+
+== Beispiel 2: Berechnungen _mit_ Snapshot Reserven
+
+In diesem Beispiel ist die Volume Snapshot-Reserve die Standardeinstellung für Data ONTAP 8.1.1 (5 Prozent).
+
+Die folgenden Beispiele gelten für eine Array-LUN unter 2 TB:
+
+[cols="2*"]
+|===
+| Prüfsummentyp | Formel 
+
+
+ a| 
+BCS (Array LUN weniger als 2 TB)
+ a| 
+10 GB ÷ {0.875 x 0.9 x 0.99 x 0.95}=13.5 GB tatsächlich benötigte Kapazität
+
+
+
+ a| 
+AZCS (Array-LUN weniger als 2 TB)
+ a| 
+10 GB ÷ {0.984 x 0.9 x 0.99 x 0.95} = 12.05 GB tatsächliche Kapazität erforderlich
+
+|===
+
+
+== Beispiel 3: Berechnungen _ohne_ Snapshot Reserven
+
+Sie benötigen 10 GB nutzbare Kapazität für den Speicher. Im folgenden Beispiel wird die tatsächliche Array-LUN-Größe berechnet, wenn Sie keine Snapshot-Kopien verwenden.
+
+Die folgenden Beispiele gelten für eine Array-LUN unter 2 TB:
+
+[cols="2*"]
+|===
+| Prüfsummentyp | Formel 
+
+
+ a| 
+BCS (Array LUN weniger als 2 TB)
+ a| 
+10 GB ÷ {0.875 x 0.9 x 0.99}=12.8 GB tatsächlich benötigte Kapazität
+
+
+
+ a| 
+AZCS (Array-LUN weniger als 2 TB)
+ a| 
+10 GB ÷ {0.984 x 0.9 x 0.99}=11.41 GB tatsächlich benötigte Kapazität
+
+|===

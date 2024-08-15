@@ -1,0 +1,112 @@
+---
+permalink: install/reference_fewer_than_two_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: fewer, two, paths, array, lun 
+summary: Häufige Gründe für weniger als zwei Pfade zu einer Array-LUN sind ein Zuordnungsfehler, ein Zoning-Fehler oder das Abfallen eines Kabels. Die Ausgabe von Storage Errors zeigt an, dass Array LUNs nur mit einem einzelnen Pfad identifiziert werden. 
+---
+= Weniger als zwei Pfade zu einer Array-LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Häufige Gründe für weniger als zwei Pfade zu einer Array-LUN sind ein Zuordnungsfehler, ein Zoning-Fehler oder das Abfallen eines Kabels. Die `storage errors show` Ausgabe identifiziert Array-LUNs mit nur einem einzigen Pfad.
+
+ONTAP benötigt redundante Pfade zu einer Array-LUN, damit bei einem Geräteausfall der Zugriff auf die LUN erhalten bleibt. Zu jeder Array-LUN müssen zwei Pfade vorhanden sein.
+
+
+
+== Speicherfehler zeigen Meldung
+
+[listing]
+----
+
+NAME (UID):  This Array LUN is only available on one path.  Proper configuration requires two paths.
+----
+
+
+== Erklärung
+
+Gründe, warum Sie weniger als zwei Pfade zu einer Array-LUN sehen, sind unter anderem die folgenden:
+
+* Der LDEV ist nur auf einem Speicher-Array-Port zugeordnet.
+* Der zweite Pfad zur Array-LUN ist nicht in Zonen unterteilt.
+* Es liegt ein Problem mit der Hostgruppenzuordnung vor.
+* Es liegt ein Problem mit den Schalterverbindungen vor.
+* Das Kabel ist herausgefallen.
+* SFPs sind auf dem Adapter ausgefallen.
+
+
+[NOTE]
+====
+Wenn ein Pfad auf einem laufenden System fällt, wird eine EMS-Meldung generiert.
+
+====
+
+
+== Problemszenario
+
+Nehmen wir für dieses Beispiel eines Zuordnungsfehlers an, dass der Speicheradministrator ein neues LDEV Z erstellt hat. Der Administrator hat LDEV Z als LUN ID 3 dem Zielport 1A zugeordnet. Der Administrator hat das LDEV jedoch nicht dem Zielport 2A zugeordnet, wie in der folgenden Abbildung dargestellt. Das Ergebnis ist nur ein Pfad zur Array-LUN.
+
+image::../media/ldev_mapped_on_only_one_array_port.gif[Diese Grafik wird im umgebenden Text beschrieben.]
+
+Wenn dieser Fehler gemacht wird, wird in der `storage array config show` Ausgabe nur ein Pfad zur LUN angezeigt, wie im folgenden Beispiel dargestellt.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+           LUN     LUN
+Node       Group   Count  Array Name    Array Target Ports      Switch Port   Initiator
+-------   -------  -----  ----------   -------------------      -----------    ---------
+mysystem1a    0      1    DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5   0a
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+Der `storage errors show` Befehl bietet die Details, die Sie benötigen, um zu ermitteln, welche LUN weniger als zwei Pfade aufweist.
+
+[listing]
+----
+
+mysystem1a::> storage errors show
+Disk: EMC-1.2
+UID: 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:...
+--------------------
+EMC-1.2 (600508b4000b63140000800000200000): This array LUN is only available on one path. Proper configuration requires two paths.
+----
+[NOTE]
+====
+Die UID für dieses Beispiel ist 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:00000000:00000000:00000000. Er wird wegen des Raumes abgeschnitten.
+
+====
+
+
+== Fehlerbehebung und Problemlösung
+
+Wenn Sie sowohl die `storage array config show` Ausgabe als auch die Speicher-Fehler anzeigen, ist die Ausgabe hilfreich, wenn Sie weniger als zwei Pfade zu einer Array-LUN beheben.
+
+. Überprüfen Sie die `storage errors show` Ausgabe, um die Seriennummer der Array-LUN zu erhalten, die nur auf einem Pfad verfügbar ist.
+. Überprüfen Sie die `storage array config show` Ausgabe, um die Ursache des Problems zu ermitteln.
++
+|===
+| Wenn in der `storage array config show` Ausgabe... | Die Ursache ist sehr wahrscheinlich... 
+
+
+ a| 
+Andere Array LUNs
+ a| 
+Ein Zuordnungsfehler
+
+
+
+ a| 
+Keine anderen Array-LUNs
+ a| 
+Ein Verkabelungsfehler, ein Zoning-Fehler oder ein Hardwareproblem
+
+|===
+. Wenn die Ursache ein Zuordnungsfehler ist, weisen Sie den Speicher-Array-Administrator die identifizierte Array-LUN zwei redundanten Speicher-Array-Ports zu.
+. Wenn die Ursache neben der Zuordnung ein anderes Problem zu sein scheint, prüfen Sie Zoning, Host-Gruppen-Zuordnung, Verkabelung und Konnektivität.
+. Nachdem Sie das Problem behoben haben, führen Sie erneut aus `storage array config show` , um zu bestätigen, dass der Fehler behoben wurde.
+

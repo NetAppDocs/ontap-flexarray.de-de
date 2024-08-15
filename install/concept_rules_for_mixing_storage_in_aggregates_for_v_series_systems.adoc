@@ -1,0 +1,29 @@
+---
+permalink: install/concept_rules_for_mixing_storage_in_aggregates_for_v_series_systems.html 
+sidebar: sidebar 
+keywords: rules, mix, storage, array, lun, aggregates 
+summary: Wenn Sie Aggregate planen, müssen Sie die Regeln für die Kombination von Storage in Aggregaten berücksichtigen. Sie können nicht verschiedene Storage-Typen oder Array-LUNs von verschiedenen Anbietern oder Anbieterfamilien im selben Aggregat kombinieren. 
+---
+= Regeln für die Kombination von Storage in Array-LUN-Aggregaten
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie Aggregate planen, müssen Sie die Regeln für die Kombination von Storage in Aggregaten berücksichtigen. Sie können nicht verschiedene Storage-Typen oder Array-LUNs von verschiedenen Anbietern oder Anbieterfamilien im selben Aggregat kombinieren.
+
+Das Hinzufügen von Folgendem zu demselben Aggregat wird nicht unterstützt:
+
+* Array-LUNs und -Festplatten
+* Array-LUNs mit verschiedenen Prüfsummen-Typen
+* Array-LUNs verschiedener Laufwerkstypen (z. B. FC und SATA) oder unterschiedlicher Geschwindigkeiten
+* Array-LUNs verschiedener Anbieter von Storage-Arrays
+* Array-LUNs aus verschiedenen Storage-Array-Modellfamilien
+
+
+[NOTE]
+====
+Storage-Arrays in derselben Familie nutzen dieselben Performance- und Failover-Merkmale. Beispielsweise führen alle Mitglieder derselben Produktfamilie aktiv/aktiv-Failover oder aktiv/Passiv-Failover aus. Es können mehrere Faktoren verwendet werden, um Speicher-Array-Familien zu bestimmen. Beispielsweise würden Storage-Arrays mit unterschiedlichen Architekturen unterschiedliche Familien unterstützen, obwohl andere Merkmale identisch sein könnten.
+
+====

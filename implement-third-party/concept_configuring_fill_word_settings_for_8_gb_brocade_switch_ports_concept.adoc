@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/concept_configuring_fill_word_settings_for_8_gb_brocade_switch_ports_concept.html 
+sidebar: sidebar 
+keywords: required fill word, settings, 8 gb, brocade, switch, ports 
+summary: Wenn Sie in Ihrer Speicherumgebung 8-GB-Brocade-Switches verwenden, auf denen die Firmware-Version FOS 6.3.1 oder höher ausgeführt wird, müssen Sie sicherstellen, dass die entsprechenden Einstellungen für das Füllwort auf den Switch-Ports konfiguriert sind, die mit ONTAP-Systemen verbunden sind, und dass die Switch-Ports mit Speicher-Arrays verbunden sind. Wenn Sie falsche Füllwörter eingeben, kann es zu Fehlern bei der Verbindungsinitialisierung in den Switch-Ports kommen. 
+---
+= Erforderliche Füllworteinstellungen für 8-GB-Brocade-Switch-Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie in Ihrer Speicherumgebung 8-GB-Brocade-Switches verwenden, auf denen die Firmware-Version FOS 6.3.1 oder höher ausgeführt wird, müssen Sie sicherstellen, dass die entsprechenden Einstellungen für das Füllwort auf den Switch-Ports konfiguriert sind, die mit ONTAP-Systemen verbunden sind, und dass die Switch-Ports mit Speicher-Arrays verbunden sind. Wenn Sie falsche Füllwörter eingeben, kann es zu Fehlern bei der Verbindungsinitialisierung in den Switch-Ports kommen.
+
+Bei ONTAP-Systemen müssen Sie das Füllwort auf den entsprechenden Switch-Ports auf 3 setzen.
+
+Für Speicher-Arrays müssen Sie das Füllwort gemäß den folgenden empfohlenen Werten festlegen. Anweisungen hierzu finden Sie in der Dokumentation zum Brocade-Switch:
+
+[cols="2*"]
+|===
+| Storage Array erledigen | Geben Sie den Wortwert an den Brocade-Switch-Ports ein 
+
+
+ a| 
+Hitachi
+| 2 
+
+
+ a| 
+HP XP
+|  
+
+
+ a| 
+Alle anderen Storage Arrays werden von Data ONTAP Systemen unterstützt
+| 3 
+|===
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]

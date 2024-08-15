@@ -1,0 +1,29 @@
+---
+permalink: install/concept_raid_protection_for_array_luns.html 
+sidebar: sidebar 
+keywords: raid, protection, array, luns 
+summary: Speicher-Arrays bieten RAID-Schutz für die Array-LUNs, die sie ONTAP zur Verfügung stellen. ONTAP bietet keinen RAID-Schutz. 
+---
+= RAID-Sicherung für Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Speicher-Arrays bieten RAID-Schutz für die Array-LUNs, die sie ONTAP zur Verfügung stellen. ONTAP bietet keinen RAID-Schutz.
+
+ONTAP verwendet RAID0 (Striping) für Array-LUNs. ONTAP unterstützt eine Vielzahl von RAID-Typen auf den Speicherarrays, mit Ausnahme von RAID0, da RAID0 keinen Speicherschutz bietet.
+
+Beim Erstellen von _RAID-Gruppen_ auf Speicher-Arrays müssen Sie die Best Practices des Speicherarray-Anbieters befolgen, um sicherzustellen, dass ein angemessenes Schutzniveau auf dem Speicher-Array vorhanden ist, damit ein Festplattenausfall nicht zu Datenverlust oder Verlust des Datenzugriffs führt.
+
+[NOTE]
+====
+* Eine _RAID-Gruppe_ auf einem Speicher-Array ist die Anordnung von Festplatten, die zusammen den definierten RAID-Level bilden.
++
+Jede RAID-Gruppe unterstützt nur einen RAID-Typ. Die Anzahl der Festplatten, die Sie für eine RAID-Gruppe auswählen, bestimmt den RAID-Typ, den eine bestimmte RAID-Gruppe unterstützt. Verschiedene Anbieter von Storage Arrays verwenden verschiedene Begriffe, um diese Einheit zu beschreiben: RAID-Gruppen, Paritätsgruppen, Festplattengruppen, Parity RAID-Gruppen und andere Begriffe.
+
+* ONTAP unterstützt RAID4 und RAID-DP auf nativen Platten-Shelves, unterstützt aber nur RAID0 auf Array LUNs.
+
+
+====

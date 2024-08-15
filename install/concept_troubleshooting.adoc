@@ -1,0 +1,14 @@
+---
+permalink: install/concept_troubleshooting.html 
+sidebar: sidebar 
+keywords: troubleshoot, configurations, storage, arrays 
+summary: Sie sollten Ihre Konfiguration während der Erstinstallation validieren, damit Sie Probleme beheben können, bevor Ihre Konfiguration in eine Produktionsumgebung integriert wird. 
+---
+= Fehlerbehebung bei Konfigurationen mit Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten Ihre Konfiguration während der Erstinstallation validieren, damit Sie Probleme beheben können, bevor Ihre Konfiguration in eine Produktionsumgebung integriert wird.

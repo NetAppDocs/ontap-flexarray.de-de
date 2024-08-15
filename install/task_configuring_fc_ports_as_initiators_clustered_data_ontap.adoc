@@ -1,0 +1,57 @@
+---
+permalink: install/task_configuring_fc_ports_as_initiators_clustered_data_ontap.html 
+sidebar: sidebar 
+keywords: configure, fc ports, initiators 
+summary: Sie können einzelne FC-Ports als Initiatoren auf ONTAP Systemen konfigurieren. Im Initiatormodus können die Ports mit Speicherarrays verbunden werden. 
+---
+= Konfigurieren von FC-Ports als Initiatoren
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können einzelne FC-Ports als Initiatoren auf ONTAP Systemen konfigurieren. Im Initiatormodus können die Ports mit Speicherarrays verbunden werden.
+
+.Schritte
+. *Optional:* Wenn der Adapter-Port bereits LIFs konfiguriert hat, löschen Sie alle LIFs mit dem `network interface delete` Befehl.
++
+Wenn sich die LIF in einem Portsatz befindet, müssen Sie die LIF aus dem Portsatz entfernen, bevor Sie die LIF löschen können.
+
++
+Im folgenden Beispiel wird gezeigt, wie Sie LIFs auf einer SVM vs3 löschen können: `network interface delete -vserver vs3 -lif lif2,lif0`
+
+. Versetzen Sie den Port mit dem Befehl in den Offline- `network fcp adapter modify` Modus.
++
+Im folgenden Beispiel wird gezeigt, wie Sie den Port 0c für den Node-Sysknoten in den Offline-Modus versetzen können: `network fcp adapter modify -node sysnode1 -adapter 0c -state down`
+
+. Ändern Sie mit dem `system hardware unified-connect modify` Befehl den Offline-Port von Ziel in Initiator.
++
+Im folgenden Beispiel wird gezeigt, wie Sie den Porttyp für 0c von Ziel in Initiator ändern können: `system node hardware unified-connect modify -node sysnode1 -adapter 0c -type initiator`
+
+. Booten Sie den Node neu, der den Adapter hostet, den Sie geändert haben.
+. Überprüfen Sie mit dem `system hardware unified-connect show` Befehl, ob die FC-Ports für Ihre Konfiguration korrekt konfiguriert sind.
++
+Das folgende Beispiel zeigt die Änderung des Porttyps für 0c:
+
++
+`system node hardware unified-connect show -node sysnode1`
+
++
+[listing]
+----
+
+
+                       Current  Current    Pending  Pending
+Node          Adapter  Mode     Type       Mode     Type       Status
+------------  -------  -------  ---------  -------  ---------  -----------
+sysnode1      0a       fc       target     -        -          online
+sysnode1      0b       fc       target     -        -          online
+sysnode1      0c       fc       initiator  -        -          offline
+sysnode1      0d       fc       target     -        -          online
+----
+. Versetzen Sie den Offline-Port mit dem `storage enable adapter` Befehl wieder in den Online-Modus.
++
+Im folgenden Beispiel wird gezeigt, wie Sie den Port 0c online stellen können: `node run -node sysnode1 -command storage enable adapter -e 0c`
+
+

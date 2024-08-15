@@ -1,0 +1,75 @@
+---
+permalink: install/concept_target_port_utilization_policy_settings.html 
+sidebar: sidebar 
+keywords: target, port, utilization, policy, settings, output, examples, array 
+summary: ONTAP kann auf einem Zielport Ereignisse von Ressourcenkonflikten erkennen, z. B. wenn die I/O-Warteschlange voll ist, Befehle aufgrund einer Zeitüberschreitung überschritten wurden oder die HBA-Ressource erschöpft ist. 
+---
+= Richtlinieneinstellungen für die Auslastung des Zielports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP kann auf einem Zielport Ereignisse von Ressourcenkonflikten erkennen, z. B. wenn die I/O-Warteschlange voll ist, Befehle aufgrund einer Zeitüberschreitung überschritten wurden oder die HBA-Ressource erschöpft ist.
+
+Sie können die Auslastungsrichtlinien für den Zielport mit dem Befehl festlegen `storage array port modify` , wenn Sie solche Ereignisse an einem bestimmten Array-Zielport erkennen.
+
+In der folgenden Tabelle werden die beiden Nutzungsrichtlinien beschrieben, die einem Zielport zugeordnet sind:
+
+|===
+| Richtlinie | Beschreibung 
+
+
+ a| 
+*Normal*
+ a| 
+Wenn ONTAP auf einem bestimmten Array-Zielport Ressourcenkonflikte erkennt, reduziert es die Warteschlangentiefe des Ziel-Ports und drosselt die I/O-Vorgänge an den Ziel-Port. In diesem Modus ist die Reduzierung der Warteschlangentiefe des Zielports geringer als die Richtlinie *depent* für jedes Ressourcenkonfliktionsereignis des Zielports. Der nachfolgende Anstieg der Zielport-Warteschlangentiefe ist schneller als die *depent*-Richtlinie. *Normal* ist die Standardrichtlinie.
+
+
+
+ a| 
+*Zurückstellen*
+ a| 
+Wenn ONTAP auf einem bestimmten Array-Zielport Ressourcenkonflikte erkennt, wird die Warteschlangentiefe des Ziel-Ports verringert und die I/O-Vorgänge werden auf den Ziel-Port gedrosselt. In diesem Modus ist die Reduzierung der Warteschlangentiefe des Zielports größer als die *normale*-Richtlinie für jedes Ressourcenkonfliktionsereignis des Zielports. Der nachfolgende Anstieg der Warteschlangentiefe des Zielports ist langsamer als die *normale* Nutzungsrichtlinie.
+
+|===
+
+
+== Ausgabebeispiele zum Anzeigen und Ändern von Richtlinien für die Auslastung des Array-Zielports
+
+Mit dem folgenden Befehl wird die Richtlinie zur Auslastung des Zielports angezeigt, die einem Array-Zielport zugeordnet ist:
+
+[listing]
+----
+vgv3170_jon::> storage array port show -wwnn 2703750270235
+        Array Name: HITACHI_DF600F_1
+              WWNN: 2703750270235
+              WWPN: 2703750270235
+   Connection Type: fabric
+       Switch Port: vgbr300s89:9
+        Link Speed: 4 GB/s
+   Max Queue Depth: 1024
+Utilization Policy: defer
+                              LUN                                        Link
+Node              Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+----------------  ---------  -----  ------  ------  -------  ----------  ----
+     vgv3170f54a         0a      2       50   1956       85           0     0
+     vgv3170f54b         0a      2      350  15366      100          40     0
+----
+Standardmäßig ist die I/O-Richtlinie für einen bestimmten Array-Zielport *normal*. Sie können die dem Port zugeordnete I/O-Richtlinie ändern, indem Sie den folgenden Befehl ausführen:
+
+[listing]
+----
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy ?
+
+
+
+normal      This policy aggressively competes for target port resources, in effect competing with other hosts.
+             (normal)
+
+defer      	This policy does not aggressively compete for target port resources, in effect deferring to other hosts.
+
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy defer
+1 record updated.
+----

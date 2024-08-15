@@ -1,0 +1,18 @@
+---
+permalink: install/concept_overview_of_setting_up_ontap_to_work_with_array_luns.html 
+sidebar: sidebar 
+keywords: set, up, ontap, work, array, luns 
+summary: Die Einrichtung eines ONTAP-Systems für die Verwendung mit Array-LUNs unterscheidet sich je nachdem, ob ONTAP-Systeme mit oder ohne Festplatten bestellt werden. 
+---
+= Einrichten von ONTAP für die Verwendung mit Array-LUNs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Einrichtung eines ONTAP-Systems für die Verwendung mit Array-LUNs unterscheidet sich je nachdem, ob ONTAP-Systeme mit oder ohne Festplatten bestellt werden.
+
+Wenn ein ONTAP System mit Festplatten-Shelfs bestellt wird, wird die ONTAP Software werkseitig installiert. In einer solchen Konfiguration müssen Sie nicht das Root-Volume erstellen und Lizenzen sowie ONTAP Software installieren.
+
+Sie können die ONTAP Software auf Systemen installieren, die ohne Festplatten-Shelfs bestellt werden. Auf diesen Systemen müssen Sie zuerst ONTAP installieren und dann ein Cluster einrichten.

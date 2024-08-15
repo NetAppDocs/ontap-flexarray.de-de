@@ -1,0 +1,91 @@
+---
+permalink: install/concept_example_of_cascading_zoning_and_host_group_configuration_errors.html 
+sidebar: sidebar 
+keywords: example, cascade, zone, host, group, configuration, errors, troubleshoot 
+summary: Fehler in Zonendefinitionen können sich auf Host-Gruppen-Definitionen auswirken und umgekehrt. Wenn LUNs über einem Pfad nicht sichtbar sind, müssen Sie sowohl Zoning- als auch Host-Gruppen-Konfigurationsfehler überprüfen. 
+---
+= Beispiel für Konfigurationsfehler bei kaskadierendem Zoning und Host-Gruppe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Fehler in Zonendefinitionen können sich auf Host-Gruppen-Definitionen auswirken und umgekehrt. Wenn LUNs über einem Pfad nicht sichtbar sind, müssen Sie sowohl Zoning- als auch Host-Gruppen-Konfigurationsfehler überprüfen.
+
+Gehen Sie davon aus, dass Ihre Konfigurationssequenz wie folgt ist:
+
+. Die Zonendefinition wurde auf dem Switch erstellt.
++
+Der WWPN für FC-Initiator-Port 0a des ONTAP-Systems wurde in die Zonendefinition aufgenommen. Es wurde jedoch beabsichtigt, den WWPN für FC-Initiator-Port 0c in die Zonendefinition zu setzen.
+
+. Die Host-Gruppe wurde auf dem Speicher-Array erstellt.
++
+Der WWPN für FC-Initiator-Port 0a wurde ausgewählt (da dieser der einzige verfügbare WWPN war, und es nicht offensichtlich war, dass es der WWPN für 0a und nicht 0c war).
+
+. In ONTAP haben Sie sich Array LUNs über die FC Initiator Ports angesehen und erwartet, dass Array LUNs über 0c angezeigt werden.
++
+Es gab jedoch keine Array-LUNs über 0c, da die Zonendefinition und die Host-Gruppendefinition fälschlicherweise den WWPN für FC-Initiator-Port 0a enthalten.
+
++
+[NOTE]
+====
+Sie haben mit dem `storage array config show` Befehl die Array-LUN-Informationen angezeigt.
+
+====
+. Sie beginnen mit der Fehlerbehebung, da Sie die LUNs über den Initiator nicht sehen können, über den Sie sie voraussichtlich sehen.
+
+
+Sie müssen sowohl die Zoning- als auch die Hostgruppenkonfiguration überprüfen, aber es spielt keine Rolle, mit welchen der folgenden Verfahren Sie zuerst beginnen. Je nachdem, ob Sie zuerst mit dem Beheben von Elementen aus der Host-Gruppe oder dem Zoning beginnen, werden möglicherweise unterschiedliche Meldungen angezeigt.
+
+
+
+== Fehlerbehebung durch Überprüfung der Zoneneinteilung
+
+. Prüfen Sie die Zonendefinitionen für das ONTAP System.
++
+Ihnen wird klar, dass sich darin zwei Zonen mit dem WWPN für FC-Initiator-Port 0a und keine Zonen mit dem WWPN für 0c befinden.
+
+. Korrigieren Sie die falschen Zonendefinitionen und aktivieren Sie sie.
++
+[NOTE]
+====
+Beim Ausführen von werden die Array-LUNs nicht über die Initiator-Ports angezeigt `storage array config show`.
+
+====
+. Wechseln Sie zum Array, und konfigurieren Sie die Host-Gruppe neu, sodass der WWPN für FC-Initiator-Port 0c enthalten ist.
++
+Nachdem sich der WWPN für 0c nun in einer aktivierten Zonendefinition befindet, wird der WWPN für 0c in der Auswahlliste der Hostgruppenkonfiguration auf dem Speicher-Array angezeigt.
+
+. Führen Sie auf dem ONTAP-System aus `storage array config show` , um die Array-LUNs über die FC-Initiator-Ports zu überprüfen, um sicherzustellen, dass Array-LUNs über 0c angezeigt werden.
+
+
+
+
+== Fehlerbehebung durch Überprüfung der Host-Gruppe
+
+. Führen Sie von der Konsole des ONTAP-Systems aus `storage show adapteradapter#``, und schreiben Sie dann den WWPN des fehlenden Adapters auf --0c in diesem Beispiel.
+. Wechseln Sie zum Speicher-Array und vergleichen Sie den WWPN, den Sie bis zu den WWPNs in der Auswahlliste der Host-Gruppen geschrieben haben, um zu sehen, ob der WWPN des erwarteten FC-Initiator-Ports aufgeführt ist.
++
+Wenn der erwartete WWPN nicht angezeigt wird, befindet sich der gewünschte Initiator nicht in der Zonendefinition.
+
+. Wenn Sie mit dem Speicher-Array WWPNs in der Host-Gruppe ändern können, können Sie den angezeigten WWPN als den von Ihnen niedergeschriebenen WWPN ändern.
++
+[NOTE]
+====
+Wenn Sie WWPNs in der Host-Gruppe nicht vom Speicher-Array ändern können, müssen Sie die Hostgruppendefinition nach dem Ändern der Zonendefinition ändern.
+
+====
++
+Sie können immer noch keine LUNs über den Initiator sehen, den Sie beabsichtigen, weil das Zoning noch nicht behoben wurde.
+
+. Wechseln Sie zum Switch, ersetzen Sie den falschen WWPN durch den richtigen FC-Port-Initiator, und aktivieren Sie dann die Zonendefinition.
+. Wenn Sie den WWPN in der Host-Gruppen-Definition zu einem früheren Zeitpunkt nicht korrigieren konnten, wechseln Sie zum Speicher-Array und konfigurieren Sie die Host-Gruppe neu, damit sie den WWPN für FC-Initiator-Port 0c enthält.
++
+Nachdem sich der WWPN für 0c nun in einer aktivierten Zonendefinition befindet, wird der WWPN für 0c in der Auswahlliste der Hostgruppenkonfiguration auf dem Speicher-Array angezeigt.
+
+. Führen Sie auf dem ONTAP-System aus `storage array config show` , um die Array-LUNs über die FC-Initiator-Ports zu überprüfen, um sicherzustellen, dass Array-LUNs über 0c angezeigt werden.
++
+Sie sollten nun den Zugriff auf die LUNs über den FC Initiator-Port sehen.
+
+

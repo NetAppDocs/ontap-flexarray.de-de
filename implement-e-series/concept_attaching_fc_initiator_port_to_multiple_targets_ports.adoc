@@ -1,0 +1,37 @@
+---
+permalink: implement-e-series/concept_attaching_fc_initiator_port_to_multiple_targets_ports.html 
+sidebar: sidebar 
+keywords: attach, fc initiator, port, multiple, targets, ports, ontap, storage, arrays 
+summary: Sie können einen FC-Initiator-Port auf einem ONTAP System mit mehreren Ziel-Ports auf separaten Storage Arrays innerhalb derselben Produktfamilie verbinden. Diese Konfiguration wird mit MetroCluster-Konfigurationen in ONTAP unterstützt. 
+---
+= Verbinden von FC-Initiator-Port mit mehreren Ziel-Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können einen FC-Initiator-Port auf einem ONTAP System mit mehreren Ziel-Ports auf separaten Storage Arrays innerhalb derselben Produktfamilie verbinden. Diese Konfiguration wird mit MetroCluster-Konfigurationen in ONTAP unterstützt.
+
+ONTAP unterstützt die gemeinsame Nutzung eines FC-Initiator-Ports mit mehreren Ziel-Ports in HA-Paaren und Standalone-Systemen. Diese Konfiguration wird für die Verwendung mit allen in der Interoperabilitäts-Matrix aufgeführten Storage Arrays unterstützt, da sie für die Version von ONTAP auf dem System unterstützt wird.
+
+[NOTE]
+====
+Einzelheiten zur gemeinsamen Nutzung eines FC-Initiator-Ports mit mehreren Ziel-Ports und Zoning finden Sie in den Informationen unter _FlexArray Installationsvoraussetzungen und Referenz_
+
+====
+
+
+== Einzelner ONTAP FC-Initiator-Port, der mit den Zielports auf separaten Storage-Arrays verbunden ist
+
+Im folgenden Beispiel ist ein HA-Paar dargestellt, bei dem sich ein einzelner ONTAP FC-Initiator-Port mit mehreren Ziel-Ports in verschiedenen Storage Arrays verbindet:
+
+image::../media/shared_initiator_ports_different_arrays.gif[Die Anschlüsse und die Zonierung sind im umgebenden Text beschrieben.]
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Installationsanforderungen für FlexArray Virtualisierung und Referenz"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation und Konfiguration von Fabric-Attached MetroCluster"]

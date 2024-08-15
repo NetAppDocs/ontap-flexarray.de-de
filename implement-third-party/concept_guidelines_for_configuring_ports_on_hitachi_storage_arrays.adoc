@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_configuring_ports_on_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, configuring, ports, hitachi, storage, arrays 
+summary: Beachten Sie bei der Konfiguration von Ports auf Hitachi-Speicher-Arrays bestimmte Richtlinien. 
+---
+= Richtlinien für die Konfiguration von Ports auf Hitachi-Speicher-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Beachten Sie bei der Konfiguration von Ports auf Hitachi-Speicher-Arrays bestimmte Richtlinien.
+
+Die Richtlinien für die Konfiguration von Ports auf Hitachi-Speicher-Arrays lauten wie folgt:
+
+* Sie sollten nur eine Host-Gruppe pro Port hinzufügen.
+* Sie sollten sicherstellen, dass eine Host-Gruppe alle FC-Initiator-Ports der V-Series-Systeme in einer Array-LUN-Nachbarschaft umfasst.
+

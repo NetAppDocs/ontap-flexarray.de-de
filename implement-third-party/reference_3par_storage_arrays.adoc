@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_3par_storage_arrays.html 
+sidebar: sidebar 
+keywords: 3par, storage, arrays 
+summary: Bei der Konfiguration von Speicher-Arrays für die Verwendung mit ONTAP-Systemen, die Array-LUNs verwenden, müssen bestimmte Anforderungen erfüllt werden. Diese Anforderungen umfassen die Festlegung von Konfigurationsparametern auf Speicher-Arrays und die Bereitstellung nur unterstützter Konfigurationen. 
+---
+= 3PAR Storage-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Konfiguration von Speicher-Arrays für die Verwendung mit ONTAP-Systemen, die Array-LUNs verwenden, müssen bestimmte Anforderungen erfüllt werden. Diese Anforderungen umfassen die Festlegung von Konfigurationsparametern auf Speicher-Arrays und die Bereitstellung nur unterstützter Konfigurationen.

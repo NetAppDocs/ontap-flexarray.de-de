@@ -1,0 +1,78 @@
+---
+permalink: install/task_setting_up_the_switches.html 
+sidebar: sidebar 
+keywords: set, up, switches 
+summary: Die Switch-Konfiguration erfolgt normalerweise durch den Storage- oder SAN-Administrator. Die Switches müssen so abgegrenzt werden, dass sich die ONTAP-Systeme und die Speicher-Arrays sehen können. Sie müssen das Einzel-Initiator-Zoning als Zoning-Strategie verwenden. 
+---
+= Einrichten der Schalter
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Switch-Konfiguration erfolgt normalerweise durch den Storage- oder SAN-Administrator. Die Switches müssen so abgegrenzt werden, dass sich die ONTAP-Systeme und die Speicher-Arrays sehen können. Sie müssen das Einzel-Initiator-Zoning als Zoning-Strategie verwenden.
+
+.Schritte
+. Melden Sie sich beim Speicher-Array an, und erhalten Sie die WWPNs der FC-Adapter des Speicher-Arrays.
+. Verwenden Sie die Fibre Channel-Switch-Befehle, um jeden Switch zu zonen, sodass das Speicher-Array und das ONTAP-System die WWPNs anderer Switches sehen.
++
+Betrachten wir das folgende Beispiel für ONTAP Systeme in einem HA-Paar:
+
++
+image::../media/one_4_port_array_lun_gp.gif[Diese Grafik wird durch den umgebenden Text beschrieben.]
+
++
+In der Beispielkonfiguration lauten die Zonen wie folgt:
+
++
+|===
+| Zone | ONTAP-System und -Port | Storage-Array-Controller und -Port 
+
+
+ a| 
+Schalter 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, 0a
+ a| 
+Controller 1, 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, 0a
+ a| 
+Controller 1, 1B
+
+
+
+ a| 
+Schalter 2
+
+
+
+ a| 
+z3
+ a| 
+vs1, 0c
+ a| 
+Regler 2, 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2, 0c
+ a| 
+Controller 2, 2B
+
+|===
+

@@ -1,0 +1,33 @@
+---
+permalink: install/concept_multiple_paths_to_an_array_lun_can_be_used_to_distribute_load.html 
+sidebar: sidebar 
+keywords: multiple, paths, array, lun, used, distribute, load, commands 
+summary: I/O-Anfragen für eine bestimmte LUN können über alle verfügbaren optimierten Pfade zur LUN verteilt werden. Dies unterscheidet sich von früheren Versionen, in denen I/O-Anfragen für eine bestimmte LUN trotz der Verfügbarkeit mehrerer Pfade nur über einen einzigen aktiven optimierten Pfad gesendet wurden. 
+---
+= Zur Lastverteilung können mehrere Pfade zu einer Array-LUN verwendet werden
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+I/O-Anfragen für eine bestimmte LUN können über alle verfügbaren optimierten Pfade zur LUN verteilt werden. Dies unterscheidet sich von früheren Versionen, in denen I/O-Anfragen für eine bestimmte LUN trotz der Verfügbarkeit mehrerer Pfade nur über einen einzigen aktiven optimierten Pfad gesendet wurden.
+
+Die Verteilung der I/O-Anfragen für eine bestimmte LUN über mehrere Pfade führt zu folgenden Vorteilen:
+
+* Verbesserte Effizienz durch maximale Auslastung aller verfügbaren und optimierten Pfade
+* Verbesserte Performance durch Lastausgleich über mehrere Pfade
+
+
+Auf einem aktiv/aktiv-Array können beispielsweise I/O-Anfragen für eine bestimmte LUN auf alle vier für diese LUN verfügbaren Zielports verteilt werden. Bei einer asymmetrischen aktiv/aktiv-Array-LUN können I/O-Anfragen auf alle optimierten Pfade einer bestimmten LUN verteilt werden.
+
+
+
+== Befehle zum Anzeigen des Lastausgleichs über mehrere Pfade für eine bestimmte LUN
+
+Sie können die folgenden Befehle ausführen, um die Lastverteilung für eine bestimmte LUN über mehrere Pfade hinweg anzuzeigen:
+
+* ``storage disk show -disk <LUN name>`` Zeigt die Verteilung der E/A-Last über die verfügbaren Pfade für eine bestimmte Array-LUN an.
+* ``storage path show-by-initiator -array-name <array name>`` Zeigt die Verteilung der E/A-Last auf alle Initiator-Ports auf dem ONTAP-System an, das mit einem bestimmten Speicher-Array verbunden ist.
+* ``storage path show -by-target -array-name <array name>`` Zeigt die Verteilung der E/A-Last auf alle Zielports eines bestimmten Speicher-Arrays an.
+

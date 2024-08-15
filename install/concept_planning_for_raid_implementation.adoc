@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_raid_implementation.html 
+sidebar: sidebar 
+keywords: plan, raid, implementation 
+summary: Sie müssen die Größe und Anzahl der LUNs in den RAID-Gruppen des Speicherarrays planen und entscheiden, ob Sie die RAID-Gruppe für die Hosts freigeben möchten. 
+---
+= Planen der RAID-Implementierung
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die Größe und Anzahl der LUNs in den RAID-Gruppen des Speicherarrays planen und entscheiden, ob Sie die RAID-Gruppe für die Hosts freigeben möchten.

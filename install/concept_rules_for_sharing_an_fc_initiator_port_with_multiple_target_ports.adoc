@@ -1,0 +1,56 @@
+---
+permalink: install/concept_rules_for_sharing_an_fc_initiator_port_with_multiple_target_ports.html 
+sidebar: sidebar 
+keywords: rules, share, fc initiator, port, multiple, target, connect, storage, arrays 
+summary: Sie können einen FC-Initiator-Port auf einem ONTAP System mit maximal vier Ziel-Ports auf separaten Storage Arrays verbinden. Wenn Sie die Anzahl der verwendeten FC-Initiator-Ports minimieren möchten, ist es von Nutzen, einen FC-Initiator-Port mit mehreren Zielen gemeinsam zu verwenden. 
+---
+= Regeln für die gemeinsame Nutzung eines FC-Initiator-Ports mit mehreren Ziel-Ports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können einen FC-Initiator-Port auf einem ONTAP System mit maximal vier Ziel-Ports auf _separate_ Speicher-Arrays verbinden. Wenn Sie die Anzahl der verwendeten FC-Initiator-Ports minimieren möchten, ist es von Nutzen, einen FC-Initiator-Port mit mehreren Zielen gemeinsam zu verwenden.
+
+Sie können auch einen FC-Initiator-Port mit maximal vier Ziel-Ports auf dem _same_ Speicher-Array verbinden, wenn das Array dem FC-Initiator auf Basis des Zielports, auf den zugegriffen wird, verschiedene Sätze logischer Geräte bereitstellen kann.
+
+Es gibt Beschränkungen dafür, wie viele Array LUNs über einem FC-Initiator-Port sichtbar sein können. Diese Grenzwerte variieren je nach Freigabe.
+
+
+
+== Regeln, wenn der FC-Initiator-Port mit mehreren Ziel-Ports auf _separate_ Speicher-Arrays verbunden ist
+
+Für diese Konfiguration gelten folgende Regeln:
+
+* Alle Storage Arrays müssen von derselben Modellfamilie des Anbieters stammen.
++
+Storage-Arrays in derselben Familie nutzen dieselben Performance- und Failover-Merkmale. Beispielsweise führen alle Mitglieder derselben Produktfamilie aktiv/aktiv-Failover oder aktiv/Passiv-Failover aus. Es können mehrere Faktoren verwendet werden, um Speicher-Array-Familien zu bestimmen. Beispielsweise würden Storage-Arrays mit unterschiedlichen Architekturen unterschiedliche Familien unterstützen, obwohl andere Merkmale identisch sein könnten.
+
+* Für MetroCluster-Konfigurationen wird das Verbinden eines einzelnen FC-Initiator-Ports mit mehreren Ziel-Ports unterstützt.
+* Ein einzelner FC-Initiator-Port kann mit bis zu vier Ziel-Ports auf mehreren Speicher-Arrays verbunden werden.
+* Sie müssen jedes FC-Initiator-Ziel-Port-Paar in einer separaten Zone (1:1) haben, selbst wenn derselbe FC-Initiator-Port auf mehrere Ziel-Ports zugreift.
+
+
+
+
+== Regeln, wenn der FC-Initiator-Port mit mehreren Zielports auf dem _same_ Speicher-Array verbunden ist
+
+Diese Konfiguration kann nur mit Speicher-Arrays verwendet werden, deren LUN-Masking-, Präsentations- oder Hostgruppenfähigkeit unterschiedliche LUN-Gruppenpräsentationen für denselben FC-Initiator ermöglicht, basierend auf dem Zielport, auf den zugegriffen wird.
+
+Einige Speicher-Arrays können einem FC-Initiator je nach Zielport, auf den zugegriffen wird, unterschiedliche Sätze logischer Geräte zur Verfügung stellen. Bei diesen Speicherarrays kann sich derselbe FC-Initiator in mehreren Hostgruppen befinden. Bei Speicher-Arrays mit dieser Funktion kann jeder FC-Initiator-Port auf mehrere Array-Ziel-Ports auf demselben Storage-Array zugreifen, wobei jeder Ziel-Port dem FC-Initiator eine andere LUN-Gruppe darstellt. Prüfen Sie in der Dokumentation Ihres Speicher-Arrays, ob sich derselbe FC-Initiator in mehreren Host-Gruppen befinden kann.
+
+Folgende Regeln gelten für diese Konfiguration:
+
+* Ein einzelner FC-Initiator-Port kann sich mit bis zu vier Ziel-Ports in einem Storage-Array verbinden.
+* Für MetroCluster-Konfigurationen wird das Verbinden eines einzelnen FC-Initiator-Ports mit mehreren Ziel-Ports unterstützt.
+* Sie müssen jedes FC-Initiator-Ziel-Port-Paar in einer separaten Zone (1:1) haben, selbst wenn derselbe FC-Initiator auf mehrere Ziel-Ports zugreifen kann.
+
+
+*Verwandte Informationen*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["FlexArray Virtualisierungs-Implementierung für Storage von Drittanbietern"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["FlexArray Virtualisierungs-Implementierung für NetApp E-Series Storage"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation und Konfiguration von Fabric-Attached MetroCluster"]

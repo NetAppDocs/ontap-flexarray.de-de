@@ -1,0 +1,20 @@
+---
+permalink: implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: supported, fabric-attached, configurations, e-series, storage, arrays 
+summary: ONTAP Systeme können nur bestimmte E-Series Storage Arrays in Fabric-Attached-Konfigurationen angeschlossen werden. 
+---
+= Unterstützte Fabric-Attached-Konfigurationen für E-Series Storage-Arrays
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Systeme können nur bestimmte E-Series Storage Arrays in Fabric-Attached-Konfigurationen angeschlossen werden
+
+Die Interoperabilitäts-Matrix enthält zusätzliche Informationen zu bestimmten Array-Modellen.
+
+*Verwandte Informationen*
+
+https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"]
